@@ -11,7 +11,7 @@
 		<item name="dialogTheme">@style/AppDialogStyle</item>
 		<item name="alertDialogTheme">@style/AppDialogStyle</item>
 		<item name="about_libraries_card">@color/white</item>
-		<item name="about_libraries_title_openSource">@color/blue_grey_800</item>
+		<item name="about_libraries_title_openSource">@color/grey_800</item>
 		<item name="about_libraries_dividerLight_openSource">@color/grey_200</item>
 		<item name="about_libraries_text_openSource">@color/grey_600</item>
 	</style>
@@ -131,7 +131,7 @@
 		<item name="preferenceFragmentListStyle">@style/AppPreferenceFragmentList</item>
 		<item name="android:textSize">16sp</item>
 		<item name="android:fontFamily">@font/roboto</item>
-		<item name="android:textColorPrimary">@color/blue_grey_800</item>
+		<item name="android:textColorPrimary">@color/grey_800</item>
 		<item name="android:textColorSecondary">@color/colorPrimary</item>
 		<item name="android:listSeparatorTextViewStyle">@style/AppPreference.Category</item>
 	</style>
