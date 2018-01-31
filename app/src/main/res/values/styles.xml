@@ -1,0 +1,155 @@
+<resources>
+
+	<!-- Base application theme. -->
+	<style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+		<!-- Customize your theme here. -->
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+		<item name="colorControlHighlight">@color/colorAccent</item>
+		<item name="preferenceTheme">@style/PreferenceTheme</item>
+		<item name="dialogTheme">@style/AppDialogStyle</item>
+		<item name="alertDialogTheme">@style/AppDialogStyle</item>
+		<item name="about_libraries_card">@color/white</item>
+		<item name="about_libraries_title_openSource">@color/blue_grey_800</item>
+		<item name="about_libraries_dividerLight_openSource">@color/grey_200</item>
+		<item name="about_libraries_text_openSource">@color/grey_600</item>
+	</style>
+
+	<style name="AppTheme" parent="AppBaseTheme"/>
+
+
+	<style name="AppDialogStyle" parent="Theme.AppCompat.Dialog">
+		<item name="android:windowTitleStyle">@style/TextRegular.Grey.16</item>
+		<item name="colorAccent">@color/colorAccent</item>
+		<item name="android:background">@color/white</item>
+		<item name="android:textColor">@color/colorPrimary</item>
+		<item name="android:keyTextColor">@color/grey_600</item>
+		<item name="textColorAlertDialogListItem">@color/grey_800</item>
+		<item name="android:textColorPrimary">@color/colorPrimary</item>
+		<item name="android:textColorSecondary">@color/colorPrimaryDark</item>
+		<item name="android:textColorTertiary">@color/grey_800</item>
+		<item name="colorControlNormal">@color/grey_800</item>
+		<item name="colorControlActivated">@color/colorPrimary</item>
+		<item name="colorControlHighlight">@color/colorPrimary</item>
+	</style>
+
+	<style name="SplashActivityTheme" parent="AppBaseTheme">
+		<item name="android:background">@drawable/bg_splash_screen</item>
+		<item name="android:windowFullscreen">true</item>
+	</style>
+
+	<style name="TransparentStatusBarActivityTheme" parent="AppTheme"/>
+
+	<style name="TranslucentStatusBarActivityTheme" parent="AppTheme"/>
+
+	<style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+		<item name="android:windowTitleStyle">@style/TextRegular.Grey.16</item>
+		<item name="colorAccent">@color/colorAccent</item>
+	</style>
+
+	<style name="TransparentToolbarStyle">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">?actionBarSize</item>
+		<item name="titleTextAppearance">@style/TextRegular.White.20</item>
+		<item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+	</style>
+
+	<style name="ToolbarStyle" parent="TransparentToolbarStyle">
+		<item name="android:background">@color/colorPrimary</item>
+	</style>
+
+	<style name="ToolbarDarkStyle" parent="TransparentToolbarStyle">
+		<item name="android:background">@color/colorPrimaryDark</item>
+	</style>
+
+	<style name="MarginTopToolbarStyle" parent="TransparentToolbarStyle"/>
+
+	<style name="TabStyle" parent="Widget.Design.TabLayout">
+		<item name="tabIndicatorColor">@color/white</item>
+		<item name="tabTextAppearance">@style/TabTextAppearance</item>
+	</style>
+
+	<style name="TabTextAppearance" parent="@style/TextAppearance.Design.Tab">
+		<item name="android:fontFamily">@font/roboto</item>
+		<item name="fontFamily">@font/roboto</item>
+	</style>
+
+	<style name="Divider">
+		<item name="android:layout_height">1dp</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:background">@color/grey_200</item>
+	</style>
+
+	<style name="DividerWithMargin">
+		<item name="android:layout_height">1dp</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_marginLeft">@dimen/d4</item>
+		<item name="android:layout_marginRight">@dimen/d4</item>
+		<item name="android:background">@color/grey_200</item>
+	</style>
+
+	<style name="IndeterminateProgressWheel">
+		<item name="matProg_progressIndeterminate">true</item>
+		<item name="matProg_barWidth">@dimen/d1</item>
+	</style>
+
+	<style name="IndeterminateProgressWheel.Accent">
+		<item name="matProg_barColor">@color/colorAccent</item>
+	</style>
+
+	<style name="IndeterminateProgressWheel.White">
+		<item name="matProg_barColor">@color/white</item>
+	</style>
+
+	<style name="IndeterminateProgressWheel.Accent.Big">
+		<item name="android:layout_width">80dp</item>
+		<item name="android:layout_height">80dp</item>
+	</style>
+
+	<style name="IndeterminateProgressWheel.White.Big">
+		<item name="android:layout_width">80dp</item>
+		<item name="android:layout_height">80dp</item>
+	</style>
+
+	<style name="ButtonWhiteBorderlessStyle" parent="Widget.AppCompat.Button.Borderless">
+		<item name="android:textAppearance">@style/TextBold.MediumRed.AllCaps.14</item>
+		<item name="android:background">?attr/selectableItemBackground</item>
+	</style>
+
+	<style name="ButtonRedBorderlessStyle" parent="Widget.AppCompat.Button.Borderless">
+		<item name="android:textAppearance">@style/TextBold.White.AllCaps.16</item>
+		<item name="android:background">@color/colorPrimary</item>
+		<item name="android:foreground">?attr/selectableItemBackground</item>
+
+	</style>
+
+	<!--Settings-->
+	<style name="PreferenceTheme" parent="@style/PreferenceThemeOverlay">
+		<item name="android:divider">@null</item>
+		<item name="preferenceFragmentListStyle">@style/AppPreferenceFragmentList</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:fontFamily">@font/roboto</item>
+		<item name="android:textColorPrimary">@color/blue_grey_800</item>
+		<item name="android:textColorSecondary">@color/colorPrimary</item>
+		<item name="android:listSeparatorTextViewStyle">@style/AppPreference.Category</item>
+	</style>
+
+	<style name="AppPreferenceFragmentList" parent="">
+		<item name="android:paddingLeft">0dp</item>
+		<item name="android:paddingRight">0dp</item>
+	</style>
+
+	<style name="AppPreference.Category" parent="">
+		<item name="android:textSize">14sp</item>
+		<item name="android:fontFamily">@font/roboto_bold</item>
+		<item name="android:textColor">@color/grey_600</item>
+		<item name="android:textAllCaps">true</item>
+		<item name="android:paddingTop">@dimen/d2</item>
+		<item name="android:paddingBottom">@dimen/d2</item>
+		<item name="android:paddingLeft">@dimen/d4</item>
+		<item name="android:paddingRight">@dimen/d4</item>
+	</style>
+
+</resources>

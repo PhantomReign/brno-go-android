@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<dimen name="d0">0.00dp</dimen>
+	<dimen name="d0.5">2.00dp</dimen>
+	<dimen name="d1">4.00dp</dimen>
+	<dimen name="d2">8.00dp</dimen>
+	<dimen name="d2.5">10.00dp</dimen>
+	<dimen name="d3">12.00dp</dimen>
+	<dimen name="d4">16.00dp</dimen>
+	<dimen name="d5">20.00dp</dimen>
+	<dimen name="d6">24.00dp</dimen>
+	<dimen name="d7">28.00dp</dimen>
+	<dimen name="d8">32.00dp</dimen>
+	<dimen name="d9">36.00dp</dimen>
+	<dimen name="d10">40.00dp</dimen>
+	<dimen name="d11">44.00dp</dimen>
+	<dimen name="d12">48.00dp</dimen>
+	<dimen name="d13">52.00dp</dimen>
+	<dimen name="d14">56.00dp</dimen>
+	<dimen name="d15">60.00dp</dimen>
+	<dimen name="d16">64.00dp</dimen>
+	<dimen name="d17">68.00dp</dimen>
+	<dimen name="d18">72.00dp</dimen>
+	<dimen name="d19">76.00dp</dimen>
+	<dimen name="d20">80.00dp</dimen>
+	<dimen name="d24">96.00dp</dimen>
+	<dimen name="d25">100.00dp</dimen>
+	<dimen name="d27">108.00dp</dimen>
+	<dimen name="d30">120.00dp</dimen>
+	<dimen name="d35">140.00dp</dimen>
+	<dimen name="d38">152.00dp</dimen>
+
+	<dimen name="d45">180.00dp</dimen>
+</resources>

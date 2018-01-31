@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item>
+		<shape>
+			<gradient
+				android:centerX="50%"
+				android:centerY="50%"
+				android:endColor="@color/colorDark"
+				android:gradientRadius="100%"
+				android:startColor="@color/grey_800"
+				android:type="radial"/>
+		</shape>
+	</item>
+
+	<item
+		android:drawable="@drawable/ic_launcher_foreground"
+		android:gravity="center">
+	</item>
+</layer-list>

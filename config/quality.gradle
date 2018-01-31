@@ -1,0 +1,61 @@
+/**
+ * Set up Checkstyle and PMD to perform extensive code analysis.
+ *
+ * Gradle tasks added:
+ * - checkstyle
+ * - pmd
+ *
+ * The three tasks above are added as dependencies of the check task so running check will
+ * run all of them.
+ */
+
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+
+dependencies {
+    checkstyle 'com.puppycrawl.tools:checkstyle:7.7'
+}
+
+def qualityConfigDir = "$project.rootDir/config";
+def reportsDir = "$project.buildDir/reports"
+
+// possible checks: 'checkstyle', 'pmd'
+check.dependsOn 'checkstyle'
+
+task checkstyle(type: Checkstyle, group: 'Verification', description: 'Runs code style checks') {
+    configFile file("$qualityConfigDir/checkstyle/checkstyle-config.xml")
+    source 'src'
+    include '**/*.java'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination "$reportsDir/checkstyle/checkstyle.xml"
+        }
+        html {
+            destination "$reportsDir/checkstyle/checkstyle.html"
+        }
+    }
+
+    classpath = files()
+}
+
+task pmd(type: Pmd, group: 'Verification', description: 'Inspect sourcecode for bugs') {
+    ruleSetFiles = files("$qualityConfigDir/pmd/pmd-ruleset.xml")
+    ignoreFailures = false
+    ruleSets = []
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    consoleOutput = true
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html {
+            destination "$reportsDir/pmd/pmd.html"
+        }
+    }
+}

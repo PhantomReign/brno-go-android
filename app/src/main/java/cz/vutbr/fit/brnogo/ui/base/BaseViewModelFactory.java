@@ -1,0 +1,15 @@
+package cz.vutbr.fit.brnogo.ui.base;
+
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+
+public abstract class BaseViewModelFactory<VM extends BaseViewModel> implements ViewModelProvider.Factory {
+
+	protected abstract VM createViewModel();
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T extends ViewModel> T create(Class<T> modelClass) {
+		return (T) createViewModel();
+	}
+}

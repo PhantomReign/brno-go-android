@@ -1,0 +1,17 @@
+<resources>
+	<string name="app_name">Brno Go</string>
+
+	<!--General-->
+	<string name="routes">Routes</string>
+	<string name="departures">Departures</string>
+	<string name="nearby">Nearby</string>
+
+	<string name="start">From location</string>
+	<string name="destination">To location</string>
+	<string name="favorite">Favorites</string>
+	<string name="advanced">Advanced</string>
+	<string name="find_route">Find route</string>
+
+	<!--Time-->
+	<string name="minutes" translatable="false">%d min</string>
+</resources>
