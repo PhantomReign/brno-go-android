@@ -12,6 +12,10 @@
 	<string name="advanced">Advanced</string>
 	<string name="find_route">Find route</string>
 
+	<string name="stops">Stops</string>
+	<string name="stop">Stop</string>
+	<string name="search_stop">Search Stop&#8230;</string>
+
 	<!--Time-->
 	<string name="minutes" translatable="false">%d min</string>
 </resources>

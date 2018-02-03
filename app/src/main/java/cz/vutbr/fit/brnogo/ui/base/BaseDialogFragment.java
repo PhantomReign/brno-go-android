@@ -6,12 +6,11 @@ import android.content.DialogInterface;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-
-import javax.annotation.Nullable;
 
 import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.BR;

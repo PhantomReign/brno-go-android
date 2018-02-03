@@ -20,7 +20,7 @@ import cz.vutbr.fit.brnogo.ui.routes.RoutesFragment;
 
 public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements MainView {
 
-	@Inject MainViewModelFactory mainViewModelFactory;
+	@Inject MainViewModelFactory viewModelFactory;
 
 	private RoutesFragment routesFragment = RoutesFragment.newInstance();
 	private DeparturesFragment departuresFragment = DeparturesFragment.newInstance();
@@ -32,14 +32,13 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 
 	@Override
 	protected MainViewModel createViewModel() {
-		return ViewModelProviders.of(this, mainViewModelFactory).get(MainViewModel.class);
+		return ViewModelProviders.of(this, viewModelFactory).get(MainViewModel.class);
 	}
 
 	@Override
 	protected ActivityMainBinding inflateBindingLayout(LayoutInflater layoutInflater) {
 		return ActivityMainBinding.inflate(layoutInflater);
 	}
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

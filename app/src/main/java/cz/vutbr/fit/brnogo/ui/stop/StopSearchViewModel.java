@@ -1,4 +1,4 @@
-package cz.vutbr.fit.brnogo.ui.routes;
+package cz.vutbr.fit.brnogo.ui.stop;
 
 import android.arch.lifecycle.MutableLiveData;
 
@@ -13,14 +13,14 @@ import cz.vutbr.fit.brnogo.ui.base.BaseViewModel;
 import timber.log.Timber;
 
 @PerScreen
-public class RoutesViewModel extends BaseViewModel {
+public class StopSearchViewModel extends BaseViewModel {
 
 	private GetStopsInteractor getStopsInteractor;
 
 	private MutableLiveData<List<Stop>> items = new MutableLiveData<>();
 
 	@Inject
-	public RoutesViewModel(GetStopsInteractor getStopsInteractor) {
+	public StopSearchViewModel(GetStopsInteractor getStopsInteractor) {
 		this.getStopsInteractor = getStopsInteractor;
 
 		loadData();

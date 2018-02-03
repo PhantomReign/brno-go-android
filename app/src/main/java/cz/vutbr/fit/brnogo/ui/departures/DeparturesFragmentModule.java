@@ -13,5 +13,4 @@ public class DeparturesFragmentModule {
 	DeparturesView departuresView(DeparturesFragment fragment) {
 		return fragment;
 	}
-
 }

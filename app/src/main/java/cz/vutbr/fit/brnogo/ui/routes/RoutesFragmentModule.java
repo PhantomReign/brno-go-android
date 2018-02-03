@@ -13,5 +13,4 @@ public class RoutesFragmentModule {
 	RoutesView routesView(RoutesFragment fragment) {
 		return fragment;
 	}
-
 }

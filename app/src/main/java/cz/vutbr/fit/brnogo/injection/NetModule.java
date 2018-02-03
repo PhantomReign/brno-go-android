@@ -1,6 +1,5 @@
 package cz.vutbr.fit.brnogo.injection;
 
-
 import android.content.Context;
 
 import com.google.gson.Gson;

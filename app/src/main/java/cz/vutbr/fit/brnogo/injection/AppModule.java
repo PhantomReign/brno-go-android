@@ -14,7 +14,6 @@ import dagger.Module;
 import dagger.Provides;
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider;
 
-
 @Module
 public class AppModule {
 

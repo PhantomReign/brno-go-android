@@ -4,8 +4,17 @@ import org.threeten.bp.format.DateTimeFormatter;
 
 public interface Constant {
 
+	interface Bundle {
+		String KEY_STOP_OBJ = "stopObject";
+	}
+
 	interface ErrorCode {
 		int UNKNOWN_ERROR = 500;
+	}
+
+	interface RequestCode {
+		int STOP_FROM = 201;
+		int STOP_TO = 202;
 	}
 
 	interface Formatter {

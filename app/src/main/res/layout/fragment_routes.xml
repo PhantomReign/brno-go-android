@@ -28,56 +28,51 @@
 			<android.support.v7.widget.CardView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_margin="@dimen/d2"
-				>
+				android:layout_margin="@dimen/d2">
 
 				<android.support.constraint.ConstraintLayout
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					>
+					android:layout_height="wrap_content">
 
 					<ImageView
 						android:id="@+id/image_view_from"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginStart="8dp"
-						android:layout_marginTop="8dp"
+						android:layout_marginStart="@dimen/d3"
+						android:layout_marginTop="@dimen/d0"
 						android:tint="@color/colorPrimary"
-						app:layout_constraintBottom_toBottomOf="@+id/text_input_layout_from"
-						app:layout_constraintEnd_toStartOf="@+id/text_input_layout_from"
+						app:layout_constraintBottom_toBottomOf="@+id/text_input_from"
+						app:layout_constraintEnd_toStartOf="@+id/text_input_from"
 						app:layout_constraintHorizontal_bias="0.5"
 						app:layout_constraintStart_toStartOf="parent"
-						app:layout_constraintTop_toTopOf="@+id/text_input_layout_from"
+						app:layout_constraintTop_toTopOf="@+id/text_input_from"
 						app:srcCompat="@drawable/ic_person_pin_circle"/>
 
-					<android.support.design.widget.TextInputLayout
-						android:id="@+id/text_input_layout_from"
+					<EditText
+						android:id="@+id/text_input_from"
+						style="@style/TextRegular.MediumRed.14"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="8dp"
-						android:layout_marginEnd="8dp"
-						android:layout_marginStart="8dp"
-						android:layout_marginTop="8dp"
+						android:layout_marginBottom="@dimen/d2"
+						android:layout_marginEnd="@dimen/d2"
+						android:layout_marginStart="@dimen/d2"
+						android:layout_marginTop="@dimen/d2"
+						android:focusable="false"
+						android:foreground="?selectableItemBackground"
 						android:gravity="bottom"
-						app:layout_constraintBottom_toTopOf="@+id/text_input_layout_to"
-						app:layout_constraintEnd_toEndOf="parent"
-						app:layout_constraintHorizontal_bias="0.5"
+						android:hint="@string/start"
+						android:longClickable="false"
+						android:onClick="@{() -> view.onStartTextEditClick()}"
+						app:layout_constraintBottom_toTopOf="@+id/text_input_to"
+						app:layout_constraintEnd_toStartOf="@+id/image_view_switch"
 						app:layout_constraintStart_toEndOf="@+id/image_view_from"
-						app:layout_constraintTop_toTopOf="parent">
-
-						<AutoCompleteTextView
-							android:id="@+id/auto_text_view_from"
-							style="@style/TextRegular.MediumRed.14"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:hint="@string/start"/>
-					</android.support.design.widget.TextInputLayout>
+						app:layout_constraintTop_toTopOf="parent"/>
 
 					<ImageView
 						android:id="@+id/image_view_dots"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginStart="8dp"
+						android:layout_marginStart="@dimen/d3"
 						android:tint="@color/grey_400"
 						app:layout_constraintBottom_toTopOf="@+id/image_view_to"
 						app:layout_constraintStart_toStartOf="parent"
@@ -88,11 +83,10 @@
 						android:id="@+id/image_view_switch"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="8dp"
-						android:layout_marginEnd="8dp"
-						android:layout_marginStart="8dp"
-						android:layout_marginTop="8dp"
+						android:layout_marginEnd="@dimen/d3"
 						android:background="?selectableItemBackgroundBorderless"
+						android:onClick="@{() -> view.onSwitchClick()}"
+						android:padding="@dimen/d1"
 						android:tint="@color/colorPrimary"
 						app:layout_constraintBottom_toTopOf="@+id/image_view_to"
 						app:layout_constraintEnd_toEndOf="parent"
@@ -105,36 +99,33 @@
 						android:id="@+id/image_view_to"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginStart="8dp"
-						android:layout_marginTop="8dp"
+						android:layout_marginStart="@dimen/d3"
+						android:layout_marginTop="@dimen/d0"
 						android:tint="@color/green_500"
-						app:layout_constraintBottom_toBottomOf="@+id/text_input_layout_to"
-						app:layout_constraintEnd_toStartOf="@+id/text_input_layout_to"
+						app:layout_constraintBottom_toBottomOf="@+id/text_input_to"
+						app:layout_constraintEnd_toStartOf="@+id/text_input_to"
 						app:layout_constraintHorizontal_bias="0.5"
 						app:layout_constraintHorizontal_chainStyle="spread"
 						app:layout_constraintStart_toStartOf="parent"
-						app:layout_constraintTop_toTopOf="@+id/text_input_layout_to"
+						app:layout_constraintTop_toTopOf="@+id/text_input_to"
 						app:srcCompat="@drawable/ic_place"/>
 
-					<android.support.design.widget.TextInputLayout
-						android:id="@+id/text_input_layout_to"
+					<EditText
+						android:id="@+id/text_input_to"
+						style="@style/TextRegular.MediumRed.14"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="8dp"
-						android:layout_marginEnd="8dp"
-						android:layout_marginStart="8dp"
+						android:layout_marginBottom="@dimen/d2"
+						android:layout_marginEnd="@dimen/d2"
+						android:layout_marginStart="@dimen/d2"
+						android:focusable="false"
+						android:foreground="?selectableItemBackground"
+						android:hint="@string/destination"
+						android:longClickable="false"
+						android:onClick="@{() -> view.onDestinationTextEditClick()}"
 						app:layout_constraintBottom_toTopOf="@+id/button_advanced"
-						app:layout_constraintEnd_toEndOf="parent"
-						app:layout_constraintHorizontal_bias="0.5"
-						app:layout_constraintStart_toEndOf="@+id/image_view_to">
-
-						<android.support.design.widget.TextInputEditText
-							android:id="@+id/auto_text_view_to"
-							style="@style/TextRegular.MediumRed.14"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:hint="@string/destination"/>
-					</android.support.design.widget.TextInputLayout>
+						app:layout_constraintEnd_toStartOf="@+id/image_view_switch"
+						app:layout_constraintStart_toEndOf="@+id/image_view_to"/>
 
 					<Button
 						android:id="@+id/button_advanced"
@@ -142,26 +133,25 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_margin="@dimen/d2"
-						android:layout_marginBottom="8dp"
-						android:layout_marginEnd="8dp"
-						android:layout_marginStart="8dp"
+						android:layout_marginBottom="@dimen/d2"
+						android:layout_marginEnd="@dimen/d2"
+						android:layout_marginStart="@dimen/d2"
 						android:text="@string/advanced"
 						app:layout_constraintBottom_toTopOf="@+id/button_find_route"
 						app:layout_constraintEnd_toEndOf="parent"
-						app:layout_constraintStart_toStartOf="parent"
-						/>
+						app:layout_constraintStart_toStartOf="parent"/>
 
 					<Button
 						android:id="@+id/button_find_route"
 						style="@style/ButtonRedBorderlessStyle"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
+						android:onClick="@{() -> view.onFindRouteClick()}"
 						android:text="@string/find_route"
 						app:layout_constraintBottom_toBottomOf="parent"
 						app:layout_constraintEnd_toEndOf="parent"
 						app:layout_constraintStart_toStartOf="parent"/>
 				</android.support.constraint.ConstraintLayout>
-
 
 			</android.support.v7.widget.CardView>
 

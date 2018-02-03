@@ -3,6 +3,8 @@ package cz.vutbr.fit.brnogo.injection;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.ui.main.MainActivity;
 import cz.vutbr.fit.brnogo.ui.main.MainActivityModule;
+import cz.vutbr.fit.brnogo.ui.stop.StopSearchActivity;
+import cz.vutbr.fit.brnogo.ui.stop.StopSearchActivityModule;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -12,5 +14,9 @@ public abstract class ActivityBuilderModule {
 	@PerScreen
 	@ContributesAndroidInjector(modules = MainActivityModule.class)
 	abstract MainActivity bindMainActivity();
+
+	@PerScreen
+	@ContributesAndroidInjector(modules = StopSearchActivityModule.class)
+	abstract StopSearchActivity bindSearchActivity();
 
 }
