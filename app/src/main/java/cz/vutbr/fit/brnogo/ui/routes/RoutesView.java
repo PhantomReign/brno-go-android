@@ -6,9 +6,21 @@ public interface RoutesView extends BaseView {
 
 	void onFindRouteClick();
 
+	void onAdvancedClick();
+
+	void onCloseClick();
+
 	void onStartTextEditClick();
 
 	void onDestinationTextEditClick();
 
 	void onSwitchClick();
+
+	void onTimeButtonClick();
+
+	void onDateButtonClick();
+
+	void onTransfersButtonClick();
+
+	void onTransferTimeButtonClick();
 }

@@ -18,4 +18,8 @@
 
 	<!--Time-->
 	<string name="minutes" translatable="false">%d min</string>
+
+	<string name="today">Today</string>
+	<string name="now">Now</string>
+	<string name="infinity" translatable="false">&#8734;</string>
 </resources>

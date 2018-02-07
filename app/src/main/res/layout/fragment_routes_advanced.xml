@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="view"
+			type="cz.vutbr.fit.brnogo.ui.routes.RoutesView"/>
+
+		<variable
+			name="viewModel"
+			type="cz.vutbr.fit.brnogo.ui.routes.RoutesViewModel"/>
+	</data>
+
+	<android.support.constraint.ConstraintLayout
+		android:id="@+id/cardConstraintLayout"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<ImageView
+			android:id="@+id/image_view_from"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/d3"
+			android:layout_marginTop="@dimen/d0"
+			android:tint="@color/colorPrimary"
+			app:layout_constraintBottom_toBottomOf="@+id/text_input_from"
+			app:layout_constraintEnd_toStartOf="@+id/text_input_from"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@+id/text_input_from"
+			app:srcCompat="@drawable/ic_person_pin_circle"/>
+
+		<EditText
+			android:id="@+id/text_input_from"
+			style="@style/TextRegular.MediumRed.14"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/d2"
+			android:layout_marginStart="@dimen/d2"
+			android:layout_marginTop="@dimen/d2"
+			android:focusable="false"
+			android:foreground="?selectableItemBackground"
+			android:gravity="bottom"
+			android:hint="@string/start"
+			android:longClickable="false"
+			android:onClick="@{() -> view.onStartTextEditClick()}"
+			app:layout_constraintEnd_toStartOf="@+id/image_view_switch"
+			app:layout_constraintStart_toEndOf="@+id/image_view_from"
+			app:layout_constraintTop_toTopOf="parent"/>
+
+		<ImageView
+			android:id="@+id/image_view_dots"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/d5"
+			android:tint="@color/grey_400"
+			app:layout_constraintBottom_toTopOf="@+id/image_view_to"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/image_view_from"
+			app:srcCompat="@drawable/ic_more"/>
+
+		<ImageView
+			android:id="@+id/image_view_switch"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/d3"
+			android:background="?selectableItemBackgroundBorderless"
+			android:onClick="@{() -> view.onSwitchClick()}"
+			android:padding="@dimen/d1"
+			android:tint="@color/colorPrimary"
+			app:layout_constraintBottom_toTopOf="@+id/image_view_to"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="1.0"
+			app:layout_constraintStart_toEndOf="@+id/image_view_dots"
+			app:layout_constraintTop_toBottomOf="@+id/image_view_from"
+			app:srcCompat="@drawable/ic_swap"/>
+
+		<ImageView
+			android:id="@+id/image_view_to"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/d3"
+			android:layout_marginTop="@dimen/d0"
+			android:tint="@color/green_500"
+			app:layout_constraintBottom_toBottomOf="@+id/text_input_to"
+			app:layout_constraintEnd_toStartOf="@+id/text_input_to"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintHorizontal_chainStyle="spread"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@+id/text_input_to"
+			app:srcCompat="@drawable/ic_place"/>
+
+		<EditText
+			android:id="@+id/text_input_to"
+			style="@style/TextRegular.MediumRed.14"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="@dimen/d2"
+			android:layout_marginStart="@dimen/d2"
+			android:layout_marginTop="8dp"
+			android:focusable="false"
+			android:foreground="?selectableItemBackground"
+			android:hint="@string/destination"
+			android:longClickable="false"
+			android:onClick="@{() -> view.onDestinationTextEditClick()}"
+			app:layout_constraintEnd_toStartOf="@+id/image_view_switch"
+			app:layout_constraintStart_toEndOf="@+id/image_view_to"
+			app:layout_constraintTop_toBottomOf="@+id/text_input_from"/>
+
+		<Button
+			android:id="@+id/button_advanced"
+			style="@style/ButtonWhiteBorderlessStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginEnd="140dp"
+			android:layout_marginStart="140dp"
+			android:layout_marginTop="8dp"
+			android:onClick="@{() -> view.onAdvancedClick()}"
+			android:text="@string/advanced"
+			android:visibility="gone"
+			app:layout_constraintBottom_toTopOf="@+id/button_date"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/text_input_to"/>
+
+		<Button
+			android:id="@+id/button_time"
+			style="@style/ButtonNoCapsWhiteBorderlessStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:drawableStart="@drawable/ic_time"
+			android:onClick="@{() -> view.onTimeButtonClick()}"
+			android:text="@string/now"
+			android:visibility="visible"
+			app:layout_constraintBaseline_toBaselineOf="@+id/button_date"
+			app:layout_constraintHorizontal_chainStyle="spread"
+			app:layout_constraintStart_toStartOf="@+id/button_transfers"/>
+
+		<Button
+			android:id="@+id/button_date"
+			style="@style/ButtonNoCapsWhiteBorderlessStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:drawableStart="@drawable/ic_date"
+			android:onClick="@{() -> view.onDateButtonClick()}"
+			android:text="@string/today"
+			android:visibility="visible"
+			app:layout_constraintBottom_toTopOf="@+id/button_transfer_time"
+			app:layout_constraintStart_toStartOf="@+id/button_transfer_time"
+			app:layout_constraintTop_toBottomOf="@+id/button_advanced"/>
+
+		<Button
+			android:id="@+id/button_transfers"
+			style="@style/ButtonNoCapsWhiteBorderlessStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="8dp"
+			android:layout_marginStart="8dp"
+			android:drawableStart="@drawable/ic_swap_horiz"
+			android:onClick="@{() -> view.onTransfersButtonClick()}"
+			android:text="@string/infinity"
+			android:visibility="visible"
+			app:layout_constraintBaseline_toBaselineOf="@+id/button_transfer_time"
+			app:layout_constraintEnd_toStartOf="@+id/button_transfer_time"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintHorizontal_chainStyle="packed"
+			app:layout_constraintStart_toStartOf="parent"/>
+
+		<Button
+			android:id="@+id/button_transfer_time"
+			style="@style/ButtonNoCapsWhiteBorderlessStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="8dp"
+			android:layout_marginStart="8dp"
+			android:drawableStart="@drawable/ic_directions_run"
+			android:onClick="@{() -> view.onTransferTimeButtonClick()}"
+			android:text="5 min"
+			android:visibility="visible"
+			app:layout_constraintBottom_toTopOf="@+id/button_close_advanced"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.5"
+			app:layout_constraintStart_toEndOf="@+id/button_transfers"
+			app:layout_constraintTop_toBottomOf="@+id/button_date"/>
+
+		<Button
+			android:id="@+id/button_close_advanced"
+			style="@style/ButtonWhiteBorderlessStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginStart="8dp"
+			android:layout_marginTop="8dp"
+			android:onClick="@{() -> view.onCloseClick()}"
+			android:text="Close"
+			android:visibility="visible"
+			app:layout_constraintBottom_toTopOf="@+id/button_find_route"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/button_transfer_time"/>
+
+		<Button
+			android:id="@+id/button_find_route"
+			style="@style/ButtonRedBorderlessStyle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:onClick="@{() -> view.onFindRouteClick()}"
+			android:text="@string/find_route"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"/>
+
+	</android.support.constraint.ConstraintLayout>
+
+</layout>

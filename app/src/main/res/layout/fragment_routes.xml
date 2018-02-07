@@ -15,24 +15,28 @@
 			type="cz.vutbr.fit.brnogo.ui.routes.RoutesViewModel"/>
 	</data>
 
-	<FrameLayout
+	<android.support.v4.widget.NestedScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 
-		<LinearLayout
+		<android.support.constraint.ConstraintLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:background="@color/grey_200"
-			android:orientation="vertical">
+			android:layout_height="wrap_content">
 
 			<android.support.v7.widget.CardView
+				android:id="@+id/cardView"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_margin="@dimen/d2">
+				android:layout_margin="@dimen/d2"
+				android:layout_marginTop="8dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent">
 
 				<android.support.constraint.ConstraintLayout
+					android:id="@+id/cardConstraintLayout"
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content">
+					android:layout_height="match_parent">
 
 					<ImageView
 						android:id="@+id/image_view_from"
@@ -53,7 +57,6 @@
 						style="@style/TextRegular.MediumRed.14"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="@dimen/d2"
 						android:layout_marginEnd="@dimen/d2"
 						android:layout_marginStart="@dimen/d2"
 						android:layout_marginTop="@dimen/d2"
@@ -63,7 +66,6 @@
 						android:hint="@string/start"
 						android:longClickable="false"
 						android:onClick="@{() -> view.onStartTextEditClick()}"
-						app:layout_constraintBottom_toTopOf="@+id/text_input_to"
 						app:layout_constraintEnd_toStartOf="@+id/image_view_switch"
 						app:layout_constraintStart_toEndOf="@+id/image_view_from"
 						app:layout_constraintTop_toTopOf="parent"/>
@@ -72,7 +74,7 @@
 						android:id="@+id/image_view_dots"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginStart="@dimen/d3"
+						android:layout_marginStart="@dimen/d5"
 						android:tint="@color/grey_400"
 						app:layout_constraintBottom_toTopOf="@+id/image_view_to"
 						app:layout_constraintStart_toStartOf="parent"
@@ -115,31 +117,111 @@
 						style="@style/TextRegular.MediumRed.14"
 						android:layout_width="0dp"
 						android:layout_height="wrap_content"
-						android:layout_marginBottom="@dimen/d2"
 						android:layout_marginEnd="@dimen/d2"
 						android:layout_marginStart="@dimen/d2"
+						android:layout_marginTop="8dp"
 						android:focusable="false"
 						android:foreground="?selectableItemBackground"
 						android:hint="@string/destination"
 						android:longClickable="false"
 						android:onClick="@{() -> view.onDestinationTextEditClick()}"
-						app:layout_constraintBottom_toTopOf="@+id/button_advanced"
 						app:layout_constraintEnd_toStartOf="@+id/image_view_switch"
-						app:layout_constraintStart_toEndOf="@+id/image_view_to"/>
+						app:layout_constraintStart_toEndOf="@+id/image_view_to"
+						app:layout_constraintTop_toBottomOf="@+id/text_input_from"/>
 
 					<Button
 						android:id="@+id/button_advanced"
 						style="@style/ButtonWhiteBorderlessStyle"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_margin="@dimen/d2"
-						android:layout_marginBottom="@dimen/d2"
-						android:layout_marginEnd="@dimen/d2"
-						android:layout_marginStart="@dimen/d2"
+						android:layout_marginBottom="8dp"
+						android:layout_marginEnd="140dp"
+						android:layout_marginStart="140dp"
+						android:layout_marginTop="8dp"
+						android:onClick="@{() -> view.onAdvancedClick()}"
 						android:text="@string/advanced"
+						app:layout_constraintBottom_toTopOf="@+id/button_date"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/text_input_to"/>
+
+					<Button
+						android:id="@+id/button_time"
+						style="@style/ButtonNoCapsWhiteBorderlessStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:drawableStart="@drawable/ic_time"
+						android:onClick="@{() -> view.onTimeButtonClick()}"
+						android:text="@string/now"
+						android:visibility="gone"
+						app:layout_constraintBaseline_toBaselineOf="@+id/button_date"
+						app:layout_constraintHorizontal_chainStyle="spread"
+						app:layout_constraintStart_toStartOf="@+id/button_transfers"/>
+
+					<Button
+						android:id="@+id/button_date"
+						style="@style/ButtonNoCapsWhiteBorderlessStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="8dp"
+						android:drawableStart="@drawable/ic_date"
+						android:onClick="@{() -> view.onDateButtonClick()}"
+						android:text="@string/today"
+						android:visibility="gone"
+						app:layout_constraintBottom_toTopOf="@+id/button_transfer_time"
+						app:layout_constraintStart_toStartOf="@+id/button_transfer_time"
+						app:layout_constraintTop_toBottomOf="@+id/button_advanced"/>
+
+					<Button
+						android:id="@+id/button_transfers"
+						style="@style/ButtonNoCapsWhiteBorderlessStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="8dp"
+						android:layout_marginStart="8dp"
+						android:drawableStart="@drawable/ic_swap_horiz"
+						android:onClick="@{() -> view.onTransfersButtonClick()}"
+						android:text="@string/infinity"
+						android:visibility="gone"
+						app:layout_constraintBaseline_toBaselineOf="@+id/button_transfer_time"
+						app:layout_constraintEnd_toStartOf="@+id/button_transfer_time"
+						app:layout_constraintHorizontal_bias="0.5"
+						app:layout_constraintHorizontal_chainStyle="packed"
+						app:layout_constraintStart_toStartOf="parent"/>
+
+					<Button
+						android:id="@+id/button_transfer_time"
+						style="@style/ButtonNoCapsWhiteBorderlessStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="8dp"
+						android:layout_marginStart="8dp"
+						android:drawableStart="@drawable/ic_directions_run"
+						android:onClick="@{() -> view.onTransferTimeButtonClick()}"
+						android:text="5 min"
+						android:visibility="gone"
+						app:layout_constraintBottom_toTopOf="@+id/button_close_advanced"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintHorizontal_bias="0.5"
+						app:layout_constraintStart_toEndOf="@+id/button_transfers"
+						app:layout_constraintTop_toBottomOf="@+id/button_date"/>
+
+					<Button
+						android:id="@+id/button_close_advanced"
+						style="@style/ButtonWhiteBorderlessStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="8dp"
+						android:layout_marginEnd="8dp"
+						android:layout_marginStart="8dp"
+						android:layout_marginTop="8dp"
+						android:onClick="@{() -> view.onCloseClick()}"
+						android:text="Close"
+						android:visibility="gone"
 						app:layout_constraintBottom_toTopOf="@+id/button_find_route"
 						app:layout_constraintEnd_toEndOf="parent"
-						app:layout_constraintStart_toStartOf="parent"/>
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toBottomOf="@+id/button_transfer_time"/>
 
 					<Button
 						android:id="@+id/button_find_route"
@@ -151,6 +233,7 @@
 						app:layout_constraintBottom_toBottomOf="parent"
 						app:layout_constraintEnd_toEndOf="parent"
 						app:layout_constraintStart_toStartOf="parent"/>
+
 				</android.support.constraint.ConstraintLayout>
 
 			</android.support.v7.widget.CardView>
@@ -161,9 +244,20 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_margin="@dimen/d2"
-				android:text="@string/favorite"/>
-		</LinearLayout>
+				android:layout_marginBottom="8dp"
+				android:layout_marginEnd="8dp"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				android:text="@string/favorite"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.0"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/cardView"
+				app:layout_constraintVertical_bias="0.0"/>
 
-	</FrameLayout>
+		</android.support.constraint.ConstraintLayout>
+
+	</android.support.v4.widget.NestedScrollView>
 
 </layout>

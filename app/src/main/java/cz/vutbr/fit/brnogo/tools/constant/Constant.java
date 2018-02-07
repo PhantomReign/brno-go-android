@@ -17,14 +17,17 @@ public interface Constant {
 		int STOP_TO = 202;
 	}
 
+	interface SearchRequest {
+		String DEFAULT_DATE = "Today";
+		String DEFAULT_TIME = "Now";
+		int DEFAULT_TRANSFERS = 999;
+		int DEFAULT_TRANSFER_TIME = 999;
+	}
+
 	interface Formatter {
-		DateTimeFormatter DAY_MONTH_YEAR = DateTimeFormatter.ofPattern("d. M. yyyy");
+		DateTimeFormatter DAY_MONTH_YEAR = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 		DateTimeFormatter DAY_LONG_MONTH_YEAR = DateTimeFormatter.ofPattern("d. MMMM yyyy");
-		DateTimeFormatter DAY_MONTH = DateTimeFormatter.ofPattern("d. M.");
 		DateTimeFormatter HOUR_MINUTE = DateTimeFormatter.ofPattern("HH:mm");
-		DateTimeFormatter HOUR_MINUTE_SECONDS = DateTimeFormatter.ofPattern("HH:mm:ss");
-		DateTimeFormatter MONTH_YEAR = DateTimeFormatter.ofPattern("MMM. yyyy");
-		DateTimeFormatter YEAR = DateTimeFormatter.ofPattern("yyyy");
 	}
 
 }
