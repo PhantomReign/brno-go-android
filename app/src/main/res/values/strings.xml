@@ -15,6 +15,11 @@
 	<string name="stops">Stops</string>
 	<string name="stop">Stop</string>
 	<string name="search_stop">Search Stop&#8230;</string>
+	<string name="transfers">Max Transfers</string>
+	<string name="transfer_time">Min Transfer Time</string>
+
+	<string name="set">Set</string>
+	<string name="cancel">Cancel</string>
 
 	<!--Time-->
 	<string name="minutes" translatable="false">%d min</string>

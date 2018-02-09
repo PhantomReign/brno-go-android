@@ -7,6 +7,10 @@ import cz.vutbr.fit.brnogo.ui.nearby.NearbyFragment;
 import cz.vutbr.fit.brnogo.ui.nearby.NearbyFragmentModule;
 import cz.vutbr.fit.brnogo.ui.routes.RoutesFragment;
 import cz.vutbr.fit.brnogo.ui.routes.RoutesFragmentModule;
+import cz.vutbr.fit.brnogo.ui.routes.dialog.time.TransferTimePickerDialog;
+import cz.vutbr.fit.brnogo.ui.routes.dialog.time.TransferTimePickerFragmentModule;
+import cz.vutbr.fit.brnogo.ui.routes.dialog.transfers.TransfersPickerDialog;
+import cz.vutbr.fit.brnogo.ui.routes.dialog.transfers.TransfersPickerFragmentModule;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -24,5 +28,13 @@ public abstract class FragmentBuilderModule {
 	@PerScreen
 	@ContributesAndroidInjector(modules = NearbyFragmentModule.class)
 	abstract NearbyFragment bindNearbyFragment();
+
+	@PerScreen
+	@ContributesAndroidInjector(modules = TransferTimePickerFragmentModule.class)
+	abstract TransferTimePickerDialog bindTransferTimeDialogFragment();
+
+	@PerScreen
+	@ContributesAndroidInjector(modules = TransfersPickerFragmentModule.class)
+	abstract TransfersPickerDialog bindTransfersDialogFragment();
 
 }

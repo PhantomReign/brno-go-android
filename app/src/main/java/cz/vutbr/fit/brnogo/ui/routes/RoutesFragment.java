@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.DatePicker;
+import android.widget.NumberPicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -37,12 +38,19 @@ import cz.vutbr.fit.brnogo.databinding.FragmentRoutesBinding;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.tools.datetime.DateTimeConverter;
 import cz.vutbr.fit.brnogo.ui.base.BaseFragment;
+import cz.vutbr.fit.brnogo.ui.routes.dialog.time.TransferTimePickerDialog;
+import cz.vutbr.fit.brnogo.ui.routes.dialog.transfers.TransfersPickerDialog;
 import cz.vutbr.fit.brnogo.ui.stop.StopSearchActivity;
 import timber.log.Timber;
 
 public class RoutesFragment
 		extends BaseFragment<RoutesViewModel, FragmentRoutesBinding>
-		implements RoutesView, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+		implements
+		RoutesView,
+		DatePickerDialog.OnDateSetListener,
+		TimePickerDialog.OnTimeSetListener,
+		TransfersPickerDialog.TransfersListener,
+		TransferTimePickerDialog.TransferTimeListener {
 
 	@Inject RoutesViewModelFactory viewModelFactory;
 
@@ -88,8 +96,13 @@ public class RoutesFragment
 	private void defaultAdvancedSettings() {
 		searchRequest.setDate(Constant.SearchRequest.DEFAULT_DATE);
 		searchRequest.setTime(Constant.SearchRequest.DEFAULT_TIME);
-		searchRequest.setTransfers(Constant.SearchRequest.DEFAULT_TRANSFERS);
-		searchRequest.setTransferTime(Constant.SearchRequest.DEFAULT_TRANSFER_TIME);
+		searchRequest.setTransfers(Constant.TransfersDialog.DEFAULT);
+		searchRequest.setTransferTime(Constant.TransferTimeDialog.DEFAULT);
+
+		binding.buttonTime.setText(R.string.now);
+		binding.buttonDate.setText(R.string.today);
+		binding.buttonTransfers.setText(R.string.infinity);
+		binding.buttonTransferTime.setText(getString(R.string.minutes, Constant.TransferTimeDialog.DEFAULT));
 	}
 
 	@Override
@@ -155,12 +168,16 @@ public class RoutesFragment
 
 	@Override
 	public void onTransfersButtonClick() {
-		Toast.makeText(getContext(), "TRANSFERS", Toast.LENGTH_SHORT).show();
+		TransfersPickerDialog dialog =  TransfersPickerDialog.newInstance();
+		dialog.setTargetFragment(this, Constant.RequestCode.DIALOG_TRANSFERS);
+		dialog.show(getFragmentManager(), Constant.Tag.DIALOG_TRANSFERS);
 	}
 
 	@Override
 	public void onTransferTimeButtonClick() {
-		Toast.makeText(getContext(), "TRANSFER TIME", Toast.LENGTH_SHORT).show();
+		TransferTimePickerDialog dialog =  TransferTimePickerDialog.newInstance();
+		dialog.setTargetFragment(this, Constant.RequestCode.DIALOG_TRANSFER_TIME);
+		dialog.show(getFragmentManager(), Constant.Tag.DIALOG_TRANSFER_TIME);
 	}
 
 	@Override
@@ -200,5 +217,17 @@ public class RoutesFragment
 				.format(Constant.Formatter.HOUR_MINUTE);
 		binding.buttonTime.setText(time);
 		searchRequest.setTime(time);
+	}
+
+	@Override
+	public void onSetTransfers(int transfers) {
+		binding.buttonTransfers.setText(String.valueOf(transfers));
+		searchRequest.setTransfers(transfers);
+	}
+
+	@Override
+	public void onSetTransferTime(int transferTime) {
+		binding.buttonTransferTime.setText(getString(R.string.minutes, transferTime));
+		searchRequest.setTransferTime(transferTime);
 	}
 }

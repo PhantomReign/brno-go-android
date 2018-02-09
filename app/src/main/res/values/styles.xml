@@ -44,7 +44,7 @@
 	<style name="TranslucentStatusBarActivityTheme" parent="AppTheme"/>
 
 	<style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-		<item name="android:windowTitleStyle">@style/TextRegular.Grey.16</item>
+		<item name="android:windowTitleStyle">@style/TextBold.DarkGrey.AllCaps.16</item>
 		<item name="colorAccent">@color/colorAccent</item>
 	</style>
 
@@ -52,7 +52,7 @@
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">?actionBarSize</item>
 		<item name="titleTextAppearance">@style/TextRegular.White.20</item>
-		<item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+		<item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
 		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
 	</style>
 
