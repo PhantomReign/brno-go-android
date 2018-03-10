@@ -10,6 +10,10 @@
 		<item name="android:textColor">@color/colorPrimary</item>
 	</style>
 
+	<style name="TextRegular.MediumRed.12">
+		<item name="android:textSize">12sp</item>
+	</style>
+
 	<style name="TextRegular.MediumRed.14">
 		<item name="android:textSize">14sp</item>
 	</style>
@@ -126,6 +130,14 @@
 
 	<style name="TextBold.DarkGrey.24">
 		<item name="android:textSize">24sp</item>
+	</style>
+
+	<style name="TextBold.DarkGrey.AllCaps">
+		<item name="android:textAllCaps">true</item>
+	</style>
+
+	<style name="TextBold.DarkGrey.AllCaps.16">
+		<item name="android:textSize">16sp</item>
 	</style>
 
 	<style name="TextBold.White">

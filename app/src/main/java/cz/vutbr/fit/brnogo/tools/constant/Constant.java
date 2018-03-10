@@ -15,16 +15,40 @@ public interface Constant {
 	interface RequestCode {
 		int STOP_FROM = 201;
 		int STOP_TO = 202;
+
+		int DIALOG_TRANSFERS = 261;
+		int DIALOG_TRANSFER_TIME = 262;
+	}
+
+	interface Tag {
+		String DIALOG_TRANSFERS = "transfers";
+		String DIALOG_TRANSFER_TIME = "transfersTime";
+
+	}
+
+	interface SearchRequest {
+		String DEFAULT_DATE = "Today";
+		String DEFAULT_TIME = "Now";
+		int DEFAULT_TRANSFERS = 999;
+		int DEFAULT_TRANSFER_TIME = 999;
+	}
+
+	interface TransfersDialog {
+		int MAX = 20;
+		int MIN = 0;
+		int DEFAULT = 20;
+	}
+
+	interface TransferTimeDialog {
+		int MAX = 30;
+		int MIN = 0;
+		int DEFAULT = 5;
 	}
 
 	interface Formatter {
-		DateTimeFormatter DAY_MONTH_YEAR = DateTimeFormatter.ofPattern("d. M. yyyy");
+		DateTimeFormatter DAY_MONTH_YEAR = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 		DateTimeFormatter DAY_LONG_MONTH_YEAR = DateTimeFormatter.ofPattern("d. MMMM yyyy");
-		DateTimeFormatter DAY_MONTH = DateTimeFormatter.ofPattern("d. M.");
 		DateTimeFormatter HOUR_MINUTE = DateTimeFormatter.ofPattern("HH:mm");
-		DateTimeFormatter HOUR_MINUTE_SECONDS = DateTimeFormatter.ofPattern("HH:mm:ss");
-		DateTimeFormatter MONTH_YEAR = DateTimeFormatter.ofPattern("MMM. yyyy");
-		DateTimeFormatter YEAR = DateTimeFormatter.ofPattern("yyyy");
 	}
 
 }
