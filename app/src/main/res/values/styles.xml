@@ -90,6 +90,14 @@
 		<item name="android:background">@color/grey_200</item>
 	</style>
 
+	<style name="DividerDeparture">
+		<item name="android:layout_height">1dp</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_marginLeft">@dimen/d2</item>
+		<item name="android:layout_marginRight">@dimen/d2</item>
+		<item name="android:background">@color/grey_600</item>
+	</style>
+
 	<style name="IndeterminateProgressWheel">
 		<item name="matProg_progressIndeterminate">true</item>
 		<item name="matProg_barWidth">@dimen/d1</item>

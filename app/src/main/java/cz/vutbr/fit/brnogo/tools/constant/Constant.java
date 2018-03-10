@@ -6,6 +6,7 @@ public interface Constant {
 
 	interface Bundle {
 		String KEY_STOP_OBJ = "stopObject";
+		String KEY_STOP_TO_DEP_OBJ = "stopToDepObject";
 	}
 
 	interface ErrorCode {
@@ -49,6 +50,11 @@ public interface Constant {
 		DateTimeFormatter DAY_MONTH_YEAR = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 		DateTimeFormatter DAY_LONG_MONTH_YEAR = DateTimeFormatter.ofPattern("d. MMMM yyyy");
 		DateTimeFormatter HOUR_MINUTE = DateTimeFormatter.ofPattern("HH:mm");
+	}
+
+	interface ViewType {
+		int DEPARTURE_LIST_HEADER = 1;
+		int DEPARTURE_LIST_VEHICLE = 2;
 	}
 
 }

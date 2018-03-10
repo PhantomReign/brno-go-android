@@ -14,9 +14,9 @@ import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.databinding.ActivityMainBinding;
 import cz.vutbr.fit.brnogo.ui.base.BaseActivity;
 import cz.vutbr.fit.brnogo.ui.base.BaseFragment;
-import cz.vutbr.fit.brnogo.ui.departures.DeparturesFragment;
-import cz.vutbr.fit.brnogo.ui.nearby.NearbyFragment;
-import cz.vutbr.fit.brnogo.ui.routes.RoutesFragment;
+import cz.vutbr.fit.brnogo.ui.main.departures.DeparturesFragment;
+import cz.vutbr.fit.brnogo.ui.main.nearby.NearbyFragment;
+import cz.vutbr.fit.brnogo.ui.main.routes.RoutesFragment;
 
 public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements MainView {
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+		<variable
+			name="item"
+			type="cz.vutbr.fit.brnogo.data.model.recyclerview.DepartureHeader"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:id="@+id/departure_direction"
+				style="@style/TextBold.Grey.AllCaps.14"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/d2"
+				android:text="@{item.direction}"
+				app:layout_constraintBottom_toBottomOf="@+id/imageView"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.0"
+				app:layout_constraintStart_toEndOf="@+id/imageView"
+				app:layout_constraintTop_toTopOf="@+id/imageView"
+				app:layout_constraintVertical_bias="0.454"
+				tools:text="Skácelova"/>
+
+			<ImageView
+				android:id="@+id/imageView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/d2"
+				android:layout_marginTop="@dimen/d3"
+				android:tint="@color/green_500"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:srcCompat="@drawable/ic_directions"/>
+
+
+		</android.support.constraint.ConstraintLayout>
+
+	</LinearLayout>
+
+</layout>
