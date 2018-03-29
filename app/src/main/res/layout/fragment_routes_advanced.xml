@@ -85,7 +85,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/d3"
 			android:layout_marginTop="@dimen/d0"
-			android:tint="@color/green_500"
+			android:tint="@color/green"
 			app:layout_constraintBottom_toBottomOf="@+id/text_input_to"
 			app:layout_constraintEnd_toStartOf="@+id/text_input_to"
 			app:layout_constraintHorizontal_bias="0.5"

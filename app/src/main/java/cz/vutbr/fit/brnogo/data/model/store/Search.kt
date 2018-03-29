@@ -10,4 +10,5 @@ data class Search(
 		var time: String = Constant.SearchRequest.DEFAULT_TIME,
 		var date: String = Constant.SearchRequest.DEFAULT_DATE,
 		var transfers: Int = Constant.TransfersDialog.DEFAULT,
-		var transferTime: Int = Constant.TransferTimeDialog.DEFAULT) : AutoParcelable
+		var transferTime: Int = Constant.TransferTimeDialog.DEFAULT,
+		var dateTime: Long = -1) : AutoParcelable

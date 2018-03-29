@@ -10,6 +10,9 @@ import io.reactivex.Single
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
+import io.reactivex.Completable
+
+
 
 @Singleton
 class StopStore @Inject constructor(
@@ -24,11 +27,12 @@ class StopStore @Inject constructor(
 
 	fun getStopsSyncStatus(): Observable<Boolean> = syncStatus
 
-	fun syncStops(): Single<List<Stop>> {
+	fun syncStops(): Completable {
 		return apiManager.getStops()
-				.map { stops -> dataBase.insertStops(stops)
+				.map({ stops ->
+					dataBase.insertStops(stops)
 					stops
-				}
+				}).toCompletable()
 	}
 
 	fun setStopsSyncStatus(isSyncing: Boolean) {

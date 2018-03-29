@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="screens">
+		<item>@string/routes</item>
+		<item>@string/departures</item>
+		<item>@string/nearby</item>
+	</string-array>
+	<string-array name="screens_values" translatable="false">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
+
+	<string-array name="routes_limit">
+		<item>@string/one_route</item>
+		<item>@string/two_routes</item>
+		<item>@string/three_routes</item>
+		<item>@string/four_routes</item>
+		<item>@string/five_routes</item>
+	</string-array>
+	<string-array name="routes_limit_values" translatable="false">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+	</string-array>
+</resources>

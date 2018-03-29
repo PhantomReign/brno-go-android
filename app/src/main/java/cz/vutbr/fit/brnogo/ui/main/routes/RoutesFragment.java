@@ -31,8 +31,10 @@ import cz.vutbr.fit.brnogo.databinding.FragmentRoutesBinding;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.tools.datetime.DateTimeConverter;
 import cz.vutbr.fit.brnogo.ui.base.BaseFragment;
+import cz.vutbr.fit.brnogo.ui.departures.DeparturesActivity;
 import cz.vutbr.fit.brnogo.ui.main.routes.dialog.time.TransferTimePickerDialog;
 import cz.vutbr.fit.brnogo.ui.main.routes.dialog.transfers.TransfersPickerDialog;
+import cz.vutbr.fit.brnogo.ui.route.RoutesActivity;
 import cz.vutbr.fit.brnogo.ui.stop.StopSearchActivity;
 
 public class RoutesFragment
@@ -74,7 +76,13 @@ public class RoutesFragment
 
 	@Override
 	public void onFindRouteClick() {
-		Toast.makeText(getContext(), "FIND", Toast.LENGTH_SHORT).show();
+		if (searchRequest != null && searchRequest.getStartStop() != null && searchRequest.getDestinationStop() != null) {
+
+			searchRequest.setDateTime(DateTimeConverter.zonedDateTimeToEpochSec(searchRequest.getDate(), searchRequest.getTime()));
+			startActivity(RoutesActivity.getStartIntent(getContext(), searchRequest));
+		} else {
+			Toast.makeText(getContext(), "FIND", Toast.LENGTH_SHORT).show();
+		}
 
 	}
 
@@ -90,6 +98,7 @@ public class RoutesFragment
 		searchRequest.setTime(Constant.SearchRequest.DEFAULT_TIME);
 		searchRequest.setTransfers(Constant.TransfersDialog.DEFAULT);
 		searchRequest.setTransferTime(Constant.TransferTimeDialog.DEFAULT);
+		searchRequest.setDateTime(-1);
 
 		binding.buttonTime.setText(R.string.now);
 		binding.buttonDate.setText(R.string.today);
@@ -196,7 +205,7 @@ public class RoutesFragment
 	@Override
 	public void onDateSet(DatePicker datePicker, int y, int m, int d) {
 		String date = DateTimeConverter
-				.localDate(LocalDateTime.of(y, m, d, 0, 0).toString())
+				.localDate(LocalDateTime.of(y, m + 1, d, 0, 0).toString())
 				.format(Constant.Formatter.DAY_MONTH_YEAR);
 		binding.buttonDate.setText(date);
 		searchRequest.setDate(date);
