@@ -8,11 +8,11 @@
 
 		<variable
 			name="view"
-			type="cz.vutbr.fit.brnogo.ui.routes.RoutesView"/>
+			type="cz.vutbr.fit.brnogo.ui.main.routes.RoutesView"/>
 
 		<variable
 			name="viewModel"
-			type="cz.vutbr.fit.brnogo.ui.routes.RoutesViewModel"/>
+			type="cz.vutbr.fit.brnogo.ui.main.routes.RoutesViewModel"/>
 	</data>
 
 	<android.support.v4.widget.NestedScrollView

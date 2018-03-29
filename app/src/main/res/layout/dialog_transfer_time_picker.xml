@@ -7,11 +7,11 @@
 
 	<variable
 		name="view"
-		type="cz.vutbr.fit.brnogo.ui.routes.dialog.time.TransferTimePickerView"/>
+		type="cz.vutbr.fit.brnogo.ui.main.routes.dialog.time.TransferTimePickerView"/>
 
 	<variable
 		name="viewModel"
-		type="cz.vutbr.fit.brnogo.ui.routes.dialog.time.TransferTimePickerViewModel"/>
+		type="cz.vutbr.fit.brnogo.ui.main.routes.dialog.time.TransferTimePickerViewModel"/>
 </data>
 
 <LinearLayout

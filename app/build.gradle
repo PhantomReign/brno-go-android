@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: "io.mironov.smuggler"
 apply plugin: 'kotlin-android'
 apply from: '../config/quality.gradle'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
@@ -65,16 +66,11 @@ android {
     }
 
     aaptOptions.additionalParameters "--no-version-vectors"
-
-    kapt {
-        generateStubs = true
-    }
-
 }
 
 dependencies {
     final SUPPORT_LIBRARY_VERSION = '27.0.2'
-    final CONSTRAINT_LAYOUT_VERSION = '1.1.0-beta4'
+    final CONSTRAINT_LAYOUT_VERSION = '1.1.0-beta5'
     final ARCH_COMPONENTS_VERSION = '1.1.0'
     final ROOM_VERSION = "1.0.0"
     final PLAY_SERVICES_VERSION = '11.8.0'
@@ -83,12 +79,16 @@ dependencies {
     final OKHTTP_VERSION = '3.9.1'
     final GLIDE_VERSION = "4.3.1"
     final PERMISSIONS_DISPATCHER_VERSION = '3.1.0'
+    final UNIDECODE_VERSION = '0.0.7'
 
     //Multi-dex
     implementation 'com.android.support:multidex:1.0.2'
 
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    //DataBinding
+    kapt "com.android.databinding:compiler:$gradle_plugin_version"
 
     //Support library
     implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
@@ -107,9 +107,9 @@ dependencies {
 
     //Architecture components
     implementation "android.arch.lifecycle:extensions:$ARCH_COMPONENTS_VERSION"
-    annotationProcessor "android.arch.lifecycle:compiler:$ARCH_COMPONENTS_VERSION"
+    kapt "android.arch.lifecycle:compiler:$ARCH_COMPONENTS_VERSION"
     implementation "android.arch.persistence.room:runtime:$ROOM_VERSION"
-    annotationProcessor "android.arch.persistence.room:compiler:$ROOM_VERSION"
+    kapt "android.arch.persistence.room:compiler:$ROOM_VERSION"
     implementation "android.arch.persistence.room:rxjava2:$ROOM_VERSION"
 
     //Maps
@@ -129,8 +129,8 @@ dependencies {
     //Injection
     implementation "com.google.dagger:dagger:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
-    annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
 
     //Networking
     implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
@@ -149,7 +149,7 @@ dependencies {
     //UI
     implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
     implementation "com.github.bumptech.glide:glide:$GLIDE_VERSION"
-    annotationProcessor "com.github.bumptech.glide:compiler:$GLIDE_VERSION"
+    kapt "com.github.bumptech.glide:compiler:$GLIDE_VERSION"
     implementation 'jp.wasabeef:recyclerview-animators:2.2.7'
     implementation 'com.pnikosis:materialish-progress:1.7'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.5.1'
@@ -160,7 +160,9 @@ dependencies {
 
     //Tools
     implementation "com.github.hotchemi:permissionsdispatcher:$PERMISSIONS_DISPATCHER_VERSION"
-    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$PERMISSIONS_DISPATCHER_VERSION"
+    kapt "com.github.hotchemi:permissionsdispatcher-processor:$PERMISSIONS_DISPATCHER_VERSION"
+    implementation "me.xuender:unidecode:$UNIDECODE_VERSION"
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {

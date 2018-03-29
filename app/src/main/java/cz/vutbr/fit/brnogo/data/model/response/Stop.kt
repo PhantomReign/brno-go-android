@@ -1,19 +1,23 @@
 package cz.vutbr.fit.brnogo.data.model.response
 
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.PrimaryKey
 import cz.vutbr.fit.brnogo.R
 import cz.vutbr.fit.brnogo.data.model.recyclerview.AdapterItem
-import cz.vutbr.fit.brnogo.tools.constant.StopType
 import io.mironov.smuggler.AutoParcelable
 
-
+@Entity(tableName = "stop")
 data class Stop(
-		private val id: String,
-		val name: String,
-		val type: String) : AutoParcelable, AdapterItem {
-	override fun getId(): String = id
+		@PrimaryKey
+		@ColumnInfo(name = "id")
+		var id: String = "",
+		@ColumnInfo(name = "name")
+		var name: String = "",
+		@ColumnInfo(name = "zone")
+		var zone: String = "") : AutoParcelable, AdapterItem {
+	override fun getItemId(): String = id
 
-	fun getIcon(): Pair<Int, Int> = when (type) {
-		StopType.TYPE_TRAM -> Pair(R.drawable.ic_tram, R.drawable.shape_oval_red)
-		else -> Pair(R.drawable.ic_bus, R.drawable.shape_oval_blue)
-	}
+	fun getIcon(): Pair<Int, Int> = Pair(R.drawable.ic_place, R.drawable.shape_oval_red)
+
 }

@@ -15,7 +15,7 @@ class DiffUtilCallback<T : AdapterItem>(private val oldItems: List<T>, private v
 	}
 
 	override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-		return oldItems[oldItemPosition].id == newItems[newItemPosition].id
+		return oldItems[oldItemPosition].itemId == newItems[newItemPosition].itemId
 	}
 
 	override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

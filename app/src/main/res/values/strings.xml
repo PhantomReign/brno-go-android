@@ -5,16 +5,20 @@
 	<string name="routes">Routes</string>
 	<string name="departures">Departures</string>
 	<string name="nearby">Nearby</string>
+	<string name="offline">You are offline.</string>
 
 	<string name="start">From location</string>
 	<string name="destination">To location</string>
 	<string name="favorite">Favorites</string>
 	<string name="advanced">Advanced</string>
 	<string name="find_route">Find route</string>
+	<string name="get_departures">Get Departures</string>
 
 	<string name="stops">Stops</string>
 	<string name="stop">Stop</string>
+	<string name="zone">Zone %1$s</string>
 	<string name="search_stop">Search Stop&#8230;</string>
+	<string name="select_stop">You did not select stop!</string>
 	<string name="transfers">Max Transfers</string>
 	<string name="transfer_time">Min Transfer Time</string>
 
@@ -27,4 +31,7 @@
 	<string name="today">Today</string>
 	<string name="now">Now</string>
 	<string name="infinity" translatable="false">&#8734;</string>
+
+	<string name="unavailable_departures">Departures are not available.</string>
+
 </resources>

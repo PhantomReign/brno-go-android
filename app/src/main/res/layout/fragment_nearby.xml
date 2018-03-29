@@ -8,11 +8,11 @@
 
 		<variable
 			name="view"
-			type="cz.vutbr.fit.brnogo.ui.nearby.NearbyView"/>
+			type="cz.vutbr.fit.brnogo.ui.main.nearby.NearbyView"/>
 
 		<variable
 			name="viewModel"
-			type="cz.vutbr.fit.brnogo.ui.nearby.NearbyViewModel"/>
+			type="cz.vutbr.fit.brnogo.ui.main.nearby.NearbyViewModel"/>
 	</data>
 
 	<FrameLayout

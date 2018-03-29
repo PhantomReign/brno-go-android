@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import cz.vutbr.fit.brnogo.data.model.response.Stop;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.GetStopsInteractor;
+import cz.vutbr.fit.brnogo.interactors.GetStopsSyncStatusInteractor;
+import cz.vutbr.fit.brnogo.interactors.SetStopsSyncStatusInteractor;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewModel;
 import timber.log.Timber;
 
@@ -16,27 +18,43 @@ import timber.log.Timber;
 public class StopSearchViewModel extends BaseViewModel {
 
 	private GetStopsInteractor getStopsInteractor;
+	private SetStopsSyncStatusInteractor setStopsSyncStatusInteractor;
+	private GetStopsSyncStatusInteractor getStopsSyncStatusInteractor;
 
 	private MutableLiveData<List<Stop>> items = new MutableLiveData<>();
 
 	@Inject
-	public StopSearchViewModel(GetStopsInteractor getStopsInteractor) {
+	public StopSearchViewModel(GetStopsInteractor getStopsInteractor,
+							   SetStopsSyncStatusInteractor setStopsSyncStatusInteractor,
+							   GetStopsSyncStatusInteractor getStopsSyncStatusInteractor) {
 		this.getStopsInteractor = getStopsInteractor;
+		this.getStopsSyncStatusInteractor = getStopsSyncStatusInteractor;
+		this.setStopsSyncStatusInteractor = setStopsSyncStatusInteractor;
 
-		loadData();
-	}
-
-	private void loadData() {
-		getStopsInteractor.execute((infoItems) -> items.setValue(infoItems), Timber::e);
+		listenForData();
 	}
 
 	public MutableLiveData<List<Stop>> getItems() {
 		return items;
 	}
 
+	private void listenForData() {
+		getStopsInteractor.execute((sync) -> {
+
+		});
+		getStopsInteractor.execute((infoItems) -> items.setValue(infoItems), Timber::e);
+	}
+
+	public void loadData() {
+		setStopsSyncStatusInteractor.execute(() -> {
+		});
+	}
+
 	@Override
 	protected void onCleared() {
 		getStopsInteractor.unsubscribe();
+		getStopsSyncStatusInteractor.unsubscribe();
+		setStopsSyncStatusInteractor.unsubscribe();
 		super.onCleared();
 	}
 }

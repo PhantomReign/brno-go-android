@@ -7,16 +7,18 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.data.model.response.Stop;
 import cz.vutbr.fit.brnogo.databinding.ListItemStopBinding;
 import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
+import me.xuender.unidecode.Unidecode;
+import timber.log.Timber;
 
 public class StopSearchAdapter extends RecyclerView.Adapter<StopSearchAdapter.ViewHolder> implements Filterable {
 
@@ -59,8 +61,7 @@ public class StopSearchAdapter extends RecyclerView.Adapter<StopSearchAdapter.Vi
 	}
 
 	private static String stripAccent(String string) {
-		return Normalizer.normalize(string, Normalizer.Form.NFD)
-				.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+		return Unidecode.decode(string);
 	}
 
 	@Override
@@ -110,7 +111,8 @@ public class StopSearchAdapter extends RecyclerView.Adapter<StopSearchAdapter.Vi
 		@Override
 		public void bind(Stop item) {
 			binding.setItem(item);
-			binding.itemStopIcon.setBackground(itemView.getResources().getDrawable(item.getIcon().getSecond()));
+			binding.itemStopSubtitle.setText(itemView.getResources().getString(R.string.zone, item.getZone()));
+			binding.itemStopIcon.setBackground(itemView.getResources().getDrawable(R.drawable.shape_oval_red));
 			binding.executePendingBindings();
 		}
 	}

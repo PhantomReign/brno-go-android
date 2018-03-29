@@ -1,16 +1,16 @@
 package cz.vutbr.fit.brnogo.injection;
 
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
-import cz.vutbr.fit.brnogo.ui.departures.DeparturesFragment;
-import cz.vutbr.fit.brnogo.ui.departures.DeparturesFragmentModule;
-import cz.vutbr.fit.brnogo.ui.nearby.NearbyFragment;
-import cz.vutbr.fit.brnogo.ui.nearby.NearbyFragmentModule;
-import cz.vutbr.fit.brnogo.ui.routes.RoutesFragment;
-import cz.vutbr.fit.brnogo.ui.routes.RoutesFragmentModule;
-import cz.vutbr.fit.brnogo.ui.routes.dialog.time.TransferTimePickerDialog;
-import cz.vutbr.fit.brnogo.ui.routes.dialog.time.TransferTimePickerFragmentModule;
-import cz.vutbr.fit.brnogo.ui.routes.dialog.transfers.TransfersPickerDialog;
-import cz.vutbr.fit.brnogo.ui.routes.dialog.transfers.TransfersPickerFragmentModule;
+import cz.vutbr.fit.brnogo.ui.main.departures.DeparturesFragment;
+import cz.vutbr.fit.brnogo.ui.main.departures.DeparturesFragmentModule;
+import cz.vutbr.fit.brnogo.ui.main.nearby.NearbyFragment;
+import cz.vutbr.fit.brnogo.ui.main.nearby.NearbyFragmentModule;
+import cz.vutbr.fit.brnogo.ui.main.routes.RoutesFragment;
+import cz.vutbr.fit.brnogo.ui.main.routes.RoutesFragmentModule;
+import cz.vutbr.fit.brnogo.ui.main.routes.dialog.time.TransferTimePickerDialog;
+import cz.vutbr.fit.brnogo.ui.main.routes.dialog.time.TransferTimePickerFragmentModule;
+import cz.vutbr.fit.brnogo.ui.main.routes.dialog.transfers.TransfersPickerDialog;
+import cz.vutbr.fit.brnogo.ui.main.routes.dialog.transfers.TransfersPickerFragmentModule;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
