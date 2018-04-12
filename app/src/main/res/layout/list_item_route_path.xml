@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="view"
+			type="cz.vutbr.fit.brnogo.ui.route.detail.RouteDetailView"/>
+
+		<variable
+			name="item"
+			type="cz.vutbr.fit.brnogo.data.model.response.Node"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:id="@+id/stop_name"
+				style="@style/TextRegular.DarkGrey.14"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/d5"
+				android:layout_marginStart="@dimen/d3"
+				android:text="@{item.stationName}"
+				app:layout_constraintBaseline_toBaselineOf="@+id/zone"
+				app:layout_constraintEnd_toStartOf="@+id/zone"
+				app:layout_constraintStart_toStartOf="parent"
+				tools:text="Skácelova"/>
+
+			<TextView
+				android:id="@+id/arrival_time"
+				style="@style/TextRegular.Grey.14"
+				android:layout_width="@dimen/d9"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/d1"
+				android:layout_marginEnd="@dimen/d2"
+				android:text="@{item.formattedTimeOfArrival}"
+				android:textAlignment="center"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toStartOf="@+id/departure_time"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:text="12:22"/>
+
+			<TextView
+				android:id="@+id/departure_time"
+				style="@style/TextRegular.Grey.14"
+				android:layout_width="@dimen/d9"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/d1"
+				android:layout_marginEnd="@dimen/d3"
+				android:text="@{item.formattedTimeOfDeparture}"
+				android:textAlignment="center"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:text="12:34"/>
+
+			<TextView
+				android:id="@+id/zone"
+				style="@style/TextRegular.MediumRed.12"
+				android:layout_width="@dimen/d8"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/d5"
+				android:text="@{String.valueOf(item.stationZone)}"
+				android:textAlignment="center"
+				app:layout_constraintBaseline_toBaselineOf="@+id/arrival_time"
+				app:layout_constraintEnd_toStartOf="@+id/arrival_time"
+				tools:text="101"/>
+		</android.support.constraint.ConstraintLayout>
+
+	</LinearLayout>
+
+</layout>

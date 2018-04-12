@@ -1,43 +1,19 @@
 package cz.vutbr.fit.brnogo.tools.datetime;
 
-import android.support.annotation.Nullable;
-
 import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneId;
-import org.threeten.bp.ZoneOffset;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.Calendar;
-import java.util.Date;
+import java.util.StringTokenizer;
+
+import cz.vutbr.fit.brnogo.tools.constant.Constant;
 
 public class DateTimeConverter {
 
 	private DateTimeConverter() {
-	}
-
-	@Nullable
-	public static LocalDateTime dateTime(Date date) {
-		if (date == null) {
-			return null;
-		}
-
-		Instant instant = Instant.ofEpochMilli(date.getTime());
-		return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-	}
-
-	public static LocalDateTime localDatetime(long milliseconds) {
-		return LocalDateTime.ofInstant(Instant.ofEpochSecond(milliseconds), ZoneId.systemDefault());
-	}
-
-	public static long milliseconds(LocalDateTime localDateTime) {
-		ZoneId zoneId = ZoneId.systemDefault();
-		return localDateTime.atZone(zoneId).toEpochSecond();
-	}
-
-	public static ZonedDateTime getUTCZonedDateTime(LocalDateTime localDateTime) {
-		return localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneOffset.UTC);
 	}
 
 	public static LocalDateTime localDate(String dateString) {
@@ -45,9 +21,34 @@ public class DateTimeConverter {
 		return LocalDateTime.parse(dateString, formatter);
 	}
 
-	public static Calendar getCalendar(int year, int month, int day) {
+	public static long zonedDateTimeToEpochSec(String date, String time) {
+		Instant now = Instant.now();
+		ZoneId zoneId = ZoneId.of("Europe/Prague");
+		ZonedDateTime dateAndTimeInBrno = ZonedDateTime.ofInstant(now, zoneId);
+
+		if (date.equals(Constant.SearchRequest.DEFAULT_DATE)) {
+			date = DateTimeFormatter.ofPattern(Constant.Formatter.DAY_MONTH_YEAR_STRING).format(dateAndTimeInBrno);
+		}
+
+		if (time.equals(Constant.SearchRequest.DEFAULT_TIME)) {
+			time = DateTimeFormatter.ofPattern(Constant.Formatter.HOUR_MINUTE_STRING).format(dateAndTimeInBrno);
+		}
+
+		StringTokenizer parsedDate = new StringTokenizer(date.trim(), ".");
+		StringTokenizer parsedTime = new StringTokenizer(time.trim(), ":");
+
+		int day = Integer.parseInt(parsedDate.nextToken());
+		int month = Integer.parseInt(parsedDate.nextToken());
+		int year = Integer.parseInt(parsedDate.nextToken());
+		int hour = Integer.parseInt(parsedTime.nextToken());
+		int minute = Integer.parseInt(parsedTime.nextToken());
+
+		return ZonedDateTime.of(year, month, day, hour, minute, 0, 0, zoneId).toEpochSecond();
+	}
+
+	public static Calendar getCalendar(int year, int month, int day, int hour, int minute) {
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(year, month, day);
+		calendar.set(year, month, day, hour, minute);
 		return calendar;
 	}
 

@@ -5,7 +5,8 @@
 	<string name="routes">Routes</string>
 	<string name="departures">Departures</string>
 	<string name="nearby">Nearby</string>
-	<string name="offline">You are offline.</string>
+
+	<string name="offline">Unable to contact server.</string>
 
 	<string name="start">From location</string>
 	<string name="destination">To location</string>
@@ -25,13 +26,44 @@
 	<string name="set">Set</string>
 	<string name="cancel">Cancel</string>
 
+	<string name="available_routes">Available Routes</string>
+
+	<string name="from_stop">From: %1$s</string>
+	<string name="to_stop">To: %1$s</string>
+
 	<!--Time-->
 	<string name="minutes" translatable="false">%d min</string>
+
+	<string name="delay" translatable="false">No delay</string>
+	<string name="delay_min">Delay: %1$d min</string>
+	<string name="total_time">Total Time: %1$d min</string>
 
 	<string name="today">Today</string>
 	<string name="now">Now</string>
 	<string name="infinity" translatable="false">&#8734;</string>
 
 	<string name="unavailable_departures">Departures are not available.</string>
+	<string name="unavailable_routes">Routes are not available.</string>
+
+	<!--Settings-->
+	<string name="settings_title">Settings</string>
+	<string name="category_sync_title">Sync</string>
+	<string name="category_limit_title">Search Routes Limit</string>
+	<string name="category_screen_title">Start Screen</string>
+
+	<string name="dialog_screen_title">Set Start Screen</string>
+	<string name="dialog_limit_title">Set Limit of Routes</string>
+
+	<string name="sync_header">Sync Stops</string>
+	<string name="sync_info">Click to sync stops</string>
+
+	<string name="sync_success">Sync successful!</string>
+	<string name="sync_failed">Sync failed!</string>
+
+	<string name="one_route">One</string>
+	<string name="two_routes">Two</string>
+	<string name="three_routes">Three</string>
+	<string name="four_routes">Four</string>
+	<string name="five_routes">Five</string>
 
 </resources>

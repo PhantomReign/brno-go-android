@@ -1,6 +1,5 @@
 package cz.vutbr.fit.brnogo.ui.departures;
 
-import cz.vutbr.fit.brnogo.data.model.response.CurrentDeparture;
 import cz.vutbr.fit.brnogo.data.model.response.Stop;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
@@ -12,7 +11,7 @@ import dagger.Provides;
 public class DeparturesActivityModule {
 	@Provides
 	@PerScreen
-	DeparturesView stopSearchView(DeparturesActivity activity) {
+	DeparturesView departuresView(DeparturesActivity activity) {
 		return activity;
 	}
 

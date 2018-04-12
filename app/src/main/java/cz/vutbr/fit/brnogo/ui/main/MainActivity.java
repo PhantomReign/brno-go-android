@@ -12,11 +12,14 @@ import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.databinding.ActivityMainBinding;
+import cz.vutbr.fit.brnogo.tools.constant.StartScreenType;
 import cz.vutbr.fit.brnogo.ui.base.BaseActivity;
 import cz.vutbr.fit.brnogo.ui.base.BaseFragment;
 import cz.vutbr.fit.brnogo.ui.main.departures.DeparturesFragment;
 import cz.vutbr.fit.brnogo.ui.main.nearby.NearbyFragment;
 import cz.vutbr.fit.brnogo.ui.main.routes.RoutesFragment;
+import cz.vutbr.fit.brnogo.ui.settings.SettingsActivity;
+import timber.log.Timber;
 
 public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements MainView {
 
@@ -41,6 +44,16 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 	}
 
 	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				startActivity(SettingsActivity.getStartIntent(this));
+				return true;
+		}
+		return false;
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setSupportActionBar(binding.toolbar);
@@ -51,7 +64,11 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 		}
 
 		if (savedInstanceState == null) {
-			setStartScreen();
+			viewModel.getStartScreenLiveData().observe(this, startScreen -> {
+				if (startScreen != null) {
+					setStartScreen(startScreen);
+				}
+			});
 		}
 	}
 
@@ -71,9 +88,21 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 		return false;
 	}
 
-	private void setStartScreen() {
-		replaceFragment(routesFragment);
-		binding.mainBottomNavigationView.setSelectedItemId(R.id.menu_bottom_navigation_routes);
+	private void setStartScreen(String startScreen) {
+		switch (startScreen) {
+			case StartScreenType.TYPE_NEARBY:
+				replaceFragment(nearbyFragment);
+				binding.mainBottomNavigationView.setSelectedItemId(R.id.menu_bottom_navigation_nearby);
+				break;
+			case StartScreenType.TYPE_DEPARTURES:
+				replaceFragment(departuresFragment);
+				binding.mainBottomNavigationView.setSelectedItemId(R.id.menu_bottom_navigation_departures);
+				break;
+			default:
+				replaceFragment(routesFragment);
+				binding.mainBottomNavigationView.setSelectedItemId(R.id.menu_bottom_navigation_routes);
+				break;
+		}
 	}
 
 	private void selectBottomNavigationItem(MenuItem menuItem, BaseFragment fragment) {

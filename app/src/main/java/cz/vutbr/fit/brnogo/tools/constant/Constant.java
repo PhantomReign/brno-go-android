@@ -7,6 +7,8 @@ public interface Constant {
 	interface Bundle {
 		String KEY_STOP_OBJ = "stopObject";
 		String KEY_STOP_TO_DEP_OBJ = "stopToDepObject";
+		String KEY_SEARCH_OBJ = "searchObject";
+		String KEY_ROUTE_OBJ = "routeObject";
 	}
 
 	interface ErrorCode {
@@ -47,14 +49,31 @@ public interface Constant {
 	}
 
 	interface Formatter {
-		DateTimeFormatter DAY_MONTH_YEAR = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		DateTimeFormatter DAY_LONG_MONTH_YEAR = DateTimeFormatter.ofPattern("d. MMMM yyyy");
-		DateTimeFormatter HOUR_MINUTE = DateTimeFormatter.ofPattern("HH:mm");
+		String DAY_MONTH_YEAR_STRING = "dd.MM.yyyy";
+		String HOUR_MINUTE_STRING = "HH:mm";
+
+		DateTimeFormatter DAY_MONTH_YEAR = DateTimeFormatter.ofPattern(DAY_MONTH_YEAR_STRING);
+		DateTimeFormatter HOUR_MINUTE = DateTimeFormatter.ofPattern(HOUR_MINUTE_STRING);
 	}
 
 	interface ViewType {
 		int DEPARTURE_LIST_HEADER = 1;
 		int DEPARTURE_LIST_VEHICLE = 2;
+
+		int ROUTE_LIST_ITEM = 1;
+		int ROUTE_LIST_FOOTER = 2;
+
+		int ROUTE_DETAIL_LIST_ITEM = 1;
+		int ROUTE_DETAIL_LIST_PATH = 2;
 	}
 
+	interface Preference {
+		String DATA_INITIALIZED = "settings_data_initialized";
+		String FIRST_STOP_SYNC_DONE = "first_stop_sync_done";
+	}
+
+	interface SyncStatus {
+		int DONE = 1;
+		int ERROR = 2;
+	}
 }

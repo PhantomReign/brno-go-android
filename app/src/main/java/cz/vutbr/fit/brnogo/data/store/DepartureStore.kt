@@ -1,6 +1,5 @@
 package cz.vutbr.fit.brnogo.data.store
 
-import android.view.Menu
 import cz.vutbr.fit.brnogo.data.api.ApiManager
 import cz.vutbr.fit.brnogo.data.model.response.CurrentDeparture
 import io.reactivex.Single

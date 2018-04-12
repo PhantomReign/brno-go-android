@@ -38,6 +38,10 @@
 		<item name="android:textColor">@color/grey_600</item>
 	</style>
 
+	<style name="TextRegular.Grey.12">
+		<item name="android:textSize">12sp</item>
+	</style>
+
 	<style name="TextRegular.Grey.14">
 		<item name="android:textSize">14sp</item>
 	</style>
@@ -94,6 +98,14 @@
 		<item name="android:textSize">24sp</item>
 	</style>
 
+	<style name="TextRegular.White80">
+		<item name="android:textColor">@color/white_80</item>
+	</style>
+
+	<style name="TextRegular.White80.16">
+		<item name="android:textSize">16sp</item>
+	</style>
+
 	<style name="TextMedium">
 		<item name="android:fontFamily">@font/roboto_medium</item>
 		<item name="fontFamily">@font/roboto_medium</item>
@@ -106,6 +118,10 @@
 
 	<style name="TextBold.Grey">
 		<item name="android:textColor">@color/grey_600</item>
+	</style>
+
+	<style name="TextBold.Grey.12">
+		<item name="android:textSize">12sp</item>
 	</style>
 
 	<style name="TextBold.Grey.AllCaps">

@@ -56,7 +56,20 @@
 		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
 	</style>
 
+	<style name="TransparentToolbarWithSubtitleStyle">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">?actionBarSize</item>
+		<item name="titleTextAppearance">@style/TextRegular.White80.16</item>
+		<item name="subtitleTextAppearance">@style/TextRegular.White.16</item>
+		<item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+	</style>
+
 	<style name="ToolbarStyle" parent="TransparentToolbarStyle">
+		<item name="android:background">@color/colorPrimary</item>
+	</style>
+
+	<style name="ToolbarWithSubtitleStyle" parent="TransparentToolbarWithSubtitleStyle">
 		<item name="android:background">@color/colorPrimary</item>
 	</style>
 

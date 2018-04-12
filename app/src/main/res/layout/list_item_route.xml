@@ -3,52 +3,112 @@
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		xmlns:tools="http://schemas.android.com/tools">
 
+	<data>
+
+		<variable
+			name="item"
+			type="cz.vutbr.fit.brnogo.data.model.response.Vehicle"/>
+	</data>
+
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
-		<android.support.v7.widget.CardView
-			android:id="@+id/cardView"
+		<android.support.constraint.ConstraintLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_margin="@dimen/d2"
-			android:layout_marginTop="8dp"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent">
+			android:background="?selectableItemBackground">
 
-			<android.support.constraint.ConstraintLayout
-				android:id="@+id/cardConstraintLayout"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent">
+			<ImageView
+				android:id="@+id/item_vehicle_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginStart="@dimen/d2"
+				android:layout_marginTop="@dimen/d2"
+				android:scaleType="center"
+				app:imageResource="@{item.getIcon()}"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:src="@drawable/ic_bus"/>
 
-				<LinearLayout
-					android:id="@+id/routeContainer"
-					android:layout_width="match_parent"
-					android:layout_height="200dp"
-					android:background="@color/white"
-					android:orientation="vertical"
-					app:layout_constraintBottom_toTopOf="@+id/button_find_route"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toTopOf="parent">
+			<TextView
+				android:id="@+id/item_vehicle_number"
+				style="@style/TextRegular.DarkGrey.16"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/d2"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="@+id/item_vehicle_icon"
+				app:layout_constraintStart_toStartOf="@+id/item_vehicle_icon"
+				app:layout_constraintTop_toBottomOf="@+id/item_vehicle_icon"
+				tools:text="15"/>
 
-				</LinearLayout>
+			<TextView
+				android:id="@+id/item_source_title"
+				style="@style/TextRegular.Grey.14"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="8dp"
+				android:layout_marginStart="@dimen/d2"
+				app:layout_constraintBottom_toTopOf="@+id/item_destination_title"
+				app:layout_constraintEnd_toStartOf="@+id/startTime"
+				app:layout_constraintStart_toEndOf="@+id/item_vehicle_icon"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_chainStyle="packed"
+				tools:text="Source"/>
 
-				<Button
-					android:id="@+id/button_find_route"
-					style="@style/ButtonRedBorderlessStyle"
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:text="@string/find_route"
-					app:layout_constraintBottom_toBottomOf="parent"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintStart_toStartOf="parent"/>
+			<TextView
+				android:id="@+id/item_destination_title"
+				style="@style/TextRegular.DarkGrey.16"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="8dp"
+				android:layout_marginStart="@dimen/d2"
+				app:layout_constraintBottom_toTopOf="@+id/item_delay"
+				app:layout_constraintEnd_toStartOf="@+id/destinationTime"
+				app:layout_constraintStart_toEndOf="@+id/item_vehicle_icon"
+				app:layout_constraintTop_toBottomOf="@+id/item_source_title"
+				tools:text="Destination"/>
 
-			</android.support.constraint.ConstraintLayout>
+			<TextView
+				android:id="@+id/item_delay"
+				style="@style/TextRegular.Grey.12"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="8dp"
+				android:layout_marginStart="@dimen/d2"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toEndOf="@+id/item_vehicle_icon"
+				app:layout_constraintTop_toBottomOf="@+id/item_destination_title"
+				tools:text="No delay"/>
 
-		</android.support.v7.widget.CardView>
+			<TextView
+				android:id="@+id/startTime"
+				style="@style/TextRegular.LightGrey.12"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/d3"
+				app:layout_constraintBottom_toBottomOf="@+id/item_source_title"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/item_source_title"
+				tools:text="23:22"/>
+
+			<TextView
+				android:id="@+id/destinationTime"
+				style="@style/TextRegular.LightGrey.12"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/d3"
+				app:layout_constraintBottom_toBottomOf="@+id/item_destination_title"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/item_destination_title"
+				tools:text="23:43"/>
+
+		</android.support.constraint.ConstraintLayout>
+
 	</LinearLayout>
 
 </layout>
