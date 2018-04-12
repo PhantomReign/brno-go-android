@@ -7,10 +7,6 @@ import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/**
- * Created by Rave on 26.03.2018.
- */
-
 @Singleton
 class RouteStore @Inject constructor(
 		val apiManager: ApiManager) {

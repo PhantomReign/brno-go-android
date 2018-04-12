@@ -76,6 +76,7 @@
 		</android.support.constraint.ConstraintLayout>
 
 		<View
+			android:id="@+id/divider_stop"
 			style="@style/DividerWithMargin"
 			android:layout_width="match_parent"/>
 	</LinearLayout>

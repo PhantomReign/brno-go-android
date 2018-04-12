@@ -1,4 +1,4 @@
-package cz.vutbr.fit.brnogo.ui.main.nearby;
+package cz.vutbr.fit.brnogo.ui.main.directions;
 
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import dagger.Module;
@@ -6,11 +6,11 @@ import dagger.Provides;
 
 @PerScreen
 @Module
-public class NearbyFragmentModule {
+public class DirectionsFragmentModule {
 
 	@Provides
 	@PerScreen
-	NearbyView nearbyView(NearbyFragment fragment) {
+	DirectionsView directionsView(DirectionsFragment fragment) {
 		return fragment;
 	}
 

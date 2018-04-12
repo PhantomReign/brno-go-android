@@ -12,8 +12,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import io.reactivex.Completable
 
-
-
 @Singleton
 class StopStore @Inject constructor(
 		val apiManager: ApiManager,

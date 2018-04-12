@@ -1,4 +1,4 @@
-package cz.vutbr.fit.brnogo.interactors.util;
+package cz.vutbr.fit.brnogo.tools;
 
 import android.Manifest;
 import android.content.Context;
@@ -51,3 +51,4 @@ public class PermissionChecker {
 		return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || ContextCompat.checkSelfPermission(context, permissions) == PackageManager.PERMISSION_GRANTED;
 	}
 }
+

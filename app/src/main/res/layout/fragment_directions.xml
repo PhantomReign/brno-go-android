@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="view"
+			type="cz.vutbr.fit.brnogo.ui.main.directions.DirectionsView"/>
+
+		<variable
+			name="viewModel"
+			type="cz.vutbr.fit.brnogo.ui.main.directions.DirectionsViewModel"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<android.support.v4.widget.NestedScrollView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:scrollbars="vertical">
+
+			<android.support.constraint.ConstraintLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<android.support.v7.widget.CardView
+					android:id="@+id/cardView"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/d2"
+					android:layout_marginTop="8dp"
+					android:focusableInTouchMode="true"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent">
+
+					<android.support.constraint.ConstraintLayout
+						android:id="@+id/cardConstraintLayout"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent">
+
+						<ImageView
+							android:id="@+id/image_view_from"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/d3"
+							android:layout_marginTop="@dimen/d0"
+							android:tint="@color/colorPrimary"
+							app:layout_constraintBottom_toBottomOf="@+id/directions_text_input_from"
+							app:layout_constraintEnd_toStartOf="@+id/directions_text_input_from"
+							app:layout_constraintHorizontal_bias="0.5"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toTopOf="@+id/directions_text_input_from"
+							app:srcCompat="@drawable/ic_person_pin_circle"/>
+
+						<EditText
+							android:id="@+id/directions_text_input_from"
+							style="@style/TextRegular.MediumRed.14"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="@dimen/d2"
+							android:layout_marginStart="@dimen/d2"
+							android:layout_marginTop="@dimen/d2"
+							android:focusable="false"
+							android:foreground="?selectableItemBackground"
+							android:gravity="bottom"
+							android:hint="@string/start"
+							android:longClickable="false"
+							android:onClick="@{() -> view.onStartTextEditClick()}"
+							android:text=""
+							app:layout_constraintEnd_toStartOf="@+id/image_view_switch"
+							app:layout_constraintStart_toEndOf="@+id/image_view_from"
+							app:layout_constraintTop_toTopOf="parent"/>
+
+						<ImageView
+							android:id="@+id/image_view_dots"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/d3"
+							android:tint="@color/grey_400"
+							app:layout_constraintBottom_toTopOf="@+id/image_view_to"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toBottomOf="@+id/image_view_from"
+							app:srcCompat="@drawable/ic_more"/>
+
+						<ImageView
+							android:id="@+id/image_view_switch"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="@dimen/d3"
+							android:background="?selectableItemBackgroundBorderless"
+							android:onClick="@{() -> view.onSwitchClick()}"
+							android:padding="@dimen/d1"
+							android:tint="@color/colorPrimary"
+							app:layout_constraintBottom_toTopOf="@+id/image_view_to"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintHorizontal_bias="1.0"
+							app:layout_constraintStart_toEndOf="@+id/image_view_dots"
+							app:layout_constraintTop_toBottomOf="@+id/image_view_from"
+							app:srcCompat="@drawable/ic_swap"/>
+
+						<ImageView
+							android:id="@+id/image_view_to"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/d3"
+							android:layout_marginTop="@dimen/d0"
+							android:tint="@color/green"
+							app:layout_constraintBottom_toBottomOf="@+id/directions_text_input_to"
+							app:layout_constraintEnd_toStartOf="@+id/directions_text_input_to"
+							app:layout_constraintHorizontal_bias="0.5"
+							app:layout_constraintHorizontal_chainStyle="spread"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toTopOf="@+id/directions_text_input_to"
+							app:srcCompat="@drawable/ic_place"/>
+
+						<EditText
+							android:id="@+id/directions_text_input_to"
+							style="@style/TextRegular.MediumRed.14"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="@dimen/d2"
+							android:layout_marginStart="@dimen/d2"
+							android:layout_marginTop="8dp"
+							android:focusable="false"
+							android:foreground="?selectableItemBackground"
+							android:hint="@string/destination"
+							android:longClickable="false"
+							android:onClick="@{() -> view.onDestinationTextEditClick()}"
+							app:layout_constraintEnd_toStartOf="@+id/image_view_switch"
+							app:layout_constraintStart_toEndOf="@+id/image_view_to"
+							app:layout_constraintTop_toBottomOf="@+id/directions_text_input_from"/>
+
+						<Button
+							android:id="@+id/button_time"
+							style="@style/ButtonNoCapsWhiteBorderlessStyle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/d2"
+							android:drawableStart="@drawable/ic_time"
+							android:onClick="@{() -> view.onTimeButtonClick()}"
+							android:text="@string/now"
+							app:layout_constraintBaseline_toBaselineOf="@+id/button_date"
+							app:layout_constraintEnd_toStartOf="@+id/button_date"
+							app:layout_constraintHorizontal_bias="0.5"
+							app:layout_constraintStart_toStartOf="parent"/>
+
+						<Button
+							android:id="@+id/button_date"
+							style="@style/ButtonNoCapsWhiteBorderlessStyle"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginBottom="@dimen/d2"
+							android:layout_marginEnd="@dimen/d2"
+							android:layout_marginTop="@dimen/d2"
+							android:drawableStart="@drawable/ic_date"
+							android:onClick="@{() -> view.onDateButtonClick()}"
+							android:text="@string/today"
+							app:layout_constraintBottom_toTopOf="@+id/button_get_directions"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintHorizontal_bias="0.5"
+							app:layout_constraintStart_toEndOf="@+id/button_time"
+							app:layout_constraintTop_toBottomOf="@+id/directions_text_input_to"/>
+
+						<Button
+							android:id="@+id/button_get_directions"
+							style="@style/ButtonRedBorderlessStyle"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:onClick="@{() -> view.onGetDirectionsClick()}"
+							android:text="@string/get_directions"
+							app:layout_constraintBottom_toBottomOf="parent"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"/>
+
+					</android.support.constraint.ConstraintLayout>
+
+				</android.support.v7.widget.CardView>
+
+				<TextView
+					android:id="@+id/saved_directions"
+					style="@style/TextBold.Grey.AllCaps.14"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/d2"
+					android:layout_marginEnd="8dp"
+					android:layout_marginStart="8dp"
+					android:layout_marginTop="8dp"
+					android:text="@string/directions_saved"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintHorizontal_bias="0.0"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/cardView"
+					/>
+
+				<android.support.v7.widget.RecyclerView
+					android:id="@+id/directions_recycler_view"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:focusableInTouchMode="false"
+					android:nestedScrollingEnabled="false"
+					app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/saved_directions"/>
+
+			</android.support.constraint.ConstraintLayout>
+		</android.support.v4.widget.NestedScrollView>
+
+	</LinearLayout>
+</layout>

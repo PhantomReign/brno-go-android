@@ -46,6 +46,30 @@ public class DateTimeConverter {
 		return ZonedDateTime.of(year, month, day, hour, minute, 0, 0, zoneId).toEpochSecond();
 	}
 
+	public static long currentZonedDateTimeToEpochSec() {
+		Instant now = Instant.now();
+		ZoneId zoneId = ZoneId.of("Europe/Prague");
+		ZonedDateTime dateAndTimeInBrno = ZonedDateTime.ofInstant(now, zoneId);
+
+		return dateAndTimeInBrno.toEpochSecond();
+	}
+
+	public static long zonedTimeToDayStartEpochSec() {
+		Instant now = Instant.now();
+		ZoneId zoneId = ZoneId.of("Europe/Prague");
+		ZonedDateTime dateAndTimeInBrno = ZonedDateTime.ofInstant(now, zoneId);
+
+		return  dateAndTimeInBrno.toLocalDate().atStartOfDay(zoneId).toEpochSecond();
+	}
+
+	public static String epochSecToZonedDayTime(long seconds) {
+		Instant dateTime = Instant.ofEpochSecond(seconds);
+		ZoneId zoneId = ZoneId.of("Europe/Prague");
+		ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(dateTime, zoneId);
+
+		return  Constant.Formatter.DAY_MONTH_YEAR_HOUR_MINUTE.format(zonedDateTime);
+	}
+
 	public static Calendar getCalendar(int year, int month, int day, int hour, int minute) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month, day, hour, minute);

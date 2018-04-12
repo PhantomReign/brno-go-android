@@ -1,6 +1,7 @@
 package cz.vutbr.fit.brnogo.data.api
 
 import cz.vutbr.fit.brnogo.data.model.response.CurrentDeparture
+import cz.vutbr.fit.brnogo.data.model.response.LiveVehicle
 import cz.vutbr.fit.brnogo.data.model.response.Route
 import cz.vutbr.fit.brnogo.data.model.response.Stop
 import javax.inject.Inject
@@ -32,5 +33,17 @@ class ApiManager @Inject constructor(
 				  liveDataEnabled: Boolean,
 				  routeLimit: Int): Single<List<Route>> {
 		return apiService.getRoutes(startStationId, destinationStationId, userLatitude, userLongitude, dateTime, minTimeToMove, maxTransfers, liveDataEnabled, routeLimit).compose(resultTransformer.transformData())
+	}
+
+	fun getDirections(startStationId: Int,
+				  destinationStationId: Int,
+				  dateTime: Long,
+				  minTimeToMove: Int,
+				  maxTransfers: Int): Single<Route> {
+		return apiService.getDirections(startStationId, destinationStationId, dateTime, minTimeToMove, maxTransfers).compose(resultTransformer.transformData())
+	}
+
+	fun getVehicle(lineCode: Int, lineId: Int): Single<LiveVehicle> {
+		return apiService.getVehicle(lineCode, lineId).compose(resultTransformer.transformData())
 	}
 }

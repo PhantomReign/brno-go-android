@@ -3,7 +3,9 @@ package cz.vutbr.fit.brnogo.ui.route;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +22,7 @@ import cz.vutbr.fit.brnogo.databinding.ActivityRoutesBinding;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.ui.base.BaseActivity;
 import cz.vutbr.fit.brnogo.ui.route.detail.RouteDetailActivity;
+import cz.vutbr.fit.brnogo.ui.route.navigation.RouteNavigationActivity;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import timber.log.Timber;
 
@@ -61,6 +64,8 @@ public class RoutesActivity extends BaseActivity<RoutesViewModel, ActivityRoutes
 			routesAdapter.updateData(routes);
 				});
 
+		viewModel.setColor.observe(this, bool -> setFavoriteColor());
+
 		if (savedInstanceState == null) {
 			viewModel.loadData();
 		}
@@ -74,19 +79,25 @@ public class RoutesActivity extends BaseActivity<RoutesViewModel, ActivityRoutes
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_favorite, menu);
+		viewModel.isFavorite();
 		return true;
 	}
 
-	private void setFavourite() {
-		Toast toast = Toast.makeText(this, "Set Fav", Toast.LENGTH_LONG);
-		toast.show();
+	private void setFavoriteColor() {
+		if (viewModel.search.getFavorite()) {
+			binding.toolbar.getMenu().findItem(R.id.action_favorite).setIcon(R.drawable.ic_favorite);
+			binding.toolbar.getMenu().findItem(R.id.action_favorite).getIcon().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), PorterDuff.Mode.SRC_ATOP);
+		} else {
+			binding.toolbar.getMenu().findItem(R.id.action_favorite).setIcon(R.drawable.ic_favorite_border);
+			binding.toolbar.getMenu().findItem(R.id.action_favorite).getIcon().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), PorterDuff.Mode.SRC_ATOP);
+		}
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.action_favorite:
-				setFavourite();
+				viewModel.setFavoriteSearch();
 				return true;
 			case android.R.id.home:
 				finish();
@@ -97,14 +108,12 @@ public class RoutesActivity extends BaseActivity<RoutesViewModel, ActivityRoutes
 
 	@Override
 	public void onInformationClick(Route route) {
-		Toast.makeText(getApplicationContext(), "INFO: " + route.getStartStationName() + " -> " + route.getDestinationStationName(), Toast.LENGTH_SHORT).show();
 		startActivity(RouteDetailActivity.getStartIntent(getApplicationContext(), route));
 
 	}
 
 	@Override
 	public void onNavigationClick(Route route) {
-		Timber.i("CLICK NAV");
-		Toast.makeText(getApplicationContext(), "NAV", Toast.LENGTH_SHORT).show();
+		startActivity(RouteNavigationActivity.getStartIntent(getApplicationContext(), route));
 	}
 }

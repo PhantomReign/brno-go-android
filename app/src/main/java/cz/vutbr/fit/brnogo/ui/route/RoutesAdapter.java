@@ -109,6 +109,7 @@ public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 			if (vehicle.getDelay() == 0) {
 				binding.itemDelay.setText(R.string.delay);
 			} else {
+
 				int min = (vehicle.getDelay() + 30) / 60;
 				binding.itemDelay.setText(itemView.getResources().getString(R.string.delay_min, min));
 			}

@@ -56,7 +56,7 @@
 			android:id="@+id/image_view_dots"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="@dimen/d5"
+			android:layout_marginStart="@dimen/d3"
 			android:tint="@color/grey_400"
 			app:layout_constraintBottom_toTopOf="@+id/image_view_to"
 			app:layout_constraintStart_toStartOf="parent"

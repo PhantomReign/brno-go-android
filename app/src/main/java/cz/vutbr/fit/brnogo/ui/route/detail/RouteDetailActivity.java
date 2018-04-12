@@ -46,7 +46,6 @@ public class RouteDetailActivity extends BaseActivity<RouteDetailViewModel, Acti
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
-			actionBar.setTitle(R.string.stops);
 			actionBar.setTitle(getString(R.string.from_stop, viewModel.route.getStartStationName()));
 			actionBar.setSubtitle(getString(R.string.to_stop, viewModel.route.getDestinationStationName()));
 		}

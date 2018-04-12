@@ -4,16 +4,17 @@ import android.view.View
 import cz.vutbr.fit.brnogo.R
 import cz.vutbr.fit.brnogo.data.model.recyclerview.DepartureItem
 import io.mironov.smuggler.AutoParcelable
+import timber.log.Timber
 
 data class DepartureVehicle(
 		val lineName: String,
 		val finalStationName: String,
-		val isBarrierLess: Boolean,
+		val barrierLess: Boolean,
 		val timeMark: String) : AutoParcelable, DepartureItem {
 	override fun getItemId(): String = lineName + timeMark
 
 	fun getBarrierLessVisibility(): Int {
-		return if (isBarrierLess) {
+		return if (barrierLess) {
 			View.VISIBLE
 		} else {
 			View.INVISIBLE

@@ -6,37 +6,54 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import cz.vutbr.fit.brnogo.data.model.response.Stop;
+import cz.vutbr.fit.brnogo.data.model.store.Search;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
-import cz.vutbr.fit.brnogo.interactors.GetStopsInteractor;
+import cz.vutbr.fit.brnogo.interactors.GetFavoriteRouteSearchInteractor;
+import cz.vutbr.fit.brnogo.interactors.SetFavoriteRouteSearchInteractor;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewModel;
 import timber.log.Timber;
 
 @PerScreen
 public class RoutesViewModel extends BaseViewModel {
 
-	private GetStopsInteractor getStopsInteractor;
+	private GetFavoriteRouteSearchInteractor getFavoriteRouteSearchInteractor;
+	private SetFavoriteRouteSearchInteractor setFavoriteRouteSearchInteractor;
 
-	private MutableLiveData<List<Stop>> items = new MutableLiveData<>();
+	private Search searchRequest;
+
+	private MutableLiveData<List<Search>> items = new MutableLiveData<>();
 
 	@Inject
-	public RoutesViewModel(GetStopsInteractor getStopsInteractor) {
-		this.getStopsInteractor = getStopsInteractor;
-
+	public RoutesViewModel(GetFavoriteRouteSearchInteractor getFavoriteRouteSearchInteractor,
+						   SetFavoriteRouteSearchInteractor setFavoriteRouteSearchInteractor) {
+		this.getFavoriteRouteSearchInteractor = getFavoriteRouteSearchInteractor;
+		this.setFavoriteRouteSearchInteractor = setFavoriteRouteSearchInteractor;
+		searchRequest = new Search();
 		loadData();
 	}
 
 	private void loadData() {
-		getStopsInteractor.execute((infoItems) -> items.setValue(infoItems), Timber::e);
+		getFavoriteRouteSearchInteractor.execute((searches) -> items.setValue(searches), Timber::e);
 	}
 
-	public MutableLiveData<List<Stop>> getItems() {
+	public void setFavoriteSearch(Search search) {
+		setFavoriteRouteSearchInteractor.init(search)
+				.execute(() -> {
+				});
+	}
+
+	public MutableLiveData<List<Search>> getItems() {
 		return items;
+	}
+
+	public Search getSearchRequest() {
+		return searchRequest;
 	}
 
 	@Override
 	protected void onCleared() {
-		getStopsInteractor.unsubscribe();
+		setFavoriteRouteSearchInteractor.unsubscribe();
+		getFavoriteRouteSearchInteractor.unsubscribe();
 		super.onCleared();
 	}
 }

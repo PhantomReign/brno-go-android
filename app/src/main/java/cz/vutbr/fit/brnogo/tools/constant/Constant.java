@@ -9,6 +9,8 @@ public interface Constant {
 		String KEY_STOP_TO_DEP_OBJ = "stopToDepObject";
 		String KEY_SEARCH_OBJ = "searchObject";
 		String KEY_ROUTE_OBJ = "routeObject";
+		String KEY_DIRECTIONS_SEARCH_OBJ = "searchObject";
+		String KEY_DIRECTIONS_ROUTE_OBJ = "routeObject";
 	}
 
 	interface ErrorCode {
@@ -36,6 +38,11 @@ public interface Constant {
 		int DEFAULT_TRANSFER_TIME = 999;
 	}
 
+	interface Persistence {
+		String FAVORITE_ROUTE_KEYS = "favorites_route_keys";
+		String SAVED_ROUTE_KEYS = "saved_route_keys";
+	}
+
 	interface TransfersDialog {
 		int MAX = 20;
 		int MIN = 0;
@@ -54,6 +61,9 @@ public interface Constant {
 
 		DateTimeFormatter DAY_MONTH_YEAR = DateTimeFormatter.ofPattern(DAY_MONTH_YEAR_STRING);
 		DateTimeFormatter HOUR_MINUTE = DateTimeFormatter.ofPattern(HOUR_MINUTE_STRING);
+
+		DateTimeFormatter DAY_MONTH_YEAR_HOUR_MINUTE = DateTimeFormatter.ofPattern(DAY_MONTH_YEAR_STRING + " - " + HOUR_MINUTE_STRING);
+
 	}
 
 	interface ViewType {
@@ -65,6 +75,9 @@ public interface Constant {
 
 		int ROUTE_DETAIL_LIST_ITEM = 1;
 		int ROUTE_DETAIL_LIST_PATH = 2;
+
+		int DIRECTION_LIST_ROUTE = 1;
+		int DIRECTION_LIST_ITEM = 2;
 	}
 
 	interface Preference {
@@ -73,6 +86,7 @@ public interface Constant {
 	}
 
 	interface SyncStatus {
+		int SYNC = 0;
 		int DONE = 1;
 		int ERROR = 2;
 	}

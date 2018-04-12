@@ -1,36 +1,28 @@
 package cz.vutbr.fit.brnogo.ui.main.departures;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.Calendar;
-
 import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.R;
-import cz.vutbr.fit.brnogo.data.model.response.Stop;
 import cz.vutbr.fit.brnogo.databinding.FragmentDeparturesBinding;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
-import cz.vutbr.fit.brnogo.tools.datetime.DateTimeConverter;
 import cz.vutbr.fit.brnogo.ui.base.BaseFragment;
 import cz.vutbr.fit.brnogo.ui.departures.DeparturesActivity;
-import cz.vutbr.fit.brnogo.ui.main.routes.dialog.time.TransferTimePickerDialog;
-import cz.vutbr.fit.brnogo.ui.main.routes.dialog.transfers.TransfersPickerDialog;
+import cz.vutbr.fit.brnogo.ui.main.MainActivity;
 import cz.vutbr.fit.brnogo.ui.stop.StopSearchActivity;
 
 public class DeparturesFragment extends BaseFragment<DeparturesViewModel, FragmentDeparturesBinding> implements DeparturesView {
 
 	@Inject DeparturesViewModelFactory viewModelFactory;
-
-	private Stop startStop = null;
 
 	public static DeparturesFragment newInstance() {
 		return new DeparturesFragment();
@@ -51,12 +43,26 @@ public class DeparturesFragment extends BaseFragment<DeparturesViewModel, Fragme
 		super.onViewCreated(view, savedInstanceState);
 	}
 
+	private void setCorrectEditTexts() {
+		if (viewModel.getStartStop() == null) {
+			binding.departuresTextInputFrom.setText("");
+		} else {
+			binding.departuresTextInputFrom.setText(viewModel.getStartStop().getName());
+		}
+	}
+
+	@Override
+	public void onResume() {
+		setCorrectEditTexts();
+		super.onResume();
+	}
+
 	@Override
 	public void onFindDeparturesClick() {
-		if (startStop != null) {
-			startActivity(DeparturesActivity.getStartIntent(getContext(), startStop));
+		if (viewModel.getStartStop() != null) {
+			startActivity(DeparturesActivity.getStartIntent(getContext(), viewModel.getStartStop()));
 		} else {
-			Toast.makeText(getContext(), getResources().getString(R.string.select_stop), Toast.LENGTH_SHORT).show();
+			Toast.makeText(getContext(), getString(R.string.select_stop), Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -70,8 +76,8 @@ public class DeparturesFragment extends BaseFragment<DeparturesViewModel, Fragme
 		switch (requestCode) {
 			case Constant.RequestCode.STOP_FROM:
 				if (resultCode == Activity.RESULT_OK) {
-					startStop = (data.getParcelableExtra(Constant.Bundle.KEY_STOP_OBJ));
-					binding.textInputFrom.setText(startStop.getName());
+					viewModel.setStartStop(data.getParcelableExtra(Constant.Bundle.KEY_STOP_OBJ));
+					binding.departuresTextInputFrom.setText(viewModel.getStartStop().getName());
 				}
 				break;
 			default:
