@@ -19,8 +19,6 @@ interface ApiService {
 	@GET("routes")
 	fun getRoutes(@Query("sId") startStationId: Int,
 				  @Query("dId") destinationStationId: Int,
-				  @Query("uLat") userLatitude: Double,
-				  @Query("uLon") userLongitude: Double,
 				  @Query("dTime") dateTime: Long,
 				  @Query("mTime") minTimeToMove: Int,
 				  @Query("mTrans") maxTransfers: Int,

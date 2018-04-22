@@ -13,7 +13,7 @@ data class Vehicle(
 		val delay: Int,
 		val path: List<Node>) : AutoParcelable, RouteItem {
 	override fun getItemId(): String {
-		return lineCode.toString() + lineId.toString() + type.toString() + path.size.toString()
+		return lineCode.toString() + lineId.toString() + type.toString() + path.toString() + delay.toString()
 	}
 
 	@DrawableRes

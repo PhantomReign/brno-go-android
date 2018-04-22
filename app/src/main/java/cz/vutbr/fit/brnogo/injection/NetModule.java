@@ -53,8 +53,8 @@ public class NetModule {
 		return new OkHttpClient.Builder()
 				.cache(cache)
 				.addInterceptor(interceptor)
-				.readTimeout(30, TimeUnit.SECONDS)
-				.writeTimeout(30, TimeUnit.SECONDS)
+				.readTimeout(60, TimeUnit.SECONDS)
+				.writeTimeout(60, TimeUnit.SECONDS)
 				.build();
 	}
 

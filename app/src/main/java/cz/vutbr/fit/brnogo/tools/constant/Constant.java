@@ -90,4 +90,16 @@ public interface Constant {
 		int DONE = 1;
 		int ERROR = 2;
 	}
+
+	interface Navigation {
+		int AVAILABLE_ROUTE_TIME_OFFSET = 600;
+		int FASTER_ROUTE_TIME_OFFSET = 120;
+
+		int ENTER_VEHICLE_TIME_OFFSET_BEFORE = 45;
+		int ENTER_VEHICLE_TIME_OFFSET_AFTER = 30;
+
+		int ON_STOP_DISTANCE_THRESHOLD = 20;
+		int STOP_EXIT_PERIMETER = 40;
+		int NUMBER_OF_NEXT_STATIONS = 2;
+	}
 }

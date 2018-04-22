@@ -45,13 +45,8 @@ public class GetNavigationInformationInteractor extends BaseFlowableInteractor<L
 
 	@Override
 	protected Flowable<Location> buildFlowable() {
-		/*locationStore.getLocationObservable().toFlowable()
-		return Flowable.interval(1000, TimeUnit.SECONDS).me
-		return locationStore.getLocationObservable().toSingle().map(location ->
-		location
-		);*/
 
-		return Flowable.interval(2, TimeUnit.SECONDS).startWith((long) 0)
+		return Flowable.interval(1, TimeUnit.SECONDS).startWith((long) 0)
 				.flatMap(__ -> locationStore.getLocationObservable().toFlowable()).map(location -> {
 					return location;
 				}).onBackpressureLatest()

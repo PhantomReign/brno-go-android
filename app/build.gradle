@@ -76,10 +76,10 @@ android {
 
 dependencies {
     final SUPPORT_LIBRARY_VERSION = '27.1.1'
-    final CONSTRAINT_LAYOUT_VERSION = '1.1.0-beta6'
+    final CONSTRAINT_LAYOUT_VERSION = '1.1.0'
     final ARCH_COMPONENTS_VERSION = '1.1.1'
     final ROOM_VERSION = "1.0.0"
-    final PLAY_SERVICES_VERSION = '12.0.1'
+    final PLAY_SERVICES_VERSION = '15.0.0'
     final DAGGER_VERSION = '2.14.1'
     final RETROFIT_VERSION = '2.3.0'
     final OKHTTP_VERSION = '3.9.1'
@@ -125,6 +125,8 @@ dependencies {
     implementation "com.google.android.gms:play-services-auth:$PLAY_SERVICES_VERSION"
     implementation 'com.google.maps.android:android-maps-utils:0.5'
     implementation 'com.github.matejcikm:RxGoogleMaps:801dfce'
+    implementation 'com.google.maps:google-maps-services:0.1.20'
+
 
     //Location
     implementation 'pl.charmas.android:android-reactive-location2:2.0@aar'

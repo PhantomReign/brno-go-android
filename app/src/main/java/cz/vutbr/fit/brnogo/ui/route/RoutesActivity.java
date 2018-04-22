@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import cz.vutbr.fit.brnogo.data.model.response.Route;
 import cz.vutbr.fit.brnogo.data.model.store.Search;
 import cz.vutbr.fit.brnogo.databinding.ActivityRoutesBinding;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
+import cz.vutbr.fit.brnogo.tools.datetime.DateTimeConverter;
 import cz.vutbr.fit.brnogo.ui.base.BaseActivity;
 import cz.vutbr.fit.brnogo.ui.route.detail.RouteDetailActivity;
 import cz.vutbr.fit.brnogo.ui.route.navigation.RouteNavigationActivity;
@@ -114,6 +116,21 @@ public class RoutesActivity extends BaseActivity<RoutesViewModel, ActivityRoutes
 
 	@Override
 	public void onNavigationClick(Route route) {
-		startActivity(RouteNavigationActivity.getStartIntent(getApplicationContext(), route));
+		long departureTime = route.getVehicles().get(0).getPath().get(0).getTimeOfDeparture();
+		long currentTime = DateTimeConverter.currentZonedDateTimeToEpochSec();
+
+		long departureTimeWithDelay = route.getVehicles().get(0).getDelay() + departureTime;
+
+		if (currentTime > departureTimeWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER) {
+			Snackbar snackbar =	Snackbar.make(binding.routeSwipeRefreshLayout, getString(R.string.routes_too_late), Snackbar.LENGTH_LONG);
+			snackbar.getView().setBackgroundColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.red_500));
+			snackbar.show();
+		} else if (currentTime < departureTimeWithDelay - Constant.Navigation.AVAILABLE_ROUTE_TIME_OFFSET) {
+			Snackbar snackbar =	Snackbar.make(binding.routeSwipeRefreshLayout, getString(R.string.routes_too_soon), Snackbar.LENGTH_LONG);
+			snackbar.getView().setBackgroundColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.blue));
+			snackbar.show();
+		} else {
+			startActivity(RouteNavigationActivity.getStartIntent(getApplicationContext(), route, viewModel.search));
+		}
 	}
 }

@@ -25,14 +25,12 @@ class ApiManager @Inject constructor(
 
 	fun getRoutes(startStationId: Int,
 				  destinationStationId: Int,
-				  userLatitude: Double,
-				  userLongitude: Double,
 				  dateTime: Long,
 				  minTimeToMove: Int,
 				  maxTransfers: Int,
 				  liveDataEnabled: Boolean,
 				  routeLimit: Int): Single<List<Route>> {
-		return apiService.getRoutes(startStationId, destinationStationId, userLatitude, userLongitude, dateTime, minTimeToMove, maxTransfers, liveDataEnabled, routeLimit).compose(resultTransformer.transformData())
+		return apiService.getRoutes(startStationId, destinationStationId, dateTime, minTimeToMove, maxTransfers, liveDataEnabled, routeLimit).compose(resultTransformer.transformData())
 	}
 
 	fun getDirections(startStationId: Int,

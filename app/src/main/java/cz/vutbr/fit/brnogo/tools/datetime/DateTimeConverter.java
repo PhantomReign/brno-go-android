@@ -59,7 +59,7 @@ public class DateTimeConverter {
 		ZoneId zoneId = ZoneId.of("Europe/Prague");
 		ZonedDateTime dateAndTimeInBrno = ZonedDateTime.ofInstant(now, zoneId);
 
-		return  dateAndTimeInBrno.toLocalDate().atStartOfDay(zoneId).toEpochSecond();
+		return dateAndTimeInBrno.toLocalDate().atStartOfDay(zoneId).toEpochSecond();
 	}
 
 	public static String epochSecToZonedDayTime(long seconds) {
@@ -67,7 +67,15 @@ public class DateTimeConverter {
 		ZoneId zoneId = ZoneId.of("Europe/Prague");
 		ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(dateTime, zoneId);
 
-		return  Constant.Formatter.DAY_MONTH_YEAR_HOUR_MINUTE.format(zonedDateTime);
+		return Constant.Formatter.DAY_MONTH_YEAR_HOUR_MINUTE.format(zonedDateTime);
+	}
+
+	public static String epochSecToZonedHourMinute(long seconds) {
+		Instant dateTime = Instant.ofEpochSecond(seconds);
+		ZoneId zoneId = ZoneId.of("Europe/Prague");
+		ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(dateTime, zoneId);
+
+		return Constant.Formatter.HOUR_MINUTE.format(zonedDateTime);
 	}
 
 	public static Calendar getCalendar(int year, int month, int day, int hour, int minute) {

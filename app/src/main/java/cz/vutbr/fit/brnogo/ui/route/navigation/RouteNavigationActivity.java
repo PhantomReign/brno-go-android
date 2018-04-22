@@ -1,6 +1,5 @@
 package cz.vutbr.fit.brnogo.ui.route.navigation;
 
-import android.Manifest;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -8,29 +7,28 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.data.model.response.Route;
+import cz.vutbr.fit.brnogo.data.model.store.Search;
 import cz.vutbr.fit.brnogo.databinding.ActivityRouteNavigationBinding;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.ui.base.BaseActivity;
 import cz.vutbr.fit.brnogo.ui.base.BaseFragment;
 import cz.vutbr.fit.brnogo.ui.route.navigation.map.MapFragment;
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.RuntimePermissions;
-import timber.log.Timber;
 
-@RuntimePermissions
 public class RouteNavigationActivity extends BaseActivity<RouteNavigationViewModel, ActivityRouteNavigationBinding>
 		implements RouteNavigationView {
 
 	@Inject RouteNavigationViewModelFactory viewModelFactory;
 
-	public static Intent getStartIntent(Context context, Route route) {
-		return new Intent(context, RouteNavigationActivity.class).putExtra(Constant.Bundle.KEY_ROUTE_OBJ, route);
+	public static Intent getStartIntent(Context context, Route route, Search search) {
+		Bundle bundle = new Bundle();
+		bundle.putParcelable(Constant.Bundle.KEY_SEARCH_OBJ, search);
+		bundle.putParcelable(Constant.Bundle.KEY_ROUTE_OBJ, route);
+		return new Intent(context, RouteNavigationActivity.class).putExtras(bundle);
 	}
 
 	@Override
@@ -51,19 +49,12 @@ public class RouteNavigationActivity extends BaseActivity<RouteNavigationViewMod
 		ActionBar actionBar = getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setDisplayHomeAsUpEnabled(true);
-			actionBar.setTitle(getString(R.string.nav_to_stop, viewModel.route.getDestinationStationName()));
+			actionBar.setTitle(getString(R.string.nav_to_stop));
+			actionBar.setSubtitle(viewModel.route.getDestinationStationName());
 		}
 
 		replaceFragment(MapFragment.newInstance());
-
-		viewModel.getLocationData().observe(this, location -> {
-			Timber.d("LC: " + location.toString());
-		});
-
-		viewModel.loadData();
 	}
-
-	@NeedsPermission(Manifest.permission.ACCESS_FINE_LOCATION)
 
 	@Override
 	public void onBackPressed() {
@@ -78,12 +69,6 @@ public class RouteNavigationActivity extends BaseActivity<RouteNavigationViewMod
 				return true;
 		}
 		return false;
-	}
-
-	@Override
-	public void onShowFasterRoute(Route route) {
-		Toast.makeText(getApplicationContext(), "FASTER", Toast.LENGTH_SHORT).show();
-
 	}
 
 	private void replaceFragment(BaseFragment fragment) {

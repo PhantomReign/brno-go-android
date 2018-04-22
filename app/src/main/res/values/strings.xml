@@ -39,7 +39,7 @@
 	<string name="from_stop">From: %1$s</string>
 	<string name="to_stop">To: %1$s</string>
 
-	<string name="nav_to_stop">Navigating to: %1$s</string>
+	<string name="nav_to_stop">Navigating to:</string>
 
 	<!--Distance-->
 	<string name="km" translatable="false">%d km</string>
@@ -47,6 +47,7 @@
 
 	<!--Time-->
 	<string name="minutes" translatable="false">%d min</string>
+	<string name="minutes_seconds" translatable="false">%1$d min %2$d s</string>
 
 	<string name="delay" translatable="false">No delay</string>
 	<string name="delay_min">Delay: %1$d min</string>
@@ -82,10 +83,15 @@
 	<string name="four_routes">Four</string>
 	<string name="five_routes">Five</string>
 
+	<!--Routes-->
+	<string name="routes_too_soon">Navigation will be available 10 minutes before departure.</string>
+	<string name="routes_too_late">Unable to start navigation. You are too late.</string>
+
+	<!--Directions-->
 	<string name="min">minutes</string>
 	<string name="vehicles">vehicles</string>
 
-	<string name="directions_saved">Saved Directions.</string>
+	<string name="directions_saved">Saved Directions</string>
 	<string name="direction_walk">Walk to stop %1$s and wait.</string>
 	<string name="direction_board_bus">At %1$s, get in the bus with number %2$d.</string>
 	<string name="direction_board_tram">At %1$s, get in the tram with number %2$d.</string>
@@ -97,4 +103,34 @@
 	<string name="direction_done">You have arrived to your destination.</string>
 	<string name="direction_save_unavailable">Available after successful data load.</string>
 
+	<!--Navigation-->
+	<string name="enter_vehicle">Got on the vehicle</string>
+	<string name="exit_vehicle">Got off the vehicle</string>
+	<string name="keep">Keep Current</string>
+	<string name="replace">Replace</string>
+	<string name="faster_route_found">Faster route has been found</string>
+
+	<string name="nav_wait">Wait</string>
+	<string name="nav_ride">Ride</string>
+	<string name="nav_walk">Walk</string>
+	<string name="nav_stay_in">Stay</string>
+	<string name="nav_finding_new">Finding new route</string>
+	<string name="nav_board">Board</string>
+	<string name="nav_exit">Exit</string>
+
+	<string name="nav_exit_info">Please get off the current vehicle.</string>
+	<string name="nav_finding_new_info">Please wait until new route is found.</string>
+	<string name="nav_walk_info">Get to the stop %1$s.</string>
+	<string name="nav_wait_info">Wait on this stop for vehicle no. %1$d, that will depart at %2$s</string>
+	<string name="nav_ride_info">Traveling with vehicle no. %1$d.</string>
+	<string name="nav_stay_in_info">Stay in vehicle.</string>
+	<string name="nav_board_info">Get on vehicle no. %1$d.</string>
+
+	<string name="nav_finish">Finish</string>
+	<string name="nav_congratulations">Congratulations</string>
+	<string name="nav_finish_info">You have successfully reached your destination.</string>
+
+	<string name="nav_finish_failed">Failed</string>
+	<string name="nav_sorry">Sorry</string>
+	<string name="nav_finish_failed_info">You did not follow instructions. Try to find need route on next stop.</string>
 </resources>

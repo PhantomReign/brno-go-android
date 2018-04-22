@@ -151,7 +151,6 @@
 		<item name="android:textAppearance">@style/TextBold.White.AllCaps.16</item>
 		<item name="android:background">@color/colorPrimary</item>
 		<item name="android:foreground">?attr/selectableItemBackground</item>
-
 	</style>
 
 	<!--Settings-->

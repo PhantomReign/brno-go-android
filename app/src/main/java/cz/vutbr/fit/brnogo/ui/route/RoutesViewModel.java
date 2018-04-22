@@ -57,7 +57,7 @@ public class RoutesViewModel extends BaseViewModel {
 		offlineVisibility.set(false);
 
 		getRoutesInteractor
-				.init(Integer.parseInt(search.getStartStop().getId()), Integer.parseInt(search.getDestinationStop().getId()), 0.0, 0.0, search.getDateTime(), search.getTransferTime(), search.getTransfers(), false)
+				.init(Integer.parseInt(search.getStartStop().getId()), Integer.parseInt(search.getDestinationStop().getId()), search.getDateTime(), search.getTransferTime(), search.getTransfers())
 				.execute(routes -> {
 					loadingVisibility.set(false);
 					items.setValue(routes);
