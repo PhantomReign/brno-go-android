@@ -68,7 +68,7 @@
 	<style name="ToolbarStyle" parent="TransparentToolbarStyle">
 		<item name="android:background">@color/colorPrimary</item>
 	</style>
-
+	
 	<style name="ToolbarWithSubtitleStyle" parent="TransparentToolbarWithSubtitleStyle">
 		<item name="android:background">@color/colorPrimary</item>
 	</style>
@@ -106,9 +106,17 @@
 	<style name="DividerDeparture">
 		<item name="android:layout_height">1dp</item>
 		<item name="android:layout_width">match_parent</item>
-		<item name="android:layout_marginLeft">@dimen/d2</item>
-		<item name="android:layout_marginRight">@dimen/d2</item>
-		<item name="android:background">@color/grey_600</item>
+		<item name="android:layout_marginLeft">@dimen/d3</item>
+		<item name="android:layout_marginRight">@dimen/d3</item>
+		<item name="android:background">@color/grey_300</item>
+	</style>
+
+	<style name="DividerDirections">
+		<item name="android:layout_height">1dp</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_marginLeft">@dimen/d12</item>
+		<item name="android:layout_marginRight">@dimen/d3</item>
+		<item name="android:background">@color/grey_300</item>
 	</style>
 
 	<style name="IndeterminateProgressWheel">

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import android.support.constraint.ConstraintSet;
-import android.support.design.widget.Snackbar;
 import android.support.transition.ChangeBounds;
 import android.support.transition.TransitionManager;
 import android.view.LayoutInflater;
@@ -29,17 +28,16 @@ import javax.inject.Inject;
 import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.data.model.response.Stop;
 import cz.vutbr.fit.brnogo.data.model.store.Search;
-import cz.vutbr.fit.brnogo.data.store.SearchStore;
 import cz.vutbr.fit.brnogo.databinding.FragmentRoutesBinding;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.tools.datetime.DateTimeConverter;
 import cz.vutbr.fit.brnogo.ui.base.BaseFragment;
-import cz.vutbr.fit.brnogo.ui.departures.DeparturesActivity;
 import cz.vutbr.fit.brnogo.ui.main.routes.dialog.time.TransferTimePickerDialog;
 import cz.vutbr.fit.brnogo.ui.main.routes.dialog.transfers.TransfersPickerDialog;
 import cz.vutbr.fit.brnogo.ui.route.RoutesActivity;
 import cz.vutbr.fit.brnogo.ui.stop.StopSearchActivity;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+import timber.log.Timber;
 
 public class RoutesFragment
 		extends BaseFragment<RoutesViewModel, FragmentRoutesBinding>
@@ -75,11 +73,17 @@ public class RoutesFragment
 		binding.favoritesRecyclerView.setAdapter(routesAdapter);
 		binding.favoritesRecyclerView.setItemAnimator(new SlideInUpAnimator(new LinearInterpolator()));
 
-		viewModel.getItems().observe(this, searches ->
-				routesAdapter.updateData(searches));
+		viewModel.getItems().observe(this, searches -> {
+			routesAdapter.updateData(searches);
+			binding.favorites.setVisibility(getFavoritesTextVisibility());
+		});
 
 		setTwo.clone(this.getContext(), R.layout.fragment_routes_advanced);
 		setOne.clone(binding.cardConstraintLayout);
+	}
+
+	private int getFavoritesTextVisibility() {
+		return routesAdapter.getItemCount() > 0 ? View.VISIBLE : View.INVISIBLE;
 	}
 
 	private void setCorrectEditTexts() {

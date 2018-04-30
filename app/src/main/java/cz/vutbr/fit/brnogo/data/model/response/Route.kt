@@ -19,7 +19,7 @@ data class Route(
 		@ColumnInfo(name = "start_station_name")
 		val startStationName: String,
 		@ColumnInfo(name = "destination_station_name")
-		val destinationStationName: String,
+		var destinationStationName: String,
 
 		@ColumnInfo(name = "route_time")
 		val routeTime: Int,

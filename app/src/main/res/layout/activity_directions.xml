@@ -22,7 +22,8 @@
 		<android.support.design.widget.AppBarLayout
 			android:id="@+id/appbar_layout"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			app:elevation="@dimen/d0">
 
 			<android.support.v7.widget.Toolbar
 				android:id="@+id/toolbar"
@@ -49,11 +50,6 @@
 					android:clipToPadding="false"
 					android:orientation="vertical"
 					android:paddingBottom="@dimen/d3"
-					android:paddingEnd="@dimen/d3"
-					android:paddingLeft="@dimen/d3"
-					android:paddingRight="@dimen/d3"
-					android:paddingStart="@dimen/d3"
-					android:paddingTop="@dimen/d0.5"
 					android:scrollbarStyle="outsideOverlay"
 					android:scrollbars="vertical"
 					app:layoutManager="android.support.v7.widget.LinearLayoutManager"

@@ -12,6 +12,6 @@ class UrlModule {
 	@Provides
 	@Singleton
 	fun url(): HttpUrl {
-		return HttpUrl.parse("https://brnogoserver.localtunnel.me/brnogo/api/")!!
+		return HttpUrl.parse("http://192.168.0.101:8080/brnogo/api/")!!
 	}
 }

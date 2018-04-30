@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">Brno Go</string>
+	<string name="app_name" translatable="false">Brno Go</string>
 
 	<!--Google API keys-->
 	<string name="google_maps_api_key" translatable="false">AIzaSyDbcWNpJcZ98DzcsYu23rZaYeRjHHhfJPk</string>
@@ -10,31 +10,32 @@
 	<string name="directions">Directions</string>
 
 	<string name="offline">Unable to contact server.</string>
+	<string name="close">Close</string>
 
 	<string name="start">From location</string>
 	<string name="destination">To location</string>
 	<string name="favorite">Favorites</string>
 	<string name="advanced">Advanced</string>
 	<string name="find_route">Find route</string>
-	<string name="get_departures">Get Departures</string>
-	<string name="get_directions">Get Directions</string>
+	<string name="get_departures">Get departures</string>
+	<string name="get_directions">Get directions</string>
 
 	<string name="stops">Stops</string>
 	<string name="stop">Stop</string>
 	<string name="zone">Zone %1$s</string>
-	<string name="search_stop">Search Stop&#8230;</string>
+	<string name="search_stop">Search stop&#8230;</string>
 	<string name="select_stop">You did not select stop!</string>
 	<string name="select_stops">You did not select stops!</string>
-	<string name="transfers">Max Transfers</string>
-	<string name="transfer_time">Min Transfer Time</string>
+	<string name="transfers">Max transfers</string>
+	<string name="transfer_time">Min transfer time</string>
 
 	<string name="set">Set</string>
 	<string name="cancel">Cancel</string>
 
-	<string name="saved_routes">Saved Routes</string>
+	<string name="saved_routes">Saved routes</string>
 	<string name="save">Save</string>
 
-	<string name="available_routes">Available Routes</string>
+	<string name="available_routes">Available routes</string>
 
 	<string name="from_stop">From: %1$s</string>
 	<string name="to_stop">To: %1$s</string>
@@ -48,13 +49,14 @@
 	<!--Time-->
 	<string name="minutes" translatable="false">%d min</string>
 	<string name="minutes_seconds" translatable="false">%1$d min %2$d s</string>
+	<string name="hours_minutes" translatable="false">%1$d h %2$d min</string>
 
 	<string name="delay" translatable="false">No delay</string>
-	<string name="delay_min">Delay: %1$d min</string>
-	<string name="total_time">Total Time: %1$d min</string>
+	<string name="total_time">Total time: %1$d min</string>
 
 	<string name="today">Today</string>
 	<string name="now">Now</string>
+	<string name="move_time" translatable="false">3 min</string>
 	<string name="infinity" translatable="false">&#8734;</string>
 
 	<string name="unavailable_departures">Departures are not available.</string>
@@ -64,11 +66,11 @@
 	<!--Settings-->
 	<string name="settings_title">Settings</string>
 	<string name="category_sync_title">Sync</string>
-	<string name="category_limit_title">Search Routes Limit</string>
-	<string name="category_screen_title">Start Screen</string>
+	<string name="category_limit_title">Route find limit</string>
+	<string name="category_screen_title">Start screen</string>
 
 	<string name="dialog_screen_title">Set Start Screen</string>
-	<string name="dialog_limit_title">Set Limit of Routes</string>
+	<string name="dialog_limit_title">Set number of routes</string>
 
 	<string name="sync_header">Sync Stops</string>
 	<string name="sync_info">Click to sync stops</string>
@@ -91,7 +93,7 @@
 	<string name="min">minutes</string>
 	<string name="vehicles">vehicles</string>
 
-	<string name="directions_saved">Saved Directions</string>
+	<string name="directions_saved">Saved directions</string>
 	<string name="direction_walk">Walk to stop %1$s and wait.</string>
 	<string name="direction_board_bus">At %1$s, get in the bus with number %2$d.</string>
 	<string name="direction_board_tram">At %1$s, get in the tram with number %2$d.</string>
@@ -106,7 +108,7 @@
 	<!--Navigation-->
 	<string name="enter_vehicle">Got on the vehicle</string>
 	<string name="exit_vehicle">Got off the vehicle</string>
-	<string name="keep">Keep Current</string>
+	<string name="keep">Keep current</string>
 	<string name="replace">Replace</string>
 	<string name="faster_route_found">Faster route has been found</string>
 
@@ -121,8 +123,8 @@
 	<string name="nav_exit_info">Please get off the current vehicle.</string>
 	<string name="nav_finding_new_info">Please wait until new route is found.</string>
 	<string name="nav_walk_info">Get to the stop %1$s.</string>
-	<string name="nav_wait_info">Wait on this stop for vehicle no. %1$d, that will depart at %2$s</string>
-	<string name="nav_ride_info">Traveling with vehicle no. %1$d.</string>
+	<string name="nav_wait_info">Wait on this stop for vehicle no. %1$d, that will depart at %2$s.</string>
+	<string name="nav_ride_info">Ride with vehicle no. %1$d.</string>
 	<string name="nav_stay_in_info">Stay in vehicle.</string>
 	<string name="nav_board_info">Get on vehicle no. %1$d.</string>
 
@@ -132,5 +134,6 @@
 
 	<string name="nav_finish_failed">Failed</string>
 	<string name="nav_sorry">Sorry</string>
-	<string name="nav_finish_failed_info">You did not follow instructions. Try to find need route on next stop.</string>
+	<string name="nav_finish_failed_info">You did not follow instructions. Try to find new route on next stop.</string>
+	<string name="delay_min">Delay: %1$d min</string>
 </resources>

@@ -25,6 +25,7 @@ import cz.vutbr.fit.brnogo.interactors.base.BaseFlowableInteractor;
 import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
+import timber.log.Timber;
 
 @PerScreen
 public class GetNavigationInformationInteractor extends BaseFlowableInteractor<Location> {
@@ -49,8 +50,6 @@ public class GetNavigationInformationInteractor extends BaseFlowableInteractor<L
 		return Flowable.interval(1, TimeUnit.SECONDS).startWith((long) 0)
 				.flatMap(__ -> locationStore.getLocationObservable().toFlowable()).map(location -> {
 					return location;
-				}).onBackpressureLatest()
-				.publish()
-				.autoConnect();
+				}).onBackpressureLatest();
 	}
 }

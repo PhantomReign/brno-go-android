@@ -70,7 +70,7 @@
 					android:id="@+id/image_view_to"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginBottom="8dp"
+					android:layout_marginBottom="@dimen/d2"
 					android:layout_marginStart="@dimen/d2"
 					android:layout_marginTop="@dimen/d1"
 					android:tint="@color/green"

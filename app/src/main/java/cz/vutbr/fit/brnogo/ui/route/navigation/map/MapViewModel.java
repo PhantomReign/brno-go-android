@@ -2,6 +2,8 @@ package cz.vutbr.fit.brnogo.ui.route.navigation.map;
 
 import android.location.Location;
 
+import com.google.maps.model.DirectionsResult;
+
 import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.data.model.response.LiveVehicle;

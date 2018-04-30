@@ -63,6 +63,11 @@ public class DirectionsFragment
 
 		viewModel.getItems().observe(this, routes ->
 				directionsAdapter.updateData(routes));
+				binding.savedDirections.setVisibility(getSavedTextVisibility());
+	}
+
+	private int getSavedTextVisibility() {
+		return directionsAdapter.getItemCount() > 0 ? View.VISIBLE : View.INVISIBLE;
 	}
 
 	private void setCorrectEditTexts() {

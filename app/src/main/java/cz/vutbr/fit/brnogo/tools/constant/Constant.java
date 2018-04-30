@@ -28,7 +28,6 @@ public interface Constant {
 	interface Tag {
 		String DIALOG_TRANSFERS = "transfers";
 		String DIALOG_TRANSFER_TIME = "transfersTime";
-
 	}
 
 	interface SearchRequest {
@@ -52,7 +51,7 @@ public interface Constant {
 	interface TransferTimeDialog {
 		int MAX = 30;
 		int MIN = 0;
-		int DEFAULT = 5;
+		int DEFAULT = 3;
 	}
 
 	interface Formatter {
@@ -63,7 +62,6 @@ public interface Constant {
 		DateTimeFormatter HOUR_MINUTE = DateTimeFormatter.ofPattern(HOUR_MINUTE_STRING);
 
 		DateTimeFormatter DAY_MONTH_YEAR_HOUR_MINUTE = DateTimeFormatter.ofPattern(DAY_MONTH_YEAR_STRING + " - " + HOUR_MINUTE_STRING);
-
 	}
 
 	interface ViewType {
@@ -95,11 +93,11 @@ public interface Constant {
 		int AVAILABLE_ROUTE_TIME_OFFSET = 600;
 		int FASTER_ROUTE_TIME_OFFSET = 120;
 
-		int ENTER_VEHICLE_TIME_OFFSET_BEFORE = 45;
-		int ENTER_VEHICLE_TIME_OFFSET_AFTER = 30;
+		int ENTER_VEHICLE_TIME_OFFSET_BEFORE = 60;
+		int ENTER_VEHICLE_TIME_OFFSET_AFTER = 60;
 
-		int ON_STOP_DISTANCE_THRESHOLD = 20;
-		int STOP_EXIT_PERIMETER = 40;
+		int ON_STOP_DISTANCE_THRESHOLD = 35;
+		int STOP_EXIT_PERIMETER = 50;
 		int NUMBER_OF_NEXT_STATIONS = 2;
 	}
 }

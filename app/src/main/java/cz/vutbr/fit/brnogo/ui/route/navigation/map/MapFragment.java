@@ -65,20 +65,32 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 	private Disposable mapSubscription = DisposableHelper.DISPOSED;
 	private GoogleMap map;
 	private boolean isPathToStopSet;
+	private boolean isPathToDestinationSet;
 
 	public static MapFragment newInstance() {
 		return new MapFragment();
 	}
 
-	private DirectionsResult getDirectionsDetails(String origin, String destination, TravelMode mode) {
+	private DirectionsResult getDirectionsDetails(String origin, String destination, List<String> waypoints, TravelMode mode) {
 		DateTime now = new DateTime();
 		try {
-			return DirectionsApi.newRequest(MapHelper.getGeoContext(getString(R.string.google_maps_api_key)))
-					.mode(mode)
-					.origin(origin)
-					.destination(destination)
-					.departureTime(now)
-					.await();
+			if (waypoints != null) {
+				return DirectionsApi.newRequest(MapHelper.getGeoContext(getString(R.string.google_maps_api_key)))
+						.mode(mode)
+						.origin(origin)
+						.destination(destination)
+						.waypoints(waypoints.toArray(new String[]{}))
+						.optimizeWaypoints(false)
+						.departureTime(now)
+						.await();
+			} else {
+				return DirectionsApi.newRequest(MapHelper.getGeoContext(getString(R.string.google_maps_api_key)))
+						.mode(mode)
+						.origin(origin)
+						.destination(destination)
+						.departureTime(now)
+						.await();
+			}
 		} catch (ApiException | InterruptedException | IOException e) {
 			e.printStackTrace();
 			return null;
@@ -105,21 +117,19 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		MapFragmentPermissionsDispatcher.afterLocationGrantedWithPermissionCheck(this);
 
 		isPathToStopSet = false;
+		isPathToDestinationSet = false;
 
 		viewModel.initNavigationData();
 		viewModel.getLocation();
 
 		viewModel.getLocationData().observe(this, location -> {
-			if (viewModel.initialized) {
-				if (binding.mapInfoLayout.getVisibility() != View.VISIBLE) {
-					binding.mapInfoLayout.setVisibility(View.VISIBLE);
-				}
-				onLocationChanged(location);
+			if (binding.mapInfoLayout.getVisibility() != View.VISIBLE) {
+				binding.mapInfoLayout.setVisibility(View.VISIBLE);
 			}
+			onLocationChanged(location);
 		});
 
 		viewModel.getVehicleData().observe(this, liveVehicle -> {
-			viewModel.initialized = true;
 			if (liveVehicle.getRouteId() != -1) {
 				viewModel.navigationInfo.setCurrentLiveVehicle(liveVehicle);
 			}
@@ -130,8 +140,8 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 			binding.fasterRouteCard.setVisibility(View.VISIBLE);
 		});
 
-		viewModel.getNewRouteData().observe(this, route -> {
-			viewModel.currentRoute = route;
+		viewModel.getNewRouteData().observe(this, newRoute -> {
+			viewModel.currentRoute = newRoute;
 			viewModel.initNewNavigationData();
 			viewModel.isFindingNewRouteEnabled = false;
 		});
@@ -163,6 +173,8 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 	@Override
 	public void onExitVehicleClick() {
+		isPathToDestinationSet = false;
+		map.clear();
 		viewModel.navigationInfo.setInVehicle(false);
 		binding.exitButton.setVisibility(View.GONE);
 	}
@@ -180,8 +192,10 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		viewModel.navigationInfo.setFasterRoute(null);
 		viewModel.isFindingFasterRouteEnabled = false;
 		viewModel.initNewNavigationData();
-
 		binding.fasterRouteCard.setVisibility(View.GONE);
+		map.clear();
+		renderInVehicle();
+		MapHelper.addStopCircleAreasToMap(binding.getRoot().getContext(), map, viewModel.navigationInfo.getCurrentVehicle());
 	}
 
 	@Override
@@ -243,11 +257,10 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 	}
 
-	private void addPathDirectionsToMap(String origin, String destination, TravelMode mode) {
-		DirectionsResult results = getDirectionsDetails(origin, destination, mode);
+	private void addPathDirectionsToMap(DirectionsResult results, LatLng endLocation) {
 		if (results != null) {
 			MapHelper.addPolylineToMap(results, map, binding.getRoot().getContext());
-			MapHelper.addMarkersToMap(results, map);
+			MapHelper.addMarkersToMap(results, map, endLocation);
 		}
 	}
 
@@ -270,22 +283,21 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 					viewModel.navigationInfo.getCurrentNode().getStopLongitude(),
 					viewModel.navigationInfo.getCurrentNode().getStopLatitude());
 
-			Timber.w("CEI: " + viewModel.navigationInfo.getCurrentNodeIndex());
 			boolean isFirstNode = viewModel.navigationInfo.getCurrentNodeIndex() == 0;
 
 			Node previous = viewModel.navigationInfo.getCurrentNode();
 			if (!viewModel.isDestinationReached) {
 				if (updateUserStatus(distance, isFirstNode)) {
 					long currentTime = DateTimeConverter.currentZonedDateTimeToEpochSec();
-					long timeToDeparture = Math.abs((viewModel.navigationInfo.getCurrentNode().getTimeOfDeparture() - currentTime));
+					long secondsToDeparture = viewModel.navigationInfo.getCurrentNode().getTimeOfDeparture() - currentTime;
 
-					long timeToDepartureWithDelay;
+					long secondsToDepartureWithDelay;
 
 					if (viewModel.navigationInfo.getCurrentLiveVehicle() != null
 							&& viewModel.navigationInfo.getCurrentLiveVehicle().getRouteId() != -1) {
-						timeToDepartureWithDelay = timeToDeparture + viewModel.navigationInfo.getCurrentLiveVehicle().getDelay() * 60;
+						secondsToDepartureWithDelay = secondsToDeparture + viewModel.navigationInfo.getCurrentLiveVehicle().getDelay() * 60;
 					} else {
-						timeToDepartureWithDelay = timeToDeparture + viewModel.currentRoute.getVehicles().get(viewModel.navigationInfo.getCurrentVehicleIndex()).getDelay();
+						secondsToDepartureWithDelay = secondsToDeparture + viewModel.currentRoute.getVehicles().get(viewModel.navigationInfo.getCurrentVehicleIndex()).getDelay();
 					}
 
 					if (!previous.equals(viewModel.navigationInfo.getCurrentNode())) {
@@ -296,8 +308,8 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 					binding.stopName.setText(viewModel.navigationInfo.getCurrentNode().getStationName());
 					binding.currentAction.setText(getCurrentAction());
-					binding.information.setText(getInformationToCurrentAction());
-					binding.distanceTime.setText(getQuantityText(getQuantity(distance, timeToDepartureWithDelay), getQuantityType()));
+					binding.information.setText(getInformationToCurrentAction(secondsToDepartureWithDelay));
+					binding.distanceTime.setText(getQuantityText(getQuantity(distance, secondsToDepartureWithDelay), getQuantityType()));
 
 				} else {
 					viewModel.isDestinationReached = true;
@@ -324,10 +336,19 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 				secondsRemaining += Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER;
 			}
 
+			if (secondsRemaining < 0) {
+				secondsRemaining = 0;
+			}
+
+			long hour = TimeUnit.SECONDS.toHours(secondsRemaining) % 24;
 			long min = TimeUnit.SECONDS.toMinutes(secondsRemaining) % 60;
 			long sec = TimeUnit.SECONDS.toSeconds(secondsRemaining) % 60;
 
-			return getString(R.string.minutes_seconds, (int) min, (int) sec);
+			if (hour > 0) {
+				return getString(R.string.hours_minutes, (int) hour, (int) min);
+			} else {
+				return getString(R.string.minutes_seconds, (int) min, (int) sec);
+			}
 		} else {
 			return "";
 		}
@@ -354,7 +375,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		}
 	}
 
-	private String getInformationToCurrentAction() {
+	private String getInformationToCurrentAction(long currentDelay) {
 		switch (viewModel.navigationInfo.getCurrentUserState()) {
 			case UserActionType.TYPE_EXIT:
 				return getString(R.string.nav_exit_info);
@@ -371,16 +392,14 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 			case UserActionType.TYPE_WAIT:
 				return getString(R.string.nav_wait_info,
 						viewModel.navigationInfo.getCurrentVehicle().getLineId(),
-						getFormattedTimeOfDepartureWithDelay());
+						getFormattedTimeOfDepartureWithDelay(currentDelay));
 			default:
 				return "";
 		}
 	}
 
-	private String getFormattedTimeOfDepartureWithDelay() {
-				viewModel.navigationInfo.getCurrentNode().getFormattedTimeOfDeparture();
-		long timeWithDelay = viewModel.navigationInfo.getCurrentVehicle().getDelay()
-				+ viewModel.navigationInfo.getCurrentNode().getTimeOfDeparture();
+	private String getFormattedTimeOfDepartureWithDelay(long currentDelay) {
+		long timeWithDelay = currentDelay + viewModel.navigationInfo.getCurrentNode().getTimeOfDeparture();
 		return DateTimeConverter.epochSecToZonedHourMinute(timeWithDelay);
 	}
 
@@ -410,30 +429,74 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		}
 	}
 
-	private boolean updateUserStatus(double distance, boolean isFirstNode) {
-		boolean isTransfer = viewModel.navigationInfo.getCurrentNodeIndex() == (viewModel.navigationInfo.getCurrentVehicle().getPath().size() - 1);
-		/* Calculate whether current stop was reached or not */
+	private void renderInVehicle() {
+		isPathToDestinationSet = true;
+		String origin = String.valueOf(viewModel.navigationInfo.getCurrentUserLocation().getLatitude())
+				+ ", " + String.valueOf(viewModel.navigationInfo.getCurrentUserLocation().getLongitude());
+
+		int size = viewModel.currentRoute.getVehicles().get(viewModel.navigationInfo.getCurrentVehicleIndex()).getPath().size();
+		Node endNode = viewModel.currentRoute.getVehicles().get(viewModel.navigationInfo.getCurrentVehicleIndex()).getPath().get(size - 1);
+		String destination = String.valueOf(endNode.getStopLatitude()) + ", " + String.valueOf(endNode.getStopLongitude());
+		List<Node> nodes = viewModel.currentRoute.getVehicles().get(viewModel.navigationInfo.getCurrentVehicleIndex()).getPath();
+		List<String> waypoints = new ArrayList<>();
+
+		for (int i = 1; i < (size - 2); i++) {
+			if (i > 22) {
+				continue;
+			}
+			Node node = nodes.get(i);
+			com.google.maps.model.LatLng latLng = new com.google.maps.model.LatLng(node.getStopLatitude(), node.getStopLongitude());
+			waypoints.add(latLng.toUrlValue());
+		}
+
+		DirectionsResult results = getDirectionsDetails(origin, destination, waypoints, TravelMode.DRIVING);
+		addPathDirectionsToMap(results, new LatLng(endNode.getStopLatitude(), endNode.getStopLongitude()));
+	}
+
+	private void renderOnFoot() {
+		isPathToStopSet = true;
+		String origin = String.valueOf(viewModel.navigationInfo.getCurrentUserLocation().getLatitude())
+				+ ", " + String.valueOf(viewModel.navigationInfo.getCurrentUserLocation().getLongitude());
+		String destination = String.valueOf(viewModel.navigationInfo.getCurrentNodeLocation().getLatitude())
+				+ ", " + String.valueOf(viewModel.navigationInfo.getCurrentNodeLocation().getLongitude());
+
+		DirectionsResult results = getDirectionsDetails(origin, destination, null, TravelMode.WALKING);
+		addPathDirectionsToMap(results, null);
+	}
+
+	private void renderRouteOnMap(double distance) {
 		if (!viewModel.navigationInfo.isCurrentNodeReached()) {
 			if (!isPathToStopSet && !viewModel.navigationInfo.isInVehicle()) {
-				isPathToStopSet = true;
-				String origin = String.valueOf(viewModel.navigationInfo.getCurrentUserLocation().getLatitude())
-						+ ", " + String.valueOf(viewModel.navigationInfo.getCurrentUserLocation().getLongitude());
-				String destination = String.valueOf(viewModel.navigationInfo.getCurrentNodeLocation().getLatitude())
-						+ ", " + String.valueOf(viewModel.navigationInfo.getCurrentNodeLocation().getLongitude());
-				addPathDirectionsToMap(origin, destination, TravelMode.WALKING);
+				renderOnFoot();
+				MapHelper.addStopCircleAreasToMap(binding.getRoot().getContext(), map, viewModel.navigationInfo.getCurrentVehicle());
+			} else if (!isPathToDestinationSet && viewModel.navigationInfo.isInVehicle()) {
+				renderInVehicle();
+				MapHelper.addStopCircleAreasToMap(binding.getRoot().getContext(), map, viewModel.navigationInfo.getCurrentVehicle());
 			}
 
 			if (distance < Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD) {
-				Timber.w("REACHED");
 				isPathToStopSet = false;
-				map.clear();
+				if (!isPathToDestinationSet) {
+					map.clear();
+					MapHelper.addStopCircleAreasToMap(binding.getRoot().getContext(), map, viewModel.navigationInfo.getCurrentVehicle());
+				}
 				viewModel.navigationInfo.setCurrentNodeReached(true);
 			} else {
 				viewModel.navigationInfo.setCurrentNodeReached(false);
 			}
+		} else {
+			if (!isPathToDestinationSet && viewModel.navigationInfo.isInVehicle()) {
+				renderInVehicle();
+				MapHelper.addStopCircleAreasToMap(binding.getRoot().getContext(), map, viewModel.navigationInfo.getCurrentVehicle());
+			}
 		}
+	}
 
+	private boolean updateUserStatus(double distance, boolean isFirstNode) {
+		boolean isTransfer = viewModel.navigationInfo.getCurrentNodeIndex() == (viewModel.navigationInfo.getCurrentVehicle().getPath().size() - 1);
 		long departureWithDelay;
+
+		renderRouteOnMap(distance);
 
 		if (viewModel.navigationInfo.getCurrentLiveVehicle() != null
 				&& viewModel.navigationInfo.getCurrentLiveVehicle().getRouteId() != -1) {
@@ -446,54 +509,73 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 					.getTimeOfDeparture() + viewModel.currentRoute.getVehicles().get(viewModel.navigationInfo.getCurrentVehicleIndex()).getDelay();
 		}
 
-		if (isFirstNode) {
-			// TODO - add find faster
+		if (viewModel.navigationInfo.isCurrentNodeReached()) {
+			Timber.e("NOT FIRST ENTRY: " + distance);
 
-			if (viewModel.navigationInfo.isCurrentNodeReached()) {
-
-				if (departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()
-						&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
-					if (binding.exitButton.getVisibility() != View.VISIBLE) {
-						binding.enterButton.setVisibility(View.VISIBLE);
-					}
-				} else {
-					binding.enterButton.setVisibility(View.GONE);
+			if (departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()
+					&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
+				if (binding.exitButton.getVisibility() != View.VISIBLE) {
+					binding.enterButton.setVisibility(View.VISIBLE);
 				}
+			} else {
+				binding.enterButton.setVisibility(View.GONE);
+			}
 
-				if (viewModel.navigationInfo.isInVehicle()) {
-					if (distance > Constant.Navigation.STOP_EXIT_PERIMETER) {
-						Timber.e("RIDE: " + distance);
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_RIDE);
-						return moveToNextStation(false);
+			if (viewModel.navigationInfo.isInVehicle()) {
+				if (distance > Constant.Navigation.STOP_EXIT_PERIMETER) {
+					if (isTransfer) {
+						viewModel.isDestinationReached = true;
+					}
+
+					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_RIDE);
+					boolean canMove = moveToNextStation(false);
+					viewModel.navigationInfo.setNextStationId(viewModel.navigationInfo.getCurrentNode().getStationId());
+					if (!viewModel.isFindingFasterRouteEnabled && canMove) {
+						viewModel.getFasterRoute();
+					}
+					return canMove;
+				} else {
+					if (isTransfer) {
+						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_EXIT);
 					} else {
 						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT_FOR_VEHICLE_TO_LEAVE);
 					}
-				} else {
-					if (distance > Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD && departureWithDelay >= DateTimeConverter.currentZonedDateTimeToEpochSec()) {
-						viewModel.navigationInfo.setCurrentNodeReached(false);
-						Timber.e("WALK AGAin: " + distance);
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WALK);
-					} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
-							&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER < DateTimeConverter.currentZonedDateTimeToEpochSec()) {
-						//viewModel.navigationInfo.setCurrentNodeReached(false);
-						Timber.e("NEED TO FIND NEW ROUTE");
-						if (!viewModel.isFindingNewRouteEnabled) {
-							viewModel.getNewRoute();
-						}
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT_FOR_NEW_ROUTE);
-					} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
-							&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()
-							&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
-						//viewModel.navigationInfo.setCurrentNodeReached(false);
-						Timber.e("BOARD");
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_BOARD);
-					} else {
-						Timber.e("WAIT: " + distance);
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT);
-					}
 				}
 			} else {
+				if (isTransfer) {
+					return moveToNextStation(true);
+				}
 
+				if (distance > Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD && departureWithDelay >= DateTimeConverter.currentZonedDateTimeToEpochSec()) {
+					viewModel.navigationInfo.setCurrentNodeReached(false);
+					Timber.e("WALK AGAin: " + distance);
+					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WALK);
+				} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
+						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER < DateTimeConverter.currentZonedDateTimeToEpochSec()) {
+					//viewModel.navigationInfo.setCurrentNodeReached(false);
+					Timber.e("NEED TO FIND NEW ROUTE");
+					if (!viewModel.isFindingNewRouteEnabled) {
+						viewModel.getNewRoute();
+					}
+					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT_FOR_NEW_ROUTE);
+				} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
+						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()
+						&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
+					//viewModel.navigationInfo.setCurrentNodeReached(false);
+					Timber.e("BOARD");
+					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_BOARD);
+				} else {
+					Timber.e("WAIT: " + distance);
+					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT);
+				}
+			}
+		} else {
+
+			if (viewModel.navigationInfo.isInVehicle()) {
+				// Keep traveling
+				Timber.w("TRAVELLING");
+				viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_RIDE);
+			} else {
 				if (departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER < DateTimeConverter.currentZonedDateTimeToEpochSec()) {
 					Timber.e("NEED TO FIND NEW ROUTE");
 					if (!viewModel.isFindingNewRouteEnabled) {
@@ -504,94 +586,6 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 				} else {
 					Timber.e("WALK: " + distance);
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WALK);
-				}
-			}
-		} else {
-			// Check whether station has been reached
-			if (viewModel.navigationInfo.isCurrentNodeReached()) {
-				Timber.e("NOT FIRST ENTRY: " + distance);
-
-				if (departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()
-						&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
-					if (binding.exitButton.getVisibility() != View.VISIBLE) {
-						binding.enterButton.setVisibility(View.VISIBLE);
-					}
-				} else {
-					binding.enterButton.setVisibility(View.GONE);
-				}
-
-				if (viewModel.navigationInfo.isInVehicle()) {
-					if (distance > Constant.Navigation.STOP_EXIT_PERIMETER) {
-						if (isTransfer) {
-							viewModel.isDestinationReached = true;
-						}
-
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_RIDE);
-						boolean canMove = moveToNextStation(false);
-						viewModel.navigationInfo.setNextStationId(viewModel.navigationInfo.getCurrentNode().getStationId());
-						if (!viewModel.isFindingFasterRouteEnabled && canMove) {
-							viewModel.getFasterRoute();
-						}
-						return canMove;
-					} else {
-						if (isTransfer) {
-							viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_EXIT);
-						} else {
-							viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT_FOR_VEHICLE_TO_LEAVE);
-						}
-					}
-				} else {
-					//TODO CHECK FINAL
-
-					if (isTransfer) {
-						return moveToNextStation(true);
-					}
-
-					if (viewModel.currentRoute.getDestinationStationId() != viewModel.navigationInfo.getCurrentNode().getStationId()) {
-						Timber.e("EXIT EARLY");
-					}
-
-					if (distance > Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD && departureWithDelay >= DateTimeConverter.currentZonedDateTimeToEpochSec()) {
-						viewModel.navigationInfo.setCurrentNodeReached(false);
-						Timber.e("WALK AGAin: " + distance);
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WALK);
-					} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
-							&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER < DateTimeConverter.currentZonedDateTimeToEpochSec()) {
-						//viewModel.navigationInfo.setCurrentNodeReached(false);
-						Timber.e("NEED TO FIND NEW ROUTE");
-						if (!viewModel.isFindingNewRouteEnabled) {
-							viewModel.getNewRoute();
-						}
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT_FOR_NEW_ROUTE);
-					} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
-							&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()
-							&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
-						//viewModel.navigationInfo.setCurrentNodeReached(false);
-						Timber.e("BOARD");
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_BOARD);
-					} else {
-						Timber.e("WAIT: " + distance);
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT);
-					}
-				}
-			} else {
-
-				if (viewModel.navigationInfo.isInVehicle()) {
-					// Keep traveling
-					Timber.w("TRAVELLING");
-					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_RIDE);
-				} else {
-					if (departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER < DateTimeConverter.currentZonedDateTimeToEpochSec()) {
-						Timber.e("NEED TO FIND NEW ROUTE");
-						if (!viewModel.isFindingNewRouteEnabled) {
-							viewModel.getNewRoute();
-						}
-						// todo - add if
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT_FOR_NEW_ROUTE);
-					} else {
-						Timber.e("WALK: " + distance);
-						viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WALK);
-					}
 				}
 			}
 		}
@@ -651,10 +645,27 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 	}
 
 	private List<Node> getNextNodes(int currentNodeIndex) {
-		return findNextNodes(currentNodeIndex, viewModel.navigationInfo.getCurrentVehicleIndex(), Constant.Navigation.NUMBER_OF_NEXT_STATIONS);
+		int maxVehicleIndex = viewModel.currentRoute.getVehicles().size() - 1;
+		if (viewModel.navigationInfo.getCurrentVehicleIndex() > maxVehicleIndex) {
+			return new ArrayList<>();
+		}
+
+		List<Node> pathNodes = viewModel.currentRoute.getVehicles().get(viewModel.navigationInfo.getCurrentVehicleIndex()).getPath();
+		List<Node> nextNodes = new ArrayList<>();
+
+		int nodesAvailableInCurrentVehicle = (pathNodes.size() - currentNodeIndex) - 1;
+		if (Constant.Navigation.NUMBER_OF_NEXT_STATIONS <= nodesAvailableInCurrentVehicle) {
+			return pathNodes.subList(currentNodeIndex + 1, currentNodeIndex + Constant.Navigation.NUMBER_OF_NEXT_STATIONS + 1);
+		} else {
+			if (nodesAvailableInCurrentVehicle > 0) {
+				nextNodes.addAll(pathNodes.subList(currentNodeIndex + 1, currentNodeIndex + nodesAvailableInCurrentVehicle + 1));
+			}
+			return nextNodes;
+		}
 	}
 
-	private List<Node> findNextNodes(int currentNodeIndex, int currentVehicleIndex, int numberOfRemaining) {
+	//private List<Node> findNextNodes(int currentNodeIndex, int currentVehicleIndex, int numberOfRemaining) {
+	/*private List<Node> findNextNodes(int currentNodeIndex, int currentVehicleIndex) {
 		int maxVehicleIndex = viewModel.currentRoute.getVehicles().size() - 1;
 		if (currentVehicleIndex > maxVehicleIndex) {
 			return new ArrayList<>();
@@ -664,20 +675,15 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		List<Node> nextNodes = new ArrayList<>();
 
 		int nodesAvailableInCurrentVehicle = (pathNodes.size() - currentNodeIndex) - 1;
-		if (numberOfRemaining <= nodesAvailableInCurrentVehicle) {
-			return pathNodes.subList(currentNodeIndex + 1, currentNodeIndex + numberOfRemaining + 1);
+		if (Constant.Navigation.NUMBER_OF_NEXT_STATIONS <= nodesAvailableInCurrentVehicle) {
+			return pathNodes.subList(currentNodeIndex + 1, currentNodeIndex + Constant.Navigation.NUMBER_OF_NEXT_STATIONS + 1);
 		} else {
 			if (nodesAvailableInCurrentVehicle > 0) {
 				nextNodes.addAll(pathNodes.subList(currentNodeIndex + 1, currentNodeIndex + nodesAvailableInCurrentVehicle + 1));
 			}
-
-			int remainingNodes = numberOfRemaining - nextNodes.size();
-			if (remainingNodes > 0) {
-				nextNodes.addAll(findNextNodes(0, currentVehicleIndex + 1, remainingNodes));
-			}
 			return nextNodes;
 		}
-	}
+	}*/
 
 	public void onFinishReached() {
 		binding.currentAction.setText(getString(R.string.nav_finish));

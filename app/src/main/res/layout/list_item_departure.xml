@@ -18,31 +18,29 @@
 		<android.support.constraint.ConstraintLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/d0.5"
-			android:layout_marginTop="@dimen/d0.5"
-			android:background="@drawable/shape_rect_white_stroke"
-			android:paddingBottom="@dimen/d2"
-			android:paddingTop="@dimen/d2">
+			android:layout_marginBottom="@dimen/d0_5"
+			android:layout_marginTop="@dimen/d0_5"
+			>
 
 			<TextView
 				android:id="@+id/line_number"
 				style="@style/TextRegular.MediumRed.16"
-				android:layout_width="wrap_content"
+				android:layout_width="@dimen/d10"
 				android:layout_height="wrap_content"
-				android:layout_marginBottom="4dp"
-				android:layout_marginStart="12dp"
-				android:layout_marginTop="4dp"
+				android:layout_marginBottom="@dimen/d0_5"
+				android:layout_marginStart="@dimen/d3"
+				android:layout_marginTop="@dimen/d0_5"
 				android:text="@{item.lineName}"
 				app:layout_constraintBottom_toBottomOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toTopOf="parent"
-				tools:text="12"/>
+				tools:text="N610"/>
 
 			<ImageView
 				android:id="@+id/barrier_less"
 				android:layout_width="@dimen/d4"
 				android:layout_height="@dimen/d4"
-				android:layout_marginStart="8dp"
+				android:layout_marginStart="@dimen/d2"
 				android:tint="@color/blue"
 				android:visibility="@{item.barrierLessVisibility}"
 				app:layout_constraintBottom_toBottomOf="@+id/line_number"
@@ -55,8 +53,8 @@
 				style="@style/TextRegular.Grey.16"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="8dp"
-				android:layout_marginStart="8dp"
+				android:layout_marginEnd="@dimen/d2"
+				android:layout_marginStart="@dimen/d2"
 				android:text="@{item.finalStationName}"
 				app:layout_constraintBottom_toBottomOf="@+id/barrier_less"
 				app:layout_constraintEnd_toStartOf="@+id/time"
@@ -69,7 +67,7 @@
 				style="@style/TextRegular.Grey.16"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginEnd="12dp"
+				android:layout_marginEnd="@dimen/d3"
 				android:text="@{item.timeMark}"
 				app:layout_constraintBottom_toBottomOf="@+id/final_station_name"
 				app:layout_constraintEnd_toEndOf="parent"
