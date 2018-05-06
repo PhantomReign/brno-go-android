@@ -15,79 +15,115 @@
 			type="cz.vutbr.fit.brnogo.ui.main.departures.DeparturesViewModel"/>
 	</data>
 
-	<android.support.v4.widget.NestedScrollView
+	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		android:orientation="vertical">
 
-		<android.support.constraint.ConstraintLayout
+		<android.support.v4.widget.NestedScrollView
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:scrollbars="vertical">
 
-			<android.support.v7.widget.CardView
-				android:id="@+id/cardView"
+			<android.support.constraint.ConstraintLayout
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_margin="@dimen/d2"
-				android:layout_marginTop="8dp"
-				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toTopOf="parent">
+				android:layout_height="wrap_content">
 
-				<android.support.constraint.ConstraintLayout
-					android:id="@+id/cardConstraintLayout"
+				<android.support.v7.widget.CardView
+					android:id="@+id/cardView"
 					android:layout_width="match_parent"
-					android:layout_height="match_parent">
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/d2"
+					android:layout_marginTop="@dimen/d2"
+					android:focusableInTouchMode="true"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent">
 
-					<ImageView
-						android:id="@+id/image_view_from"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginStart="@dimen/d3"
-						android:layout_marginTop="@dimen/d0"
-						android:tint="@color/colorPrimary"
-						app:layout_constraintBottom_toBottomOf="@+id/departures_text_input_from"
-						app:layout_constraintEnd_toStartOf="@+id/departures_text_input_from"
-						app:layout_constraintHorizontal_bias="0.5"
-						app:layout_constraintStart_toStartOf="parent"
-						app:layout_constraintTop_toTopOf="@+id/departures_text_input_from"
-						app:srcCompat="@drawable/ic_person_pin_circle"/>
+					<android.support.constraint.ConstraintLayout
+						android:id="@+id/cardConstraintLayout"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent">
 
-					<EditText
-						android:id="@+id/departures_text_input_from"
-						style="@style/TextRegular.MediumRed.14"
-						android:layout_width="0dp"
-						android:layout_height="wrap_content"
-						android:layout_marginBottom="@dimen/d4"
-						android:layout_marginEnd="@dimen/d3"
-						android:layout_marginStart="@dimen/d2"
-						android:layout_marginTop="@dimen/d2"
-						android:focusable="false"
-						android:foreground="?selectableItemBackground"
-						android:gravity="bottom"
-						android:hint="@string/start"
-						android:longClickable="false"
-						android:onClick="@{() -> view.onStartTextEditClick()}"
-						app:layout_constraintBottom_toTopOf="@+id/button_find_route"
-						app:layout_constraintEnd_toEndOf="parent"
-						app:layout_constraintStart_toEndOf="@+id/image_view_from"
-						app:layout_constraintTop_toTopOf="parent"/>
+						<ImageView
+							android:id="@+id/image_view_from"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="@dimen/d3"
+							android:layout_marginTop="@dimen/d0"
+							android:tint="@color/colorPrimary"
+							app:layout_constraintBottom_toBottomOf="@+id/departures_text_input_from"
+							app:layout_constraintEnd_toStartOf="@+id/departures_text_input_from"
+							app:layout_constraintHorizontal_bias="0.5"
+							app:layout_constraintStart_toStartOf="parent"
+							app:layout_constraintTop_toTopOf="@+id/departures_text_input_from"
+							app:srcCompat="@drawable/ic_person_pin_circle"/>
 
-					<Button
-						android:id="@+id/button_find_route"
-						style="@style/ButtonRedBorderlessStyle"
-						android:layout_width="0dp"
-						android:layout_height="wrap_content"
-						android:onClick="@{() -> view.onFindDeparturesClick()}"
-						android:text="@string/get_departures"
-						app:layout_constraintBottom_toBottomOf="parent"
-						app:layout_constraintEnd_toEndOf="parent"
-						app:layout_constraintStart_toStartOf="parent"/>
+						<EditText
+							android:id="@+id/departures_text_input_from"
+							style="@style/TextRegular.MediumRed.14"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_marginBottom="@dimen/d4"
+							android:layout_marginEnd="@dimen/d3"
+							android:layout_marginStart="@dimen/d2"
+							android:layout_marginTop="@dimen/d2"
+							android:focusable="false"
+							android:foreground="?selectableItemBackground"
+							android:gravity="bottom"
+							android:hint="@string/start"
+							android:longClickable="false"
+							android:onClick="@{() -> view.onStartTextEditClick()}"
+							app:layout_constraintBottom_toTopOf="@+id/button_find_route"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toEndOf="@+id/image_view_from"
+							app:layout_constraintTop_toTopOf="parent"/>
 
-				</android.support.constraint.ConstraintLayout>
+						<Button
+							android:id="@+id/button_find_route"
+							style="@style/ButtonRedBorderlessStyle"
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:onClick="@{() -> view.onFindDeparturesClick()}"
+							android:text="@string/get_departures"
+							app:layout_constraintBottom_toBottomOf="parent"
+							app:layout_constraintEnd_toEndOf="parent"
+							app:layout_constraintStart_toStartOf="parent"/>
 
-			</android.support.v7.widget.CardView>
+					</android.support.constraint.ConstraintLayout>
 
-		</android.support.constraint.ConstraintLayout>
+				</android.support.v7.widget.CardView>
 
-	</android.support.v4.widget.NestedScrollView>
+				<TextView
+					android:id="@+id/favorite_departures"
+					style="@style/TextBold.Grey.AllCaps.14"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/d2"
+					android:layout_marginEnd="8dp"
+					android:layout_marginStart="8dp"
+					android:layout_marginTop="8dp"
+					android:text="@string/favorite"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintHorizontal_bias="0.0"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/cardView"
+					/>
+
+				<android.support.v7.widget.RecyclerView
+					android:id="@+id/departures_recycler_view"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:focusableInTouchMode="false"
+					android:nestedScrollingEnabled="false"
+					app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/favorite_departures"/>
+
+			</android.support.constraint.ConstraintLayout>
+		</android.support.v4.widget.NestedScrollView>
+
+	</LinearLayout>
 </layout>

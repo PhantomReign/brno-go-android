@@ -40,6 +40,7 @@ public interface Constant {
 	interface Persistence {
 		String FAVORITE_ROUTE_KEYS = "favorites_route_keys";
 		String SAVED_ROUTE_KEYS = "saved_route_keys";
+		String FAVORITE_STOP_KEYS = "favorites_stop_keys";
 	}
 
 	interface TransfersDialog {
@@ -90,6 +91,9 @@ public interface Constant {
 	}
 
 	interface Navigation {
+		int CAMERA_ZOOM = 16;
+		int CAMERA_MOVE_SPEED = 500;
+
 		int AVAILABLE_ROUTE_TIME_OFFSET = 600;
 		int FASTER_ROUTE_TIME_OFFSET = 120;
 

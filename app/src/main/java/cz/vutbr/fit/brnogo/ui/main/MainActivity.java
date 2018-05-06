@@ -114,6 +114,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 	private void replaceFragment(BaseFragment fragment) {
 		getSupportFragmentManager()
 				.beginTransaction()
+				.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
 				.replace(R.id.main_content, fragment)
 				.commit();
 	}

@@ -17,8 +17,8 @@
 	<string name="favorite">Favorites</string>
 	<string name="advanced">Advanced</string>
 	<string name="find_route">Find route</string>
-	<string name="get_departures">Get departures</string>
-	<string name="get_directions">Get directions</string>
+	<string name="get_departures">Show departures</string>
+	<string name="get_directions">Show directions</string>
 
 	<string name="stops">Stops</string>
 	<string name="stop">Stop</string>
@@ -66,14 +66,14 @@
 	<!--Settings-->
 	<string name="settings_title">Settings</string>
 	<string name="category_sync_title">Sync</string>
-	<string name="category_limit_title">Route find limit</string>
+	<string name="category_limit_title">Route search limit</string>
 	<string name="category_screen_title">Start screen</string>
 
 	<string name="dialog_screen_title">Set Start Screen</string>
 	<string name="dialog_limit_title">Set number of routes</string>
 
 	<string name="sync_header">Sync Stops</string>
-	<string name="sync_info">Click to sync stops</string>
+	<string name="sync_info">Click to sync</string>
 
 	<string name="sync_in_progress">Sync in progress&#8230;</string>
 	<string name="sync_success">Sync successful!</string>
@@ -87,7 +87,7 @@
 
 	<!--Routes-->
 	<string name="routes_too_soon">Navigation will be available 10 minutes before departure.</string>
-	<string name="routes_too_late">Unable to start navigation. You are too late.</string>
+	<string name="routes_too_late">"Unable to start navigation. The vehicle is no longer available. "</string>
 
 	<!--Directions-->
 	<string name="min">minutes</string>

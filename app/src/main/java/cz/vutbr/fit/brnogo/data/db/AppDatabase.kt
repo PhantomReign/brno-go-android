@@ -2,8 +2,10 @@ package cz.vutbr.fit.brnogo.data.db
 
 import android.arch.persistence.room.Room
 import android.content.Context
+import cz.vutbr.fit.brnogo.R.string.routes
 import cz.vutbr.fit.brnogo.data.model.response.Route
 import cz.vutbr.fit.brnogo.data.model.response.Stop
+import cz.vutbr.fit.brnogo.data.model.store.FavoriteStop
 import cz.vutbr.fit.brnogo.data.model.store.Search
 import io.reactivex.Flowable
 import javax.inject.Inject
@@ -30,6 +32,12 @@ class AppDatabase @Inject constructor(
 			Room.databaseBuilder(context,
 					RouteRoomDatabase::class.java,
 					RouteRoomDatabase.DB_NAME)
+					.fallbackToDestructiveMigration().build()
+
+	private val dataBaseFavoriteStop: FavoriteStopRoomDatabase =
+			Room.databaseBuilder(context,
+					FavoriteStopRoomDatabase::class.java,
+					FavoriteStopRoomDatabase.DB_NAME)
 					.fallbackToDestructiveMigration().build()
 
 	fun getAllStops(): Flowable<List<Stop>> {
@@ -74,5 +82,21 @@ class AppDatabase @Inject constructor(
 
 	fun deleteRoute(route: Route) {
 		dataBaseRoute.routeDao().delete(route)
+	}
+
+	fun getAllFavoriteStops(): Flowable<List<FavoriteStop>> {
+		return dataBaseFavoriteStop.favoriteStopDao().getAll()
+	}
+
+	fun insertFavoriteStops(favoriteStops: List<FavoriteStop>) {
+		dataBaseFavoriteStop.favoriteStopDao().insertAll(favoriteStops)
+	}
+
+	fun insertFavoriteStop(favoriteStop: FavoriteStop) {
+		dataBaseFavoriteStop.favoriteStopDao().insert(favoriteStop)
+	}
+
+	fun deleteFavoriteStop(favoriteStop: FavoriteStop) {
+		dataBaseFavoriteStop.favoriteStopDao().delete(favoriteStop)
 	}
 }

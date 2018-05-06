@@ -15,7 +15,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        resConfigs "en", "sk"
+        resConfigs "en", "cs", "sk"
 
         vectorDrawables.useSupportLibrary true
         vectorDrawables.generatedDensities = []

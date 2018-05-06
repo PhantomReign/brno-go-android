@@ -18,7 +18,6 @@ import cz.vutbr.fit.brnogo.interactors.GetVehicleInteractor;
 import cz.vutbr.fit.brnogo.tools.datetime.DateTimeConverter;
 import cz.vutbr.fit.brnogo.tools.livedata.SingleEventLiveData;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewModel;
-import timber.log.Timber;
 
 @PerScreen
 public class MapViewModel extends BaseViewModel {
@@ -87,7 +86,6 @@ public class MapViewModel extends BaseViewModel {
 	}
 
 	public void getVehicles() {
-		Timber.e("CODE " + navigationInfo.getLineCode());
 		getVehicleInteractor.init(navigationInfo.getLineCode(), navigationInfo.getLineId()).execute(liveVehicle -> vehicleData.setValue(liveVehicle));
 	}
 
@@ -97,7 +95,6 @@ public class MapViewModel extends BaseViewModel {
 		getNewRouteInteractor
 				.init(navigationInfo.getNextStationId(), currentRoute.getDestinationStationId(), DateTimeConverter.currentZonedDateTimeToEpochSec(), search.getTransferTime(), search.getTransfers())
 				.execute(newRoute -> {
-					Timber.e("RT: " + newRoute);
 					if (!newRoute.getId().equals("")) {
 						newRouteData.setValue(newRoute);
 					}

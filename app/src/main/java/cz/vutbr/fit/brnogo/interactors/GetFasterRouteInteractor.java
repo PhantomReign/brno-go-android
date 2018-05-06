@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import cz.vutbr.fit.brnogo.data.model.response.Node;
 import cz.vutbr.fit.brnogo.data.model.response.Route;
 import cz.vutbr.fit.brnogo.data.model.response.Vehicle;
 import cz.vutbr.fit.brnogo.data.store.RouteStore;
@@ -65,11 +64,8 @@ public class GetFasterRouteInteractor extends BaseSingleInteractor<Route> {
 						return route;
 					}
 
-					route.setDestinationStationName("KOKS");
-					return route;
-
-					//ArrayList<Vehicle> vehicles = new ArrayList<>();
-					//return new Route("", -1 , -1, "", "", -1, -1, vehicles, false);
+					ArrayList<Vehicle> vehicles = new ArrayList<>();
+					return new Route("", -1 , -1, "", "", -1, -1, vehicles, false);
 					});
 	}
 }

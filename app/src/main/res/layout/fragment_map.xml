@@ -17,14 +17,12 @@
 
 	<android.support.constraint.ConstraintLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:animateLayoutChanges="true">
+		android:layout_height="match_parent">
 
 		<android.support.v7.widget.CardView
 			android:id="@+id/faster_route_card"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:visibility="gone"
 			app:cardElevation="@dimen/d3"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
@@ -33,9 +31,14 @@
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintVertical_bias="0.0">
 
-			<android.support.constraint.ConstraintLayout
+			<LinearLayout
+				android:id="@+id/faster_layout"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
+				android:layout_height="wrap_content"
+				android:animateLayoutChanges="true"
+				android:gravity="center"
+				android:orientation="vertical"
+				android:visibility="gone">
 
 				<TextView
 					android:id="@+id/faster_route_found_text"
@@ -45,42 +48,43 @@
 					android:layout_marginEnd="@dimen/d2"
 					android:layout_marginStart="@dimen/d2"
 					android:layout_marginTop="@dimen/d2"
-					android:text="@string/faster_route_found"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toTopOf="parent"/>
+					android:text="@string/faster_route_found"/>
 
-				<Button
-					android:id="@+id/keep_button"
-					style="@style/ButtonWhiteBorderlessStyle"
+				<LinearLayout
+					android:id="@+id/faster_buttons_layout"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginBottom="@dimen/d2"
-					android:layout_marginEnd="@dimen/d2"
-					android:layout_marginStart="@dimen/d2"
-					android:layout_marginTop="@dimen/d2"
-					android:onClick="@{() -> view.onKeepClick()}"
-					android:text="@string/keep"
-					app:layout_constraintBottom_toBottomOf="parent"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintHorizontal_bias="0.5"
-					app:layout_constraintStart_toEndOf="@+id/replace_button"
-					app:layout_constraintTop_toBottomOf="@+id/faster_route_found_text"/>
+					android:orientation="horizontal">
 
-				<Button
-					android:id="@+id/replace_button"
-					style="@style/ButtonWhiteBorderlessStyle"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="@dimen/d2"
-					android:onClick="@{() -> view.onReplaceClick()}"
-					android:text="@string/replace"
-					app:layout_constraintBottom_toBottomOf="@+id/keep_button"
-					app:layout_constraintEnd_toStartOf="@+id/keep_button"
-					app:layout_constraintHorizontal_bias="0.5"
-					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toTopOf="@+id/keep_button"/>
-			</android.support.constraint.ConstraintLayout>
+					<Button
+						android:id="@+id/keep_button"
+						style="@style/ButtonWhiteBorderlessStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="@dimen/d2"
+						android:layout_marginEnd="@dimen/d6"
+						android:layout_marginStart="@dimen/d2"
+						android:layout_marginTop="@dimen/d2"
+						android:onClick="@{() -> view.onKeepClick()}"
+						android:padding="@dimen/d2"
+						android:text="@string/keep"/>
+
+					<Button
+						android:id="@+id/replace_button"
+						style="@style/ButtonWhiteBorderlessStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="@dimen/d2"
+						android:layout_marginEnd="@dimen/d2"
+						android:layout_marginStart="@dimen/d6"
+						android:layout_marginTop="@dimen/d2"
+						android:onClick="@{() -> view.onReplaceClick()}"
+						android:padding="@dimen/d2"
+						android:text="@string/replace"/>
+
+				</LinearLayout>
+
+			</LinearLayout>
 		</android.support.v7.widget.CardView>
 
 		<android.support.design.widget.FloatingActionButton
@@ -123,7 +127,7 @@
 			android:animateLayoutChanges="true"
 			android:orientation="vertical"
 			android:visibility="gone"
-			app:layout_constraintBottom_toTopOf="@+id/exit_button"
+			app:layout_constraintBottom_toTopOf="@+id/buttons_layout"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent">
 
@@ -136,7 +140,6 @@
 				android:id="@+id/nearest_stop_card"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:visibility="visible"
 				app:cardBackgroundColor="@color/grey_200"
 				app:cardCornerRadius="@dimen/d0">
 
@@ -154,7 +157,7 @@
 						android:animateLayoutChanges="true"
 						android:background="@drawable/shape_rect_red_round"
 						android:orientation="vertical"
-						app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+						app:layout_constraintBottom_toTopOf="@+id/contentLayout"
 						app:layout_constraintEnd_toEndOf="parent"
 						app:layout_constraintStart_toStartOf="parent"
 						app:layout_constraintTop_toTopOf="parent">
@@ -190,12 +193,13 @@
 					</LinearLayout>
 
 					<LinearLayout
-						android:id="@+id/linearLayout"
+						android:id="@+id/contentLayout"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="@dimen/d2"
 						android:layout_marginEnd="@dimen/d7"
 						android:layout_marginStart="@dimen/d7"
+						android:animateLayoutChanges="true"
 						android:orientation="vertical"
 						android:padding="@dimen/d1"
 						app:layout_constraintBottom_toBottomOf="parent"
@@ -243,29 +247,34 @@
 
 		</LinearLayout>
 
-		<Button
-			android:id="@+id/enter_button"
-			style="@style/ButtonRedBorderlessStyle"
+		<LinearLayout
+			android:id="@+id/buttons_layout"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:onClick="@{() -> view.onEnterVehicleClick()}"
-			android:text="@string/enter_vehicle"
-			android:visibility="gone"
+			android:animateLayoutChanges="true"
+			android:orientation="vertical"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"/>
+			app:layout_constraintStart_toStartOf="parent">
 
-		<Button
-			android:id="@+id/exit_button"
-			style="@style/ButtonRedBorderlessStyle"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:onClick="@{() -> view.onExitVehicleClick()}"
-			android:text="@string/exit_vehicle"
-			android:visibility="gone"
-			app:layout_constraintBottom_toTopOf="@+id/enter_button"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"/>
+			<Button
+				android:id="@+id/enter_button"
+				style="@style/ButtonRedBorderlessStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:onClick="@{() -> view.onEnterVehicleClick()}"
+				android:text="@string/enter_vehicle"
+				android:visibility="gone"/>
+
+			<Button
+				android:id="@+id/exit_button"
+				style="@style/ButtonRedBorderlessStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:onClick="@{() -> view.onExitVehicleClick()}"
+				android:text="@string/exit_vehicle"
+				android:visibility="gone"/>
+		</LinearLayout>
 
 	</android.support.constraint.ConstraintLayout>
 </layout>

@@ -51,7 +51,6 @@ import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
 import permissions.dispatcher.RuntimePermissions;
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider;
-import timber.log.Timber;
 
 @RuntimePermissions
 public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> implements MapView {
@@ -80,7 +79,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 						.origin(origin)
 						.destination(destination)
 						.waypoints(waypoints.toArray(new String[]{}))
-						.optimizeWaypoints(false)
+						.optimizeWaypoints(true)
 						.departureTime(now)
 						.await();
 			} else {
@@ -137,7 +136,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 		viewModel.getFasterRouteData().observe(this, fasterRoute -> {
 			viewModel.navigationInfo.setFasterRoute(fasterRoute);
-			binding.fasterRouteCard.setVisibility(View.VISIBLE);
+			binding.fasterLayout.setVisibility(View.VISIBLE);
 		});
 
 		viewModel.getNewRouteData().observe(this, newRoute -> {
@@ -177,6 +176,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		map.clear();
 		viewModel.navigationInfo.setInVehicle(false);
 		binding.exitButton.setVisibility(View.GONE);
+
 	}
 
 	@Override
@@ -192,7 +192,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		viewModel.navigationInfo.setFasterRoute(null);
 		viewModel.isFindingFasterRouteEnabled = false;
 		viewModel.initNewNavigationData();
-		binding.fasterRouteCard.setVisibility(View.GONE);
+		binding.fasterLayout.setVisibility(View.GONE);
 		map.clear();
 		renderInVehicle();
 		MapHelper.addStopCircleAreasToMap(binding.getRoot().getContext(), map, viewModel.navigationInfo.getCurrentVehicle());
@@ -201,7 +201,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 	@Override
 	public void onKeepClick() {
 		viewModel.isFindingFasterRouteEnabled = false;
-		binding.fasterRouteCard.setVisibility(View.GONE);
+		binding.fasterLayout.setVisibility(View.GONE);
 	}
 
 	@Override
@@ -228,7 +228,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 					map = locationGoogleMapPair.second;
 
 					LatLng convertedLocation = new LatLng(location.getLatitude(), location.getLongitude());
-					map.moveCamera(CameraUpdateFactory.newLatLngZoom(convertedLocation, 16));
+					map.moveCamera(CameraUpdateFactory.newLatLngZoom(convertedLocation, Constant.Navigation.CAMERA_ZOOM));
 
 					setMap(map);
 				})
@@ -275,7 +275,8 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 			viewModel.navigationInfo.setCurrentUserLocation(location);
 			if (viewModel.isFollowLocationEnabled) {
 				LatLng mapLocation = new LatLng(location.getLatitude(), location.getLongitude());
-				map.animateCamera(CameraUpdateFactory.newLatLngZoom(mapLocation, 16), 800, null);
+				map.animateCamera(CameraUpdateFactory.newLatLngZoom(mapLocation, Constant.Navigation.CAMERA_ZOOM),
+						Constant.Navigation.CAMERA_MOVE_SPEED, null);
 			}
 
 			// Calculate distance to current node
@@ -283,21 +284,22 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 					viewModel.navigationInfo.getCurrentNode().getStopLongitude(),
 					viewModel.navigationInfo.getCurrentNode().getStopLatitude());
 
-			boolean isFirstNode = viewModel.navigationInfo.getCurrentNodeIndex() == 0;
-
 			Node previous = viewModel.navigationInfo.getCurrentNode();
 			if (!viewModel.isDestinationReached) {
-				if (updateUserStatus(distance, isFirstNode)) {
+				if (updateUserStatus(distance)) {
 					long currentTime = DateTimeConverter.currentZonedDateTimeToEpochSec();
 					long secondsToDeparture = viewModel.navigationInfo.getCurrentNode().getTimeOfDeparture() - currentTime;
 
 					long secondsToDepartureWithDelay;
+					long delay;
 
 					if (viewModel.navigationInfo.getCurrentLiveVehicle() != null
 							&& viewModel.navigationInfo.getCurrentLiveVehicle().getRouteId() != -1) {
-						secondsToDepartureWithDelay = secondsToDeparture + viewModel.navigationInfo.getCurrentLiveVehicle().getDelay() * 60;
+						delay = viewModel.navigationInfo.getCurrentLiveVehicle().getDelay() * 60;
+						secondsToDepartureWithDelay = secondsToDeparture + delay;
 					} else {
-						secondsToDepartureWithDelay = secondsToDeparture + viewModel.currentRoute.getVehicles().get(viewModel.navigationInfo.getCurrentVehicleIndex()).getDelay();
+						delay = viewModel.currentRoute.getVehicles().get(viewModel.navigationInfo.getCurrentVehicleIndex()).getDelay();
+						secondsToDepartureWithDelay = secondsToDeparture + delay;
 					}
 
 					if (!previous.equals(viewModel.navigationInfo.getCurrentNode())) {
@@ -308,7 +310,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 					binding.stopName.setText(viewModel.navigationInfo.getCurrentNode().getStationName());
 					binding.currentAction.setText(getCurrentAction());
-					binding.information.setText(getInformationToCurrentAction(secondsToDepartureWithDelay));
+					binding.information.setText(getInformationToCurrentAction(delay));
 					binding.distanceTime.setText(getQuantityText(getQuantity(distance, secondsToDepartureWithDelay), getQuantityType()));
 
 				} else {
@@ -492,7 +494,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		}
 	}
 
-	private boolean updateUserStatus(double distance, boolean isFirstNode) {
+	private boolean updateUserStatus(double distance) {
 		boolean isTransfer = viewModel.navigationInfo.getCurrentNodeIndex() == (viewModel.navigationInfo.getCurrentVehicle().getPath().size() - 1);
 		long departureWithDelay;
 
@@ -510,7 +512,6 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		}
 
 		if (viewModel.navigationInfo.isCurrentNodeReached()) {
-			Timber.e("NOT FIRST ENTRY: " + distance);
 
 			if (departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()
 					&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
@@ -548,12 +549,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 				if (distance > Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD && departureWithDelay >= DateTimeConverter.currentZonedDateTimeToEpochSec()) {
 					viewModel.navigationInfo.setCurrentNodeReached(false);
-					Timber.e("WALK AGAin: " + distance);
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WALK);
 				} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
 						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER < DateTimeConverter.currentZonedDateTimeToEpochSec()) {
-					//viewModel.navigationInfo.setCurrentNodeReached(false);
-					Timber.e("NEED TO FIND NEW ROUTE");
 					if (!viewModel.isFindingNewRouteEnabled) {
 						viewModel.getNewRoute();
 					}
@@ -561,30 +559,22 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 				} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
 						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()
 						&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
-					//viewModel.navigationInfo.setCurrentNodeReached(false);
-					Timber.e("BOARD");
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_BOARD);
 				} else {
-					Timber.e("WAIT: " + distance);
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT);
 				}
 			}
 		} else {
 
 			if (viewModel.navigationInfo.isInVehicle()) {
-				// Keep traveling
-				Timber.w("TRAVELLING");
 				viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_RIDE);
 			} else {
 				if (departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER < DateTimeConverter.currentZonedDateTimeToEpochSec()) {
-					Timber.e("NEED TO FIND NEW ROUTE");
 					if (!viewModel.isFindingNewRouteEnabled) {
 						viewModel.getNewRoute();
 					}
-					// todo - add if
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT_FOR_NEW_ROUTE);
 				} else {
-					Timber.e("WALK: " + distance);
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WALK);
 				}
 			}
@@ -663,27 +653,6 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 			return nextNodes;
 		}
 	}
-
-	//private List<Node> findNextNodes(int currentNodeIndex, int currentVehicleIndex, int numberOfRemaining) {
-	/*private List<Node> findNextNodes(int currentNodeIndex, int currentVehicleIndex) {
-		int maxVehicleIndex = viewModel.currentRoute.getVehicles().size() - 1;
-		if (currentVehicleIndex > maxVehicleIndex) {
-			return new ArrayList<>();
-		}
-
-		List<Node> pathNodes = viewModel.currentRoute.getVehicles().get(currentVehicleIndex).getPath();
-		List<Node> nextNodes = new ArrayList<>();
-
-		int nodesAvailableInCurrentVehicle = (pathNodes.size() - currentNodeIndex) - 1;
-		if (Constant.Navigation.NUMBER_OF_NEXT_STATIONS <= nodesAvailableInCurrentVehicle) {
-			return pathNodes.subList(currentNodeIndex + 1, currentNodeIndex + Constant.Navigation.NUMBER_OF_NEXT_STATIONS + 1);
-		} else {
-			if (nodesAvailableInCurrentVehicle > 0) {
-				nextNodes.addAll(pathNodes.subList(currentNodeIndex + 1, currentNodeIndex + nodesAvailableInCurrentVehicle + 1));
-			}
-			return nextNodes;
-		}
-	}*/
 
 	public void onFinishReached() {
 		binding.currentAction.setText(getString(R.string.nav_finish));

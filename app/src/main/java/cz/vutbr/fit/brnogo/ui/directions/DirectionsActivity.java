@@ -85,7 +85,7 @@ public class DirectionsActivity extends BaseActivity<DirectionsViewModel, Activi
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_save, menu);
-		//viewModel.isSaved();
+		viewModel.isSaved();
 		return true;
 	}
 
