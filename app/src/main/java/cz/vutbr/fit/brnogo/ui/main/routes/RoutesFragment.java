@@ -135,7 +135,7 @@ public class RoutesFragment
 
 		binding.buttonTime.setText(R.string.now);
 		binding.buttonDate.setText(R.string.today);
-		binding.buttonTransfers.setText(R.string.infinity);
+		binding.buttonTransfers.setText(R.string.default_transfer);
 		binding.buttonTransferTime.setText(getString(R.string.minutes, Constant.TransferTimeDialog.DEFAULT));
 	}
 

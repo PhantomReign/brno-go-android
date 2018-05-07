@@ -164,7 +164,7 @@
 			android:layout_marginStart="@dimen/d2"
 			android:drawableStart="@drawable/ic_swap_horiz"
 			android:onClick="@{() -> view.onTransfersButtonClick()}"
-			android:text="@string/infinity"
+			android:text="@string/default_transfer"
 			android:visibility="visible"
 			app:layout_constraintBaseline_toBaselineOf="@+id/button_transfer_time"
 			app:layout_constraintEnd_toStartOf="@+id/button_transfer_time"

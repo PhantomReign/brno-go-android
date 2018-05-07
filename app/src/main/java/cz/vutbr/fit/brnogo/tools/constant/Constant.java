@@ -33,8 +33,6 @@ public interface Constant {
 	interface SearchRequest {
 		String DEFAULT_DATE = "Today";
 		String DEFAULT_TIME = "Now";
-		int DEFAULT_TRANSFERS = 999;
-		int DEFAULT_TRANSFER_TIME = 999;
 	}
 
 	interface Persistence {
@@ -44,13 +42,13 @@ public interface Constant {
 	}
 
 	interface TransfersDialog {
-		int MAX = 20;
+		int MAX = 4;
 		int MIN = 0;
-		int DEFAULT = 20;
+		int DEFAULT = 2;
 	}
 
 	interface TransferTimeDialog {
-		int MAX = 30;
+		int MAX = 10;
 		int MIN = 0;
 		int DEFAULT = 3;
 	}

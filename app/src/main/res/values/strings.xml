@@ -57,7 +57,7 @@
 	<string name="today">Today</string>
 	<string name="now">Now</string>
 	<string name="move_time" translatable="false">3 min</string>
-	<string name="infinity" translatable="false">&#8734;</string>
+	<string name="default_transfer" translatable="false">2</string>
 
 	<string name="unavailable_departures">Departures are not available.</string>
 	<string name="unavailable_directions">Directions are not available.</string>
