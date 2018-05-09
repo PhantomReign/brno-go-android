@@ -315,7 +315,6 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 				} else {
 					viewModel.isDestinationReached = true;
-					// TODO is in vehicle and away from stop - new route
 				}
 			} else {
 
@@ -547,9 +546,13 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 					return moveToNextStation(true);
 				}
 
-				if (distance > Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD && departureWithDelay >= DateTimeConverter.currentZonedDateTimeToEpochSec()) {
+				if (distance > Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
+						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE >= DateTimeConverter.currentZonedDateTimeToEpochSec()) {
 					viewModel.navigationInfo.setCurrentNodeReached(false);
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WALK);
+					if (binding.exitButton.getVisibility() == View.VISIBLE) {
+						binding.exitButton.setVisibility(View.GONE);
+					}
 				} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
 						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER < DateTimeConverter.currentZonedDateTimeToEpochSec()) {
 					if (!viewModel.isFindingNewRouteEnabled) {
@@ -560,6 +563,13 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()
 						&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_BOARD);
+				} else if (distance > Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
+						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER < DateTimeConverter.currentZonedDateTimeToEpochSec()) {
+					viewModel.navigationInfo.setCurrentNodeReached(false);
+					if (!viewModel.isFindingNewRouteEnabled) {
+						viewModel.getNewRoute();
+					}
+					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT_FOR_NEW_ROUTE);
 				} else {
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT);
 				}
