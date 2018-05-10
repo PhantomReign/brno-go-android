@@ -31,6 +31,7 @@ import cz.vutbr.fit.brnogo.ui.base.BaseFragment;
 import cz.vutbr.fit.brnogo.ui.directions.DirectionsActivity;
 import cz.vutbr.fit.brnogo.ui.stop.StopSearchActivity;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+import timber.log.Timber;
 
 public class DirectionsFragment
 		extends BaseFragment<DirectionsViewModel, FragmentDirectionsBinding>
@@ -61,9 +62,10 @@ public class DirectionsFragment
 		binding.directionsRecyclerView.setAdapter(directionsAdapter);
 		binding.directionsRecyclerView.setItemAnimator(new SlideInUpAnimator(new LinearInterpolator()));
 
-		viewModel.getItems().observe(this, routes ->
-				directionsAdapter.updateData(routes));
-				binding.savedDirections.setVisibility(getSavedTextVisibility());
+		viewModel.getItems().observe(this, routes -> {
+			directionsAdapter.updateData(routes);
+			binding.savedDirections.setVisibility(getSavedTextVisibility());
+		});
 	}
 
 	private int getSavedTextVisibility() {

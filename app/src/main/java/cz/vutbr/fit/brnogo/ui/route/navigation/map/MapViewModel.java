@@ -2,8 +2,6 @@ package cz.vutbr.fit.brnogo.ui.route.navigation.map;
 
 import android.location.Location;
 
-import com.google.maps.model.DirectionsResult;
-
 import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.data.model.response.LiveVehicle;
@@ -12,7 +10,7 @@ import cz.vutbr.fit.brnogo.data.model.store.Navigation;
 import cz.vutbr.fit.brnogo.data.model.store.Search;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.GetFasterRouteInteractor;
-import cz.vutbr.fit.brnogo.interactors.GetNavigationInformationInteractor;
+import cz.vutbr.fit.brnogo.interactors.GetLocationInformationInteractor;
 import cz.vutbr.fit.brnogo.interactors.GetNewRouteInteractor;
 import cz.vutbr.fit.brnogo.interactors.GetVehicleInteractor;
 import cz.vutbr.fit.brnogo.tools.datetime.DateTimeConverter;
@@ -22,7 +20,7 @@ import cz.vutbr.fit.brnogo.ui.base.BaseViewModel;
 @PerScreen
 public class MapViewModel extends BaseViewModel {
 
-	private GetNavigationInformationInteractor getNavigationInformationInteractor;
+	private GetLocationInformationInteractor getLocationInformationInteractor;
 	private GetFasterRouteInteractor getFasterRouteInteractor;
 	private GetNewRouteInteractor getNewRouteInteractor;
 	private GetVehicleInteractor getVehicleInteractor;
@@ -64,10 +62,10 @@ public class MapViewModel extends BaseViewModel {
 
 	@Inject
 	public MapViewModel(GetVehicleInteractor getVehicleInteractor,
-						GetNavigationInformationInteractor getNavigationInformationInteractor,
+						GetLocationInformationInteractor getLocationInformationInteractor,
 						GetFasterRouteInteractor getFasterRouteInteractor,
 						GetNewRouteInteractor getNewRouteInteractor) {
-		this.getNavigationInformationInteractor = getNavigationInformationInteractor;
+		this.getLocationInformationInteractor = getLocationInformationInteractor;
 		this.getVehicleInteractor = getVehicleInteractor;
 		this.getFasterRouteInteractor = getFasterRouteInteractor;
 		this.getNewRouteInteractor = getNewRouteInteractor;
@@ -80,7 +78,7 @@ public class MapViewModel extends BaseViewModel {
 	}
 
 	public void getLocation() {
-		getNavigationInformationInteractor.init(route).execute(location -> {
+		getLocationInformationInteractor.execute(location -> {
 			locationData.setValue(location);
 		});
 	}
@@ -150,7 +148,7 @@ public class MapViewModel extends BaseViewModel {
 
 	@Override
 	protected void onCleared() {
-		getNavigationInformationInteractor.unsubscribe();
+		getLocationInformationInteractor.unsubscribe();
 		getVehicleInteractor.unsubscribe();
 		getFasterRouteInteractor.unsubscribe();
 		getNewRouteInteractor.unsubscribe();

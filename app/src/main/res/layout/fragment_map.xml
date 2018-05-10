@@ -52,22 +52,10 @@
 
 				<LinearLayout
 					android:id="@+id/faster_buttons_layout"
-					android:layout_width="wrap_content"
+					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:gravity="center"
 					android:orientation="horizontal">
-
-					<Button
-						android:id="@+id/keep_button"
-						style="@style/ButtonWhiteBorderlessStyle"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginBottom="@dimen/d2"
-						android:layout_marginEnd="@dimen/d6"
-						android:layout_marginStart="@dimen/d2"
-						android:layout_marginTop="@dimen/d2"
-						android:onClick="@{() -> view.onKeepClick()}"
-						android:padding="@dimen/d2"
-						android:text="@string/keep"/>
 
 					<Button
 						android:id="@+id/replace_button"
@@ -75,12 +63,25 @@
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="@dimen/d2"
-						android:layout_marginEnd="@dimen/d2"
-						android:layout_marginStart="@dimen/d6"
+						android:layout_marginEnd="@dimen/d5"
+						android:layout_marginStart="@dimen/d2"
 						android:layout_marginTop="@dimen/d2"
 						android:onClick="@{() -> view.onReplaceClick()}"
 						android:padding="@dimen/d2"
 						android:text="@string/replace"/>
+
+					<Button
+						android:id="@+id/keep_button"
+						style="@style/ButtonWhiteBorderlessStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="@dimen/d2"
+						android:layout_marginEnd="@dimen/d2"
+						android:layout_marginStart="@dimen/d5"
+						android:layout_marginTop="@dimen/d2"
+						android:onClick="@{() -> view.onKeepClick()}"
+						android:padding="@dimen/d2"
+						android:text="@string/keep"/>
 
 				</LinearLayout>
 
