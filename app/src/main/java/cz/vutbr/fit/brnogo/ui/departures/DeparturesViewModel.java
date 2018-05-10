@@ -9,13 +9,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.data.model.recyclerview.DepartureItem;
-import cz.vutbr.fit.brnogo.data.model.response.CurrentDeparture;
-import cz.vutbr.fit.brnogo.data.model.response.Stop;
 import cz.vutbr.fit.brnogo.data.model.store.FavoriteStop;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.GetDeparturesInteractor;
 import cz.vutbr.fit.brnogo.interactors.GetFavoriteStopInteractor;
-import cz.vutbr.fit.brnogo.interactors.IsFavoriteSearchInteractor;
 import cz.vutbr.fit.brnogo.interactors.IsFavoriteStopInteractor;
 import cz.vutbr.fit.brnogo.interactors.SetFavoriteStopInteractor;
 import cz.vutbr.fit.brnogo.tools.livedata.SingleEventLiveData;

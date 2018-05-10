@@ -13,7 +13,6 @@ import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import io.reactivex.Single;
-import timber.log.Timber;
 
 @PerScreen
 public class IsFavoriteSearchInteractor extends BaseSingleInteractor<Boolean> {

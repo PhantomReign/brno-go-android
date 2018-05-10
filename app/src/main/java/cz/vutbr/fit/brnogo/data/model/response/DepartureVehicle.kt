@@ -1,10 +1,8 @@
 package cz.vutbr.fit.brnogo.data.model.response
 
 import android.view.View
-import cz.vutbr.fit.brnogo.R
 import cz.vutbr.fit.brnogo.data.model.recyclerview.DepartureItem
 import io.mironov.smuggler.AutoParcelable
-import timber.log.Timber
 
 data class DepartureVehicle(
 		val lineName: String,

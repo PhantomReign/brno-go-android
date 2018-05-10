@@ -6,13 +6,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import cz.vutbr.fit.brnogo.data.model.response.Stop;
 import cz.vutbr.fit.brnogo.data.model.store.FavoriteStop;
-import cz.vutbr.fit.brnogo.data.model.store.Search;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
-import cz.vutbr.fit.brnogo.interactors.GetFavoriteRouteSearchInteractor;
 import cz.vutbr.fit.brnogo.interactors.GetFavoriteStopInteractor;
-import cz.vutbr.fit.brnogo.interactors.SetFavoriteRouteSearchInteractor;
 import cz.vutbr.fit.brnogo.interactors.SetFavoriteStopInteractor;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewModel;
 import timber.log.Timber;

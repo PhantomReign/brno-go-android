@@ -15,13 +15,11 @@ import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.data.model.recyclerview.RouteItem;
 import cz.vutbr.fit.brnogo.data.model.response.Node;
 import cz.vutbr.fit.brnogo.data.model.response.Vehicle;
-import cz.vutbr.fit.brnogo.databinding.ListItemRouteBinding;
 import cz.vutbr.fit.brnogo.databinding.ListItemRouteDetailBinding;
 import cz.vutbr.fit.brnogo.databinding.ListItemRoutePathBinding;
 import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
-import timber.log.Timber;
 
 public class RouteDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

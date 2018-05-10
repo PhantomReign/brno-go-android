@@ -4,7 +4,6 @@ import cz.vutbr.fit.brnogo.data.model.response.Route;
 import cz.vutbr.fit.brnogo.data.model.store.Search;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
-import cz.vutbr.fit.brnogo.ui.route.navigation.RouteNavigationActivity;
 import dagger.Module;
 import dagger.Provides;
 

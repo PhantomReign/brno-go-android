@@ -7,7 +7,6 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import android.support.constraint.ConstraintSet;
 import android.support.transition.ChangeBounds;
 import android.support.transition.TransitionManager;
@@ -37,7 +36,6 @@ import cz.vutbr.fit.brnogo.ui.main.routes.dialog.transfers.TransfersPickerDialog
 import cz.vutbr.fit.brnogo.ui.route.RoutesActivity;
 import cz.vutbr.fit.brnogo.ui.stop.StopSearchActivity;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
-import timber.log.Timber;
 
 public class RoutesFragment
 		extends BaseFragment<RoutesViewModel, FragmentRoutesBinding>

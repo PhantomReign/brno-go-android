@@ -1,14 +1,12 @@
 package cz.vutbr.fit.brnogo.interactors;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.data.model.response.Route;
-import cz.vutbr.fit.brnogo.data.model.store.Search;
 import cz.vutbr.fit.brnogo.data.persistance.Persistence;
 import cz.vutbr.fit.brnogo.injection.annotation.qualifier.ApplicationContext;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;

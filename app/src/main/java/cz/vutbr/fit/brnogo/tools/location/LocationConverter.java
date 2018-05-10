@@ -2,8 +2,6 @@ package cz.vutbr.fit.brnogo.tools.location;
 
 import android.location.Location;
 
-import com.google.maps.android.data.geojson.GeoJsonPoint;
-
 public class LocationConverter {
 
 	private LocationConverter() {

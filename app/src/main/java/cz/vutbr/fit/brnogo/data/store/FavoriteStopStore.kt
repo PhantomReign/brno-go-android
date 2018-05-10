@@ -1,7 +1,6 @@
 package cz.vutbr.fit.brnogo.data.store
 
 import cz.vutbr.fit.brnogo.data.db.AppDatabase
-import cz.vutbr.fit.brnogo.data.model.response.Route
 import cz.vutbr.fit.brnogo.data.model.store.FavoriteStop
 import cz.vutbr.fit.brnogo.data.persistance.Persistence
 import cz.vutbr.fit.brnogo.tools.constant.Constant

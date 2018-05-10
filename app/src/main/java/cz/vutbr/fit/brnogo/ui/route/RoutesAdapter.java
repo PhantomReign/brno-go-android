@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import javax.inject.Inject;
 
@@ -22,7 +21,6 @@ import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.tools.datetime.DateTimeConverter;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
-import timber.log.Timber;
 
 public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

@@ -17,7 +17,6 @@ import cz.vutbr.fit.brnogo.injection.annotation.qualifier.ApplicationContext;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import io.reactivex.Single;
-import timber.log.Timber;
 
 @PerScreen
 public class GetRoutesInteractor extends BaseSingleInteractor<List<RouteItem>> {

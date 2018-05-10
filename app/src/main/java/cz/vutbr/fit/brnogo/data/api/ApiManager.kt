@@ -4,11 +4,10 @@ import cz.vutbr.fit.brnogo.data.model.response.CurrentDeparture
 import cz.vutbr.fit.brnogo.data.model.response.LiveVehicle
 import cz.vutbr.fit.brnogo.data.model.response.Route
 import cz.vutbr.fit.brnogo.data.model.response.Stop
-import javax.inject.Inject
-import javax.inject.Singleton
-
 import cz.vutbr.fit.brnogo.data.util.ResultTransformer
 import io.reactivex.Single
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @Singleton
 class ApiManager @Inject constructor(

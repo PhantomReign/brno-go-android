@@ -1,24 +1,15 @@
 package cz.vutbr.fit.brnogo.ui.route;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
-import android.databinding.Bindable;
 import android.databinding.ObservableBoolean;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import cz.vutbr.fit.brnogo.R;
-import cz.vutbr.fit.brnogo.data.model.recyclerview.DepartureItem;
 import cz.vutbr.fit.brnogo.data.model.recyclerview.RouteItem;
-import cz.vutbr.fit.brnogo.data.model.response.Route;
-import cz.vutbr.fit.brnogo.data.model.response.Stop;
 import cz.vutbr.fit.brnogo.data.model.store.Search;
-import cz.vutbr.fit.brnogo.data.persistance.Persistence;
-import cz.vutbr.fit.brnogo.injection.annotation.qualifier.ApplicationContext;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
-import cz.vutbr.fit.brnogo.interactors.GetDeparturesInteractor;
 import cz.vutbr.fit.brnogo.interactors.GetRoutesInteractor;
 import cz.vutbr.fit.brnogo.interactors.IsFavoriteSearchInteractor;
 import cz.vutbr.fit.brnogo.interactors.SetFavoriteRouteSearchInteractor;

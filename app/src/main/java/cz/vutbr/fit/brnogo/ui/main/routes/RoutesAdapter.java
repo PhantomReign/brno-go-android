@@ -5,7 +5,6 @@ import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Filterable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +12,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.R;
-import cz.vutbr.fit.brnogo.data.model.response.Stop;
 import cz.vutbr.fit.brnogo.data.model.store.Search;
 import cz.vutbr.fit.brnogo.databinding.ListItemSearchFavoriteBinding;
 import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
-import cz.vutbr.fit.brnogo.ui.stop.StopSearchView;
-import me.xuender.unidecode.Unidecode;
-import timber.log.Timber;
 
 public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.ViewHolder> {
 

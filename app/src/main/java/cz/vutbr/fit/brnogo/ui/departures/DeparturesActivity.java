@@ -15,7 +15,6 @@ import android.view.animation.LinearInterpolator;
 import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.R;
-import cz.vutbr.fit.brnogo.data.model.response.Stop;
 import cz.vutbr.fit.brnogo.data.model.store.FavoriteStop;
 import cz.vutbr.fit.brnogo.databinding.ActivityDeparturesBinding;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;

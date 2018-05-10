@@ -2,15 +2,14 @@ package cz.vutbr.fit.brnogo.data.db
 
 import android.arch.persistence.room.Room
 import android.content.Context
-import cz.vutbr.fit.brnogo.R.string.routes
 import cz.vutbr.fit.brnogo.data.model.response.Route
 import cz.vutbr.fit.brnogo.data.model.response.Stop
 import cz.vutbr.fit.brnogo.data.model.store.FavoriteStop
 import cz.vutbr.fit.brnogo.data.model.store.Search
+import cz.vutbr.fit.brnogo.injection.annotation.qualifier.ApplicationContext
 import io.reactivex.Flowable
 import javax.inject.Inject
 import javax.inject.Singleton
-import cz.vutbr.fit.brnogo.injection.annotation.qualifier.ApplicationContext
 
 @Singleton
 class AppDatabase @Inject constructor(

@@ -1,10 +1,9 @@
 package cz.vutbr.fit.brnogo.injection
 
-import javax.inject.Singleton
-
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
+import javax.inject.Singleton
 
 @Module
 class UrlModule {

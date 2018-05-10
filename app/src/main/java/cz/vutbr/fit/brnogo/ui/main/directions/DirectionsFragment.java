@@ -7,7 +7,6 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -31,7 +30,6 @@ import cz.vutbr.fit.brnogo.ui.base.BaseFragment;
 import cz.vutbr.fit.brnogo.ui.directions.DirectionsActivity;
 import cz.vutbr.fit.brnogo.ui.stop.StopSearchActivity;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
-import timber.log.Timber;
 
 public class DirectionsFragment
 		extends BaseFragment<DirectionsViewModel, FragmentDirectionsBinding>

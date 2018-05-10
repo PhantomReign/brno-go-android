@@ -1,7 +1,5 @@
 package cz.vutbr.fit.brnogo.interactors;
 
-import android.support.annotation.Nullable;
-
 import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.data.model.response.Route;

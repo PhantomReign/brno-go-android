@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.LinearInterpolator;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -26,7 +25,6 @@ import cz.vutbr.fit.brnogo.ui.base.BaseActivity;
 import cz.vutbr.fit.brnogo.ui.route.detail.RouteDetailActivity;
 import cz.vutbr.fit.brnogo.ui.route.navigation.RouteNavigationActivity;
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
-import timber.log.Timber;
 
 public class RoutesActivity extends BaseActivity<RoutesViewModel, ActivityRoutesBinding> implements RoutesView {
 

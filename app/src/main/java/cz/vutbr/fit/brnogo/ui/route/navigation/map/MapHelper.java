@@ -6,7 +6,6 @@ import android.location.Location;
 import android.support.v4.content.ContextCompat;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -15,13 +14,11 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.android.PolyUtil;
 import com.google.maps.model.DirectionsResult;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.data.model.response.Node;
-import cz.vutbr.fit.brnogo.data.model.response.Route;
 import cz.vutbr.fit.brnogo.data.model.response.Vehicle;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 

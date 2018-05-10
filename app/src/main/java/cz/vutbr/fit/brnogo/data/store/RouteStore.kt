@@ -1,7 +1,6 @@
 package cz.vutbr.fit.brnogo.data.store
 
 import cz.vutbr.fit.brnogo.data.api.ApiManager
-import cz.vutbr.fit.brnogo.data.model.response.CurrentDeparture
 import cz.vutbr.fit.brnogo.data.model.response.Route
 import io.reactivex.Single
 import javax.inject.Inject

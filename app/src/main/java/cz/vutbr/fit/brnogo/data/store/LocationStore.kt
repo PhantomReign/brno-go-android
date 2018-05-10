@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import com.google.android.gms.location.LocationRequest
-import cz.vutbr.fit.brnogo.R
 import cz.vutbr.fit.brnogo.injection.annotation.qualifier.ApplicationContext
 import cz.vutbr.fit.brnogo.tools.PermissionChecker
 import io.reactivex.Maybe

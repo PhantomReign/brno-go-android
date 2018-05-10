@@ -18,7 +18,6 @@ import cz.vutbr.fit.brnogo.databinding.ListItemStopBinding;
 import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
 import me.xuender.unidecode.Unidecode;
-import timber.log.Timber;
 
 public class StopSearchAdapter extends RecyclerView.Adapter<StopSearchAdapter.ViewHolder> implements Filterable {
 

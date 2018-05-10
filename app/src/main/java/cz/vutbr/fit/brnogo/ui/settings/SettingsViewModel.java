@@ -1,7 +1,5 @@
 package cz.vutbr.fit.brnogo.ui.settings;
 
-import android.support.design.widget.Snackbar;
-
 import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;

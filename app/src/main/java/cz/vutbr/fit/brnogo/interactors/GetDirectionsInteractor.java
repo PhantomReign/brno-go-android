@@ -1,7 +1,6 @@
 package cz.vutbr.fit.brnogo.interactors;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
