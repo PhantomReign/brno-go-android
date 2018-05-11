@@ -8,6 +8,7 @@ import cz.vutbr.fit.brnogo.data.model.response.LiveVehicle;
 import cz.vutbr.fit.brnogo.data.model.response.Route;
 import cz.vutbr.fit.brnogo.data.model.store.Navigation;
 import cz.vutbr.fit.brnogo.data.model.store.Search;
+import cz.vutbr.fit.brnogo.data.persistance.Persistence;
 import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.GetFasterRouteInteractor;
 import cz.vutbr.fit.brnogo.interactors.GetLocationInformationInteractor;
@@ -24,6 +25,8 @@ public class MapViewModel extends BaseViewModel {
 	private GetFasterRouteInteractor getFasterRouteInteractor;
 	private GetNewRouteInteractor getNewRouteInteractor;
 	private GetVehicleInteractor getVehicleInteractor;
+
+	private Persistence persistence;
 
 	public Navigation navigationInfo;
 	public Boolean initialized;
@@ -64,7 +67,8 @@ public class MapViewModel extends BaseViewModel {
 	public MapViewModel(GetVehicleInteractor getVehicleInteractor,
 						GetLocationInformationInteractor getLocationInformationInteractor,
 						GetFasterRouteInteractor getFasterRouteInteractor,
-						GetNewRouteInteractor getNewRouteInteractor) {
+						GetNewRouteInteractor getNewRouteInteractor,
+						Persistence persistence) {
 		this.getLocationInformationInteractor = getLocationInformationInteractor;
 		this.getVehicleInteractor = getVehicleInteractor;
 		this.getFasterRouteInteractor = getFasterRouteInteractor;
@@ -75,6 +79,7 @@ public class MapViewModel extends BaseViewModel {
 		this.isFollowLocationEnabled = false;
 		this.isFindingNewRouteEnabled = false;
 		this.isDestinationReached = false;
+		this.persistence = persistence;
 	}
 
 	public void getLocation() {
@@ -113,6 +118,10 @@ public class MapViewModel extends BaseViewModel {
 						fasterRouteData.setValue(fasterRoute);
 					}
 				});
+	}
+
+	public Persistence getPersistence() {
+		return persistence;
 	}
 
 	public void setLineIdAndLineCode(int lineId, int lineCode) {

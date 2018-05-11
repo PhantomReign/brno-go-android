@@ -91,4 +91,7 @@
 	<string name="nav_sorry">Litujeme</string>
 	<string name="nav_finish_failed_info">Nedodržel si pokyny. Pokus se najít novou trasu na další zastávce.</string>
 	<string name="delay_min">Zpoždění: %1$d min</string>
+	<string name="category_navigation">Navigace</string>
+	<string name="implicit_enter_title">Automatické nastoupení do vozidla.</string>
+	<string name="implicit_enter_summary">Stiskni pro zapnutí nebo vypnutí</string>
 </resources>

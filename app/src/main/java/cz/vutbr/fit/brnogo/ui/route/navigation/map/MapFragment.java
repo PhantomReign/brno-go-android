@@ -65,6 +65,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 	private GoogleMap map;
 	private boolean isPathToStopSet;
 	private boolean isPathToDestinationSet;
+	private boolean isImplicitEnabled;
 
 	public static MapFragment newInstance() {
 		return new MapFragment();
@@ -117,6 +118,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 		isPathToStopSet = false;
 		isPathToDestinationSet = false;
+		isImplicitEnabled = viewModel.getPersistence().get(getString(R.string.settings_key_implicit_enter), false);
 
 		viewModel.initNavigationData();
 		viewModel.getLocation();
@@ -333,7 +335,11 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		} else if (type == QuantityType.TYPE_TIME) {
 			long secondsRemaining = (long) value;
 
-			if (viewModel.navigationInfo.getCurrentUserState() == UserActionType.TYPE_BOARD) {
+			if (!isImplicitEnabled && viewModel.navigationInfo.getCurrentUserState() == UserActionType.TYPE_BOARD) {
+				secondsRemaining += Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER;
+			} else if (isImplicitEnabled
+					&& viewModel.navigationInfo.getCurrentUserState() == UserActionType.TYPE_BOARD
+					&& secondsRemaining < 0) {
 				secondsRemaining += Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER;
 			}
 
@@ -512,8 +518,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 		if (viewModel.navigationInfo.isCurrentNodeReached()) {
 
-			if (departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()
-					&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
+			if (departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()) {
 				if (binding.exitButton.getVisibility() != View.VISIBLE) {
 					binding.enterButton.setVisibility(View.VISIBLE);
 				}
@@ -547,12 +552,19 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 				}
 
 				if (distance > Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
-						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE >= DateTimeConverter.currentZonedDateTimeToEpochSec()) {
+						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER >= DateTimeConverter.currentZonedDateTimeToEpochSec()) {
 					viewModel.navigationInfo.setCurrentNodeReached(false);
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WALK);
 					if (binding.exitButton.getVisibility() == View.VISIBLE) {
 						binding.exitButton.setVisibility(View.GONE);
 					}
+				} else if (isImplicitEnabled
+						&& distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
+						&& departureWithDelay + Constant.Navigation.IMPLICIT_ENTER_VEHICLE_TIME_OFFSET >= DateTimeConverter.currentZonedDateTimeToEpochSec()
+						&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.IMPLICIT_ENTER_VEHICLE_TIME_OFFSET) {
+					viewModel.navigationInfo.setInVehicle(true);
+					binding.enterButton.setVisibility(View.GONE);
+					binding.exitButton.setVisibility(View.VISIBLE);
 				} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
 						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER < DateTimeConverter.currentZonedDateTimeToEpochSec()) {
 					if (!viewModel.isFindingNewRouteEnabled) {
@@ -560,7 +572,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 					}
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT_FOR_NEW_ROUTE);
 				} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
-						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER > DateTimeConverter.currentZonedDateTimeToEpochSec()
+						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER >= DateTimeConverter.currentZonedDateTimeToEpochSec()
 						&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_BOARD);
 				} else if (distance > Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD

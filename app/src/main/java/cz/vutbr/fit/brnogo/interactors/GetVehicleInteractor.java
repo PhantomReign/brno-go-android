@@ -34,11 +34,8 @@ public class GetVehicleInteractor extends BaseFlowableInteractor<LiveVehicle> {
 
 	@Override
 	protected Flowable<LiveVehicle> buildFlowable() {
-		//return vehicleStore.getVehicle(lineCode);
-
 		return Flowable.interval(10, TimeUnit.SECONDS).startWith((long) 0)
-				.flatMap(__ -> vehicleStore.getVehicle(lineCode, lineId).toFlowable()).map(liveVehicle -> {
-					return liveVehicle;
-				}).onBackpressureLatest();
+				.flatMap(__ -> vehicleStore.getVehicle(lineCode, lineId).toFlowable().onBackpressureLatest())
+				.onBackpressureLatest();
 	}
 }

@@ -91,4 +91,7 @@
 	<string name="sync_success">Synchronizácia bola úspešná!</string>
 	<string name="sync_failed">Synchronizácia zlyhala!</string>
 	<string name="routes_too_late">Nie je možné spustiť navigáciu. Vozidlo už nie je k dispozícií.</string>
+	<string name="category_navigation">Navigácia</string>
+	<string name="implicit_enter_title">Automatické nástupenie do vozidla</string>
+	<string name="implicit_enter_summary">Stlač pre zapnutie alebo vypnutie</string>
 </resources>

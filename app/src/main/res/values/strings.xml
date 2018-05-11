@@ -68,11 +68,15 @@
 	<string name="category_sync_title">Sync</string>
 	<string name="category_limit_title">Route search limit</string>
 	<string name="category_screen_title">Start screen</string>
+	<string name="category_navigation">Navigation</string>
 
-	<string name="dialog_screen_title">Set Start Screen</string>
+	<string name="dialog_screen_title">Set start screen</string>
 	<string name="dialog_limit_title">Set number of routes</string>
 
-	<string name="sync_header">Sync Stops</string>
+	<string name="implicit_enter_title">Automatic boarding to a vehicle</string>
+	<string name="implicit_enter_summary">Click to enable or disable</string>
+
+	<string name="sync_header">Sync stops</string>
 	<string name="sync_info">Click to sync</string>
 
 	<string name="sync_in_progress">Sync in progress&#8230;</string>
