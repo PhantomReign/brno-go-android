@@ -140,4 +140,5 @@
 	<string name="nav_sorry">Sorry</string>
 	<string name="nav_finish_failed_info">You did not follow instructions. Try to find new route on next stop.</string>
 	<string name="delay_min">Delay: %1$d min</string>
+	<string name="manual_enter">Confirm boarding manually.</string>
 </resources>

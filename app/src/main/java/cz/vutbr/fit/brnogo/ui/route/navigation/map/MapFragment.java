@@ -236,6 +236,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		viewModel.navigationInfo.setInVehicle(true);
 		binding.enterButton.setVisibility(View.GONE);
 		binding.exitButton.setVisibility(View.VISIBLE);
+		if (isImplicitEnabled && binding.manualEnter.getVisibility() == View.VISIBLE) {
+			binding.manualEnter.setVisibility(View.GONE);
+		}
 	}
 
 	@SuppressWarnings("MissingPermission")
@@ -596,10 +599,16 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 						viewModel.getNewRoute();
 					}
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT_FOR_NEW_ROUTE);
+					if (isImplicitEnabled) {
+						binding.manualEnter.setVisibility(View.GONE);
+					}
 				} else if (distance <= Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
 						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER >= DateTimeConverter.currentZonedDateTimeToEpochSec()
 						&& DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay - Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_BEFORE) {
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_BOARD);
+					if (isImplicitEnabled && DateTimeConverter.currentZonedDateTimeToEpochSec() > departureWithDelay + Constant.Navigation.IMPLICIT_ENTER_VEHICLE_TIME_OFFSET) {
+						binding.manualEnter.setVisibility(View.VISIBLE);
+					}
 				} else if (distance > Constant.Navigation.ON_STOP_DISTANCE_THRESHOLD
 						&& departureWithDelay + Constant.Navigation.ENTER_VEHICLE_TIME_OFFSET_AFTER < DateTimeConverter.currentZonedDateTimeToEpochSec()) {
 					viewModel.navigationInfo.setCurrentNodeReached(false);
@@ -607,6 +616,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 						viewModel.getNewRoute();
 					}
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT_FOR_NEW_ROUTE);
+					if (isImplicitEnabled) {
+						binding.manualEnter.setVisibility(View.GONE);
+					}
 				} else {
 					viewModel.navigationInfo.setCurrentUserState(UserActionType.TYPE_WAIT);
 				}

@@ -94,4 +94,5 @@
 	<string name="category_navigation">Navigace</string>
 	<string name="implicit_enter_title">Automatické nastoupení do vozidla.</string>
 	<string name="implicit_enter_summary">Stiskni pro zapnutí nebo vypnutí</string>
+	<string name="manual_enter">Potvrď nastoupení manuálně.</string>
 </resources>

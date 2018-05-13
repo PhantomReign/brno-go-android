@@ -256,6 +256,18 @@
 							android:layout_marginStart="@dimen/d4"
 							android:textAlignment="center"
 							tools:text="Continue to next stop by vehicle 12"/>
+
+						<TextView
+							android:id="@+id/manual_enter"
+							style="@style/TextRegular.MediumRed.12"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="@dimen/d4"
+							android:layout_marginStart="@dimen/d4"
+							android:layout_marginTop="@dimen/d2"
+							android:text="@string/manual_enter"
+							android:textAlignment="center"
+							android:visibility="gone"/>
 					</LinearLayout>
 				</android.support.constraint.ConstraintLayout>
 
