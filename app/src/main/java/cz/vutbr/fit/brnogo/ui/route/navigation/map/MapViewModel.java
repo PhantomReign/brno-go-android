@@ -109,10 +109,13 @@ public class MapViewModel extends BaseViewModel {
 		int lastVehicleIndex = route.getVehicles().size() - 1;
 		int lastNodeIndex = route.getVehicles().get(lastVehicleIndex).getPath().size() - 1;
 		long endTime = route.getVehicles().get(lastVehicleIndex).getPath().get(lastNodeIndex).getTimeOfArrival();
+		long timeToNextStation = currentRoute.getVehicles().get(navigationInfo.getCurrentVehicleIndex()).getPath().get(navigationInfo.getCurrentNodeIndex()).getTimeOfArrival()
+				- currentRoute.getVehicles().get(navigationInfo.getCurrentVehicleIndex()).getPath().get(navigationInfo.getCurrentNodeIndex() - 1).getTimeOfDeparture();
+		long startTime = DateTimeConverter.currentZonedDateTimeToEpochSec() + currentRoute.getMinTimeToMove() + timeToNextStation;
 
 		isFindingFasterRouteEnabled = true;
 		getFasterRouteInteractor
-				.init(navigationInfo.getNextStationId(), route.getDestinationStationId(), DateTimeConverter.currentZonedDateTimeToEpochSec(), search.getTransferTime(), search.getTransfers(), endTime)
+				.init(navigationInfo.getNextStationId(), route.getDestinationStationId(), startTime, search.getTransferTime(), search.getTransfers(), endTime)
 				.execute(fasterRoute -> {
 					if (!fasterRoute.getId().equals("")) {
 						fasterRouteData.setValue(fasterRoute);

@@ -34,6 +34,7 @@ import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.data.model.response.Node;
+import cz.vutbr.fit.brnogo.data.model.response.Vehicle;
 import cz.vutbr.fit.brnogo.databinding.FragmentMapBinding;
 import cz.vutbr.fit.brnogo.tools.PermissionChecker;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
@@ -190,6 +191,20 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 	@Override
 	public void onReplaceClick() {
+		if (viewModel.navigationInfo.getCurrentNodeIndex() == (viewModel.navigationInfo.getCurrentVehicle().getPath().size() - 1)) {
+			Node node = viewModel.navigationInfo.getCurrentNode();
+			ArrayList<Node> nodes = new ArrayList<>();
+			nodes.add(node);
+
+			Vehicle vehicle = new Vehicle(viewModel.navigationInfo.getCurrentVehicle().getLineCode(),
+					viewModel.navigationInfo.getCurrentVehicle().getLineId(),
+					viewModel.navigationInfo.getCurrentVehicle().getType(),
+					viewModel.navigationInfo.getCurrentVehicle().getDelay(),
+					nodes);
+
+			viewModel.navigationInfo.getFasterRoute().getVehicles().add(0, vehicle);
+		}
+
 		viewModel.currentRoute = viewModel.navigationInfo.getFasterRoute();
 		viewModel.navigationInfo.setFasterRoute(null);
 		viewModel.isFindingFasterRouteEnabled = false;
@@ -204,6 +219,16 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 	public void onKeepClick() {
 		viewModel.isFindingFasterRouteEnabled = false;
 		binding.fasterLayout.setVisibility(View.GONE);
+	}
+
+	@Override
+	public void onMoveToNextClick() {
+		boolean isTransfer = viewModel.navigationInfo.getCurrentNodeIndex() == (viewModel.navigationInfo.getCurrentVehicle().getPath().size() - 1);
+		if (isTransfer) {
+			moveToNextStation(true);
+		} else {
+			moveToNextStation(false);
+		}
 	}
 
 	@Override
@@ -606,6 +631,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 	private boolean moveToNextStation(boolean isTransfer) {
 		viewModel.navigationInfo.setCurrentNodeReached(false);
+		viewModel.isFindingFasterRouteEnabled = false;
 		if (isTransfer) {
 			int vehicleIndex = viewModel.navigationInfo.getCurrentVehicleIndex();
 			if (vehicleIndex < viewModel.currentRoute.getVehicles().size() - 1) {
@@ -641,16 +667,19 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 				binding.nextStop.setVisibility(View.VISIBLE);
 				binding.nextFarStop.setText(next.get(1).getStationName());
 				binding.nextStop.setText(next.get(0).getStationName());
+				binding.moveToNext.setVisibility(View.VISIBLE);
 				break;
 			case 1:
 				binding.nextFarStop.setVisibility(View.GONE);
 				binding.nextStop.setVisibility(View.VISIBLE);
 				binding.nextFarStop.setText("");
 				binding.nextStop.setText(next.get(0).getStationName());
+				binding.moveToNext.setVisibility(View.VISIBLE);
 				break;
 			default:
 				binding.nextFarStop.setVisibility(View.GONE);
 				binding.nextStop.setVisibility(View.GONE);
+				binding.moveToNext.setVisibility(View.GONE);
 				binding.nextFarStop.setText("");
 				binding.nextStop.setText("");
 		}

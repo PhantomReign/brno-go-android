@@ -13,4 +13,6 @@ public interface MapView extends BaseView {
 	void onReplaceClick();
 
 	void onKeepClick();
+
+	void onMoveToNextClick();
 }

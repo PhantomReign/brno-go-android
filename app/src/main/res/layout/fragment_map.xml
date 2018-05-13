@@ -148,18 +148,33 @@
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content">
 
+					<ImageView
+						android:id="@+id/moveToNext"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="@dimen/d2"
+						android:background="?selectableItemBackgroundBorderless"
+						android:onClick="@{() -> view.onMoveToNextClick()}"
+						android:padding="@dimen/d0_5"
+						android:tint="@color/grey_400"
+						android:visibility="gone"
+						app:layout_constraintBottom_toBottomOf="@+id/next_stop_layout"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintTop_toTopOf="@+id/next_stop_layout"
+						app:srcCompat="@drawable/ic_skip_next"/>
+
 					<LinearLayout
 						android:id="@+id/next_stop_layout"
-						android:layout_width="match_parent"
+						android:layout_width="0dp"
 						android:layout_height="wrap_content"
 						android:layout_marginBottom="@dimen/d2"
-						android:layout_marginEnd="@dimen/d10"
-						android:layout_marginStart="@dimen/d10"
+						android:layout_marginEnd="@dimen/d2"
+						android:layout_marginStart="@dimen/d11"
 						android:animateLayoutChanges="true"
 						android:background="@drawable/shape_rect_red_round"
 						android:orientation="vertical"
 						app:layout_constraintBottom_toTopOf="@+id/contentLayout"
-						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintEnd_toStartOf="@+id/moveToNext"
 						app:layout_constraintStart_toStartOf="parent"
 						app:layout_constraintTop_toTopOf="parent">
 
