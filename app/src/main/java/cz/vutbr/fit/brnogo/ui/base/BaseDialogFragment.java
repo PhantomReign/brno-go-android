@@ -12,8 +12,8 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 
-import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.BR;
+import cz.vutbr.fit.brnogo.R;
 import dagger.android.support.AndroidSupportInjection;
 
 public abstract class BaseDialogFragment<T extends BaseViewModel, B extends ViewDataBinding> extends DialogFragment {

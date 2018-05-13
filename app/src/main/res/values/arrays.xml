@@ -3,7 +3,7 @@
 	<string-array name="screens">
 		<item>@string/routes</item>
 		<item>@string/departures</item>
-		<item>@string/nearby</item>
+		<item>@string/directions</item>
 	</string-array>
 	<string-array name="screens_values" translatable="false">
 		<item>0</item>

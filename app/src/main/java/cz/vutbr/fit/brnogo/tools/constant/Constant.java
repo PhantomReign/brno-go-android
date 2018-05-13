@@ -9,6 +9,8 @@ public interface Constant {
 		String KEY_STOP_TO_DEP_OBJ = "stopToDepObject";
 		String KEY_SEARCH_OBJ = "searchObject";
 		String KEY_ROUTE_OBJ = "routeObject";
+		String KEY_DIRECTIONS_SEARCH_OBJ = "searchObject";
+		String KEY_DIRECTIONS_ROUTE_OBJ = "routeObject";
 	}
 
 	interface ErrorCode {
@@ -26,26 +28,29 @@ public interface Constant {
 	interface Tag {
 		String DIALOG_TRANSFERS = "transfers";
 		String DIALOG_TRANSFER_TIME = "transfersTime";
-
 	}
 
 	interface SearchRequest {
 		String DEFAULT_DATE = "Today";
 		String DEFAULT_TIME = "Now";
-		int DEFAULT_TRANSFERS = 999;
-		int DEFAULT_TRANSFER_TIME = 999;
+	}
+
+	interface Persistence {
+		String FAVORITE_ROUTE_KEYS = "favorites_route_keys";
+		String SAVED_ROUTE_KEYS = "saved_route_keys";
+		String FAVORITE_STOP_KEYS = "favorites_stop_keys";
 	}
 
 	interface TransfersDialog {
-		int MAX = 20;
+		int MAX = 4;
 		int MIN = 0;
-		int DEFAULT = 20;
+		int DEFAULT = 2;
 	}
 
 	interface TransferTimeDialog {
-		int MAX = 30;
+		int MAX = 10;
 		int MIN = 0;
-		int DEFAULT = 5;
+		int DEFAULT = 3;
 	}
 
 	interface Formatter {
@@ -54,6 +59,8 @@ public interface Constant {
 
 		DateTimeFormatter DAY_MONTH_YEAR = DateTimeFormatter.ofPattern(DAY_MONTH_YEAR_STRING);
 		DateTimeFormatter HOUR_MINUTE = DateTimeFormatter.ofPattern(HOUR_MINUTE_STRING);
+
+		DateTimeFormatter DAY_MONTH_YEAR_HOUR_MINUTE = DateTimeFormatter.ofPattern(DAY_MONTH_YEAR_STRING + " - " + HOUR_MINUTE_STRING);
 	}
 
 	interface ViewType {
@@ -65,6 +72,9 @@ public interface Constant {
 
 		int ROUTE_DETAIL_LIST_ITEM = 1;
 		int ROUTE_DETAIL_LIST_PATH = 2;
+
+		int DIRECTION_LIST_ROUTE = 1;
+		int DIRECTION_LIST_ITEM = 2;
 	}
 
 	interface Preference {
@@ -73,7 +83,25 @@ public interface Constant {
 	}
 
 	interface SyncStatus {
+		int SYNC = 0;
 		int DONE = 1;
 		int ERROR = 2;
+	}
+
+	interface Navigation {
+		int CAMERA_ZOOM = 16;
+		int CAMERA_MOVE_SPEED = 500;
+
+		int AVAILABLE_ROUTE_TIME_OFFSET = 600;
+		int FASTER_ROUTE_TIME_OFFSET = 120;
+
+		int ENTER_VEHICLE_TIME_OFFSET_BEFORE = 60;
+		int ENTER_VEHICLE_TIME_OFFSET_AFTER = 60;
+
+		int IMPLICIT_ENTER_VEHICLE_TIME_OFFSET = 2;
+
+		int ON_STOP_DISTANCE_THRESHOLD = 45;
+		int STOP_EXIT_PERIMETER = 60;
+		int NUMBER_OF_NEXT_STATIONS = 2;
 	}
 }

@@ -5,10 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -37,6 +38,11 @@ public class SettingsActivity extends BaseActivity<SettingsViewModel, ActivitySe
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setSupportActionBar(binding.toolbar);
@@ -55,14 +61,26 @@ public class SettingsActivity extends BaseActivity<SettingsViewModel, ActivitySe
 
 		viewModel.msgType.observe(this, syncStatus -> {
 			if (syncStatus != null) {
+				Snackbar snackbar = Snackbar.make(binding.preferenceContent, "", Snackbar.LENGTH_SHORT);
+
 				switch (syncStatus) {
 					case Constant.SyncStatus.DONE:
-						Toast.makeText(getApplicationContext(), getString(R.string.sync_success), Toast.LENGTH_SHORT).show();
+						snackbar.getView().setBackgroundColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.green));
+						snackbar.setDuration(Snackbar.LENGTH_SHORT);
+						snackbar.setText(getString(R.string.sync_success));
+						break;
+					case Constant.SyncStatus.ERROR:
+						snackbar.getView().setBackgroundColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.red_500));
+						snackbar.setDuration(Snackbar.LENGTH_SHORT);
+						snackbar.setText(getString(R.string.sync_failed));
 						break;
 					default:
-						Toast.makeText(getApplicationContext(), getString(R.string.sync_failed), Toast.LENGTH_SHORT).show();
+						snackbar.getView().setBackgroundColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.colorDark));
+						snackbar.setDuration(Snackbar.LENGTH_INDEFINITE);
+						snackbar.setText(getString(R.string.sync_in_progress));
 						break;
 				}
+				snackbar.show();
 			}
 		});
 	}

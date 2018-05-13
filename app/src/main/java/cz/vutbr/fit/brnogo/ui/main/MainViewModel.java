@@ -74,6 +74,7 @@ public class MainViewModel extends BaseViewModel {
 		setStopsSyncStatusInteractor.unsubscribe();
 		setSettingsInitialDataInteractor.unsubscribe();
 		setFirstStopSyncDoneInteractor.unsubscribe();
+		unsetFirstStopSyncDoneInteractor.unsubscribe();
 		getStartScreenInteractor.unsubscribe();
 		super.onCleared();
 	}

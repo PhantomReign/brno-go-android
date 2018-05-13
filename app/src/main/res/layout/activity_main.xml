@@ -27,7 +27,8 @@
 			android:layout_height="wrap_content"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toTopOf="parent">
+			app:layout_constraintTop_toTopOf="parent"
+			app:elevation="@dimen/d0">
 
 			<android.support.v7.widget.Toolbar
 				android:id="@+id/toolbar"

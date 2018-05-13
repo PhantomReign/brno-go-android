@@ -21,6 +21,7 @@ class SettingsInitialData @Inject constructor(
     fun setInitialData() {
         persistence.put(context.getString(R.string.settings_key_screen), "0")
         persistence.put(context.getString(R.string.settings_key_limit), "3")
+        persistence.put(context.getString(R.string.settings_key_implicit_enter), false)
         persistence.put(Constant.Preference.DATA_INITIALIZED, true)
     }
 

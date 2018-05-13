@@ -18,6 +18,14 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 
+		<meta-data
+			android:name="com.google.android.gms.version"
+			android:value="@integer/google_play_services_version"/>
+
+		<meta-data
+			android:name="com.google.android.geo.API_KEY"
+			android:value="@string/google_maps_api_key"/>
+
 		<activity
 			android:name="cz.vutbr.fit.brnogo.ui.splash.SplashActivity"
 			android:theme="@style/SplashActivityTheme">
@@ -49,10 +57,17 @@
 			android:name="cz.vutbr.fit.brnogo.ui.departures.DeparturesActivity"/>
 
 		<activity
+			android:name="cz.vutbr.fit.brnogo.ui.directions.DirectionsActivity"/>
+
+		<activity
 			android:name="cz.vutbr.fit.brnogo.ui.route.RoutesActivity"/>
 
 		<activity
 			android:name="cz.vutbr.fit.brnogo.ui.route.detail.RouteDetailActivity"/>
+
+		<activity
+			android:name="cz.vutbr.fit.brnogo.ui.route.navigation.RouteNavigationActivity"
+			android:screenOrientation="portrait"/>
 
 		<activity
 			android:name="cz.vutbr.fit.brnogo.ui.settings.SettingsActivity"/>

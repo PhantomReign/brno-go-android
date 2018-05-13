@@ -15,12 +15,11 @@ import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.data.model.recyclerview.RouteItem;
 import cz.vutbr.fit.brnogo.data.model.response.Node;
 import cz.vutbr.fit.brnogo.data.model.response.Vehicle;
-import cz.vutbr.fit.brnogo.databinding.ListItemRouteBinding;
+import cz.vutbr.fit.brnogo.databinding.ListItemRouteDetailBinding;
 import cz.vutbr.fit.brnogo.databinding.ListItemRoutePathBinding;
 import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
-import timber.log.Timber;
 
 public class RouteDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -37,8 +36,8 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
 		if (viewType == Constant.ViewType.ROUTE_LIST_ITEM) {
-			ListItemRouteBinding binding = ListItemRouteBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-			return new RouteItemViewHolder(binding);
+			ListItemRouteDetailBinding binding = ListItemRouteDetailBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+			return new RouteItemDetailViewHolder(binding);
 		} else {
 			ListItemRoutePathBinding binding = ListItemRoutePathBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
 			binding.setView(view);
@@ -49,8 +48,8 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 	@Override
 	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 		try {
-			if (holder instanceof RouteItemViewHolder) {
-				((RouteItemViewHolder) holder).bind(items.get(position));
+			if (holder instanceof RouteItemDetailViewHolder) {
+				((RouteItemDetailViewHolder) holder).bind(items.get(position));
 			} else {
 				((RoutePathViewHolder) holder).bind(items.get(position));
 			}
@@ -82,11 +81,11 @@ public class RouteDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 		diffResult.dispatchUpdatesTo(this);
 	}
 
-	static class RouteItemViewHolder extends BaseViewHolder<RouteItem> {
+	static class RouteItemDetailViewHolder extends BaseViewHolder<RouteItem> {
 
-		final ListItemRouteBinding binding;
+		final ListItemRouteDetailBinding binding;
 
-		public RouteItemViewHolder(ListItemRouteBinding binding) {
+		public RouteItemDetailViewHolder(ListItemRouteDetailBinding binding) {
 			super(binding.getRoot());
 			this.binding = binding;
 		}

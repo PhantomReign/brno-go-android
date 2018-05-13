@@ -34,6 +34,18 @@
 	</PreferenceCategory>
 
 	<PreferenceCategory
+		android:title="@string/category_navigation">
+
+		<SwitchPreference
+			android:defaultValue="false"
+			android:dialogTitle="@string/dialog_limit_title"
+			android:key="@string/settings_key_implicit_enter"
+			android:summary="@string/implicit_enter_summary"
+			android:title="@string/implicit_enter_title"/>
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
 		android:title="@string/category_sync_title">
 
 		<Preference

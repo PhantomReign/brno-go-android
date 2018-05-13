@@ -25,7 +25,7 @@ public class SettingsViewModel extends BaseViewModel {
 	}
 
 	protected void sync() {
-
+		msgType.setValue(Constant.SyncStatus.SYNC);
 		setStopsSyncStatusInteractor.execute(() -> {
 		});
 		syncStopsInteractor.execute(() -> msgType.setValue(Constant.SyncStatus.DONE),

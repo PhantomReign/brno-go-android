@@ -18,6 +18,6 @@ data class Node(
 		val formattedTimeOfArrival: String,
 		val formattedTimeOfDeparture: String) : AutoParcelable, RouteItem {
 	override fun getItemId(): String {
-		return stationName + stopDescription + formattedTimeOfArrival
+		return stationName + stopDescription + formattedTimeOfArrival + formattedTimeOfDeparture + stopLongitude.toString() + stopLatitude.toString()
 	}
 }

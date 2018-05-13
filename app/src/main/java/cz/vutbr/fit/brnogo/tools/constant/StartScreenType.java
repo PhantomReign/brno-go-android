@@ -7,10 +7,10 @@ import java.lang.annotation.RetentionPolicy;
 
 @StringDef({StartScreenType.TYPE_ROUTES,
 		StartScreenType.TYPE_DEPARTURES,
-		StartScreenType.TYPE_NEARBY})
+		StartScreenType.TYPE_DIRECTIONS})
 @Retention(RetentionPolicy.SOURCE)
 public @interface StartScreenType {
 	String TYPE_ROUTES = "0";
 	String TYPE_DEPARTURES = "1";
-	String TYPE_NEARBY = "2";
+	String TYPE_DIRECTIONS = "2";
 }

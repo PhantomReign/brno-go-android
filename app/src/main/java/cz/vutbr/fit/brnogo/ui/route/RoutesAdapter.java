@@ -19,8 +19,8 @@ import cz.vutbr.fit.brnogo.databinding.ListItemRouteBinding;
 import cz.vutbr.fit.brnogo.databinding.ListItemRouteFooterBinding;
 import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
+import cz.vutbr.fit.brnogo.tools.datetime.DateTimeConverter;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
-import timber.log.Timber;
 
 public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -106,18 +106,22 @@ public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 			binding.itemVehicleNumber.setText(String.valueOf(vehicle.getLineId()));
 			binding.itemVehicleNumber.setTextColor(color);
 
-			if (vehicle.getDelay() == 0) {
-				binding.itemDelay.setText(R.string.delay);
-			} else {
-				int min = (vehicle.getDelay() + 30) / 60;
-				binding.itemDelay.setText(itemView.getResources().getString(R.string.delay_min, min));
-			}
-
 			binding.itemSourceTitle.setText(vehicle.getPath().get(0).getStationName());
-			binding.startTime.setText(vehicle.getPath().get(0).getFormattedTimeOfDeparture());
+			binding.startTime.setText(getFormattedTimeOfDepartureWithDelay(vehicle));
 			binding.itemDestinationTitle.setText(vehicle.getPath().get(size - 1).getStationName());
-			binding.destinationTime.setText(vehicle.getPath().get(size - 1).getFormattedTimeOfArrival());
+			binding.destinationTime.setText(getFormattedTimeOfArrivalWithDelay(vehicle));
 
+		}
+
+		private String getFormattedTimeOfDepartureWithDelay(Vehicle vehicle) {
+			long timeWithDelay = vehicle.getDelay() + vehicle.getPath().get(0).getTimeOfDeparture();
+			return DateTimeConverter.epochSecToZonedHourMinute(timeWithDelay);
+		}
+
+		private String getFormattedTimeOfArrivalWithDelay(Vehicle vehicle) {
+			int size = vehicle.getPath().size();
+			long timeWithDelay = vehicle.getDelay() + vehicle.getPath().get(size - 1).getTimeOfArrival();
+			return DateTimeConverter.epochSecToZonedHourMinute(timeWithDelay);
 		}
 	}
 

@@ -16,10 +16,9 @@ import cz.vutbr.fit.brnogo.tools.constant.StartScreenType;
 import cz.vutbr.fit.brnogo.ui.base.BaseActivity;
 import cz.vutbr.fit.brnogo.ui.base.BaseFragment;
 import cz.vutbr.fit.brnogo.ui.main.departures.DeparturesFragment;
-import cz.vutbr.fit.brnogo.ui.main.nearby.NearbyFragment;
+import cz.vutbr.fit.brnogo.ui.main.directions.DirectionsFragment;
 import cz.vutbr.fit.brnogo.ui.main.routes.RoutesFragment;
 import cz.vutbr.fit.brnogo.ui.settings.SettingsActivity;
-import timber.log.Timber;
 
 public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements MainView {
 
@@ -27,7 +26,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 
 	private RoutesFragment routesFragment = RoutesFragment.newInstance();
 	private DeparturesFragment departuresFragment = DeparturesFragment.newInstance();
-	private NearbyFragment nearbyFragment = NearbyFragment.newInstance();
+	private DirectionsFragment directionsFragment = DirectionsFragment.newInstance();
 
 	public static Intent getStartIntent(Context context) {
 		return new Intent(context, MainActivity.class);
@@ -81,8 +80,8 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 			case R.id.menu_bottom_navigation_departures:
 				selectBottomNavigationItem(menuItem, departuresFragment);
 				return true;
-			case R.id.menu_bottom_navigation_nearby:
-				selectBottomNavigationItem(menuItem, nearbyFragment);
+			case R.id.menu_bottom_navigation_directions:
+				selectBottomNavigationItem(menuItem, directionsFragment);
 				return true;
 		}
 		return false;
@@ -90,9 +89,9 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 
 	private void setStartScreen(String startScreen) {
 		switch (startScreen) {
-			case StartScreenType.TYPE_NEARBY:
-				replaceFragment(nearbyFragment);
-				binding.mainBottomNavigationView.setSelectedItemId(R.id.menu_bottom_navigation_nearby);
+			case StartScreenType.TYPE_DIRECTIONS:
+				replaceFragment(directionsFragment);
+				binding.mainBottomNavigationView.setSelectedItemId(R.id.menu_bottom_navigation_directions);
 				break;
 			case StartScreenType.TYPE_DEPARTURES:
 				replaceFragment(departuresFragment);
@@ -114,6 +113,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 	private void replaceFragment(BaseFragment fragment) {
 		getSupportFragmentManager()
 				.beginTransaction()
+				.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
 				.replace(R.id.main_content, fragment)
 				.commit();
 	}

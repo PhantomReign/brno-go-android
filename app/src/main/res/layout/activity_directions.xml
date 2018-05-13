@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="view"
+			type="cz.vutbr.fit.brnogo.ui.directions.DirectionsView"/>
+
+		<variable
+			name="viewModel"
+			type="cz.vutbr.fit.brnogo.ui.directions.DirectionsViewModel"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<android.support.design.widget.AppBarLayout
+			android:id="@+id/appbar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:elevation="@dimen/d0">
+
+			<android.support.v7.widget.Toolbar
+				android:id="@+id/toolbar"
+				style="@style/ToolbarStyle"/>
+
+		</android.support.design.widget.AppBarLayout>
+
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<android.support.v4.widget.SwipeRefreshLayout
+				android:id="@+id/directions_swipe_refresh_layout"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				app:on_refresh="@{() -> viewModel.loadData()}"
+				app:refreshing="@{viewModel.loadingVisibility}"
+				app:swipe_refresh_color="@{@color/colorAccent}">
+
+				<android.support.v7.widget.RecyclerView
+					android:id="@+id/directions_recycler_view"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:clipToPadding="false"
+					android:orientation="vertical"
+					android:paddingBottom="@dimen/d3"
+					android:scrollbarStyle="outsideOverlay"
+					android:scrollbars="vertical"
+					app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+					app:visible="@{!viewModel.offlineVisibility}"/>
+
+			</android.support.v4.widget.SwipeRefreshLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:gravity="center"
+				android:orientation="vertical"
+				app:visible_animated="@{viewModel.emptyViewVisibility}"
+				tools:ignore="UseCompoundDrawables">
+
+				<ImageView
+					android:layout_width="@dimen/d15"
+					android:layout_height="@dimen/d15"
+					android:tint="@color/red_500"
+					app:srcCompat="@drawable/ic_date"/>
+
+				<TextView
+					style="@style/TextRegular.Grey.16"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/d3"
+					android:gravity="center"
+					android:text="@string/unavailable_directions"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:gravity="center"
+				android:orientation="vertical"
+				app:visible_animated="@{viewModel.offlineVisibility}"
+				tools:ignore="UseCompoundDrawables">
+
+				<ImageView
+					android:layout_width="@dimen/d15"
+					android:layout_height="@dimen/d15"
+					android:tint="@color/grey_400"
+					app:srcCompat="@drawable/ic_cloud_off"/>
+
+				<TextView
+					style="@style/TextRegular.Grey.16"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/d3"
+					android:gravity="center"
+					android:text="@string/offline"/>
+
+			</LinearLayout>
+		</FrameLayout>
+
+	</LinearLayout>
+
+</layout>
