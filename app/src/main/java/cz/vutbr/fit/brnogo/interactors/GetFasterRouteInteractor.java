@@ -15,6 +15,10 @@ import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import io.reactivex.Single;
 
+/**
+ * Class used to return faster route.
+ */
+
 @PerScreen
 public class GetFasterRouteInteractor extends BaseSingleInteractor<Route> {
 

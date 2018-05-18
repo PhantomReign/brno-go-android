@@ -11,6 +11,11 @@ import io.reactivex.Flowable
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Class containing methods for database manipulation.
+ *
+ */
+
 @Singleton
 class AppDatabase @Inject constructor(
 		@ApplicationContext context: Context) {

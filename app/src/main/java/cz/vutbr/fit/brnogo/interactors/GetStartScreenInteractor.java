@@ -12,6 +12,10 @@ import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import cz.vutbr.fit.brnogo.tools.constant.StartScreenType;
 import io.reactivex.Single;
 
+/**
+ * Class used to return current start screen.
+ */
+
 @PerScreen
 public class GetStartScreenInteractor extends BaseSingleInteractor<String> {
 

@@ -7,6 +7,11 @@ import android.arch.persistence.room.Query
 import cz.vutbr.fit.brnogo.data.model.response.Stop
 import io.reactivex.Flowable
 
+/**
+ * Interface containing specific methods for database manipulation.
+ *
+ */
+
 @Dao
 interface StopsDao {
 

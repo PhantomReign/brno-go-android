@@ -8,6 +8,11 @@ import io.reactivex.Flowable
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Store Class containing method for getting stored routes from database.
+ *
+ */
+
 @Singleton
 class SavedRouteStore @Inject constructor(
 		val persistence: Persistence,

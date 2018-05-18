@@ -51,7 +51,7 @@
 	<string name="minutes_seconds" translatable="false">%1$d min %2$d s</string>
 	<string name="hours_minutes" translatable="false">%1$d h %2$d min</string>
 
-	<string name="delay" translatable="false">No delay</string>
+	<string name="delay">No delay</string>
 	<string name="total_time">Total time: %1$d min</string>
 
 	<string name="today">Today</string>

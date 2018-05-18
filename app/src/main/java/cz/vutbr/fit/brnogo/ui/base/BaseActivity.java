@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import cz.vutbr.fit.brnogo.BR;
 import dagger.android.support.DaggerAppCompatActivity;
 
+/**
+ * Base Class representing Activity.
+ */
+
 public abstract class BaseActivity<T extends ViewModel, B extends ViewDataBinding> extends DaggerAppCompatActivity {
 
 	protected T viewModel;

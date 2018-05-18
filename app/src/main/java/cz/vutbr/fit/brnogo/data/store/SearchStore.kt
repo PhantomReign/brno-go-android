@@ -8,6 +8,11 @@ import io.reactivex.Flowable
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Store Class containing methods for getting favorite searches from database.
+ *
+ */
+
 @Singleton
 class SearchStore @Inject constructor(
 		val persistence: Persistence,

@@ -14,6 +14,10 @@ import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import io.reactivex.Single;
 
+/**
+ * Class used to favorite search status.
+ */
+
 @PerScreen
 public class IsFavoriteSearchInteractor extends BaseSingleInteractor<Boolean> {
 

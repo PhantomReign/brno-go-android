@@ -16,6 +16,10 @@ import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import io.reactivex.Single;
 
+/**
+ * Class used to return formatted departures information.
+ */
+
 @PerScreen
 public class GetDeparturesInteractor extends BaseSingleInteractor<List<DepartureItem>> {
 

@@ -12,6 +12,10 @@ import javax.inject.Singleton;
 
 import cz.vutbr.fit.brnogo.injection.annotation.qualifier.ApplicationContext;
 
+/**
+ * Class used to check permissions.
+ */
+
 @Singleton
 public class PermissionChecker {
 

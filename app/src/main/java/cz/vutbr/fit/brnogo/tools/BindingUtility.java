@@ -7,6 +7,10 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
+/**
+ * Class containing all custom binding methods.
+ */
+
 public class BindingUtility {
 
 	private BindingUtility() {

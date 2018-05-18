@@ -7,6 +7,10 @@ import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import io.reactivex.Single;
 
+/**
+ * Class used to unset initial stop sync as done.
+ */
+
 @PerScreen
 public class UnsetFirstStopSyncDoneInteractor extends BaseSingleInteractor<Boolean> {
 

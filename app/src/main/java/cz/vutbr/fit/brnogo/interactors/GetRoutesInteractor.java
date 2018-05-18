@@ -18,6 +18,10 @@ import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import io.reactivex.Single;
 
+/**
+ * Class used to return formatted route information.
+ */
+
 @PerScreen
 public class GetRoutesInteractor extends BaseSingleInteractor<List<RouteItem>> {
 

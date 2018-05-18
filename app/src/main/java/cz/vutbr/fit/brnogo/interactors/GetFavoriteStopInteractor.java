@@ -10,6 +10,10 @@ import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.base.BaseFlowableInteractor;
 import io.reactivex.Flowable;
 
+/**
+ * Class used to return favorite stops.
+ */
+
 @PerScreen
 public class GetFavoriteStopInteractor extends BaseFlowableInteractor<List<FavoriteStop>> {
 

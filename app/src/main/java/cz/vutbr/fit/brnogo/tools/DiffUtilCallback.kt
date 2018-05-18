@@ -4,6 +4,11 @@ import android.support.v7.util.DiffUtil
 
 import cz.vutbr.fit.brnogo.data.model.recyclerview.AdapterItem
 
+/**
+ * Utility class that can calculate the difference between two lists and output.
+ * It is used to calculate updates for a RecyclerView Adapter.
+ */
+
 class DiffUtilCallback<T : AdapterItem>(private val oldItems: List<T>, private val newItems: List<T>) : DiffUtil.Callback() {
 
 	override fun getOldListSize(): Int {

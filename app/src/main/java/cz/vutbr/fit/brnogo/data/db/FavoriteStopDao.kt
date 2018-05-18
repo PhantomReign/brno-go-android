@@ -4,6 +4,11 @@ import android.arch.persistence.room.*
 import cz.vutbr.fit.brnogo.data.model.store.FavoriteStop
 import io.reactivex.Flowable
 
+/**
+ * Interface containing specific methods for database manipulation.
+ *
+ */
+
 @Dao
 interface FavoriteStopDao {
 

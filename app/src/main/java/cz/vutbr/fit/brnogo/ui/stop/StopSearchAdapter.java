@@ -19,6 +19,10 @@ import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
 import me.xuender.unidecode.Unidecode;
 
+/**
+ * Adapter Class used to manage stops search in RecyclerView.
+ */
+
 public class StopSearchAdapter extends RecyclerView.Adapter<StopSearchAdapter.ViewHolder> implements Filterable {
 
 	private List<Stop> items = new ArrayList<>();

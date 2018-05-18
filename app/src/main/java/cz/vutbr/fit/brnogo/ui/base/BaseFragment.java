@@ -7,6 +7,10 @@ import android.support.annotation.CallSuper;
 
 import dagger.android.support.AndroidSupportInjection;
 
+/**
+ * Base Class representing Fragment.
+ */
+
 public abstract class BaseFragment<T extends ViewModel, B extends ViewDataBinding> extends BaseInjectableFragment<T, B> {
 
 	@Override

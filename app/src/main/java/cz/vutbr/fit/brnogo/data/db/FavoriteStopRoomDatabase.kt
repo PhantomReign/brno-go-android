@@ -5,6 +5,11 @@ import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import cz.vutbr.fit.brnogo.data.model.store.FavoriteStop
 
+/**
+ * Database class.
+ *
+ */
+
 @Database(entities = [(FavoriteStop::class)], version = 5, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class FavoriteStopRoomDatabase : RoomDatabase() {

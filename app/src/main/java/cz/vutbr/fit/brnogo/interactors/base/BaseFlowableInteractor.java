@@ -8,6 +8,10 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import timber.log.Timber;
 
+/**
+ * Base Abstract Class representing structure of Flowable Interactor.
+ */
+
 public abstract class BaseFlowableInteractor<T> extends BaseInteractor {
 
 	protected abstract Flowable<T> buildFlowable();

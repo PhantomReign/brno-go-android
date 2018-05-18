@@ -22,6 +22,10 @@ import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.tools.datetime.DateTimeConverter;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
 
+/**
+ * Adapter Class used to manage found routes in RecyclerView.
+ */
+
 public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 	private List<RouteItem> items = new ArrayList<>();

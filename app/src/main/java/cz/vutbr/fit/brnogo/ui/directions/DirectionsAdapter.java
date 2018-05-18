@@ -21,6 +21,10 @@ import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
 
+/**
+ * Adapter Class used to manage directions data in RecyclerView.
+ */
+
 public class DirectionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 	private List<RouteItem> items = new ArrayList<>();

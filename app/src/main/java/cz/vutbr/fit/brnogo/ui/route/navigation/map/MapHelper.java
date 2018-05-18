@@ -22,6 +22,10 @@ import cz.vutbr.fit.brnogo.data.model.response.Node;
 import cz.vutbr.fit.brnogo.data.model.response.Vehicle;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 
+/**
+ * Helper Class with methods used for map manipulation.
+ */
+
 public class MapHelper {
 
 	private MapHelper() {

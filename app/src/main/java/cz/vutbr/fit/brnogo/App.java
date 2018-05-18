@@ -11,6 +11,10 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;
 import timber.log.Timber;
 
+/**
+ * Main Class.
+ */
+
 public class App extends DaggerApplication {
 
 	@Override

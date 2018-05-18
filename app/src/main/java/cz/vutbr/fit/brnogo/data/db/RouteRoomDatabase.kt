@@ -5,6 +5,11 @@ import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import cz.vutbr.fit.brnogo.data.model.response.Route
 
+/**
+ * Database class.
+ *
+ */
+
 @Database(entities = [(Route::class)], version = 5, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class RouteRoomDatabase : RoomDatabase() {

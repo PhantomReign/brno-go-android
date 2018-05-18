@@ -6,6 +6,10 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.disposables.DisposableHelper;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Base Abstract Class representing structure of Base Interactor.
+ */
+
 public abstract class BaseInteractor {
 	protected Disposable subscription = DisposableHelper.DISPOSED;
 

@@ -10,6 +10,10 @@ import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.base.BaseFlowableInteractor;
 import io.reactivex.Flowable;
 
+/**
+ * Class used to return stops.
+ */
+
 @PerScreen
 public class GetStopsInteractor extends BaseFlowableInteractor<List<Stop>> {
 

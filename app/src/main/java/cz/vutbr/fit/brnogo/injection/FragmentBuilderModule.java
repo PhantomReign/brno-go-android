@@ -18,6 +18,10 @@ import cz.vutbr.fit.brnogo.ui.settings.SettingsFragmentModule;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
+/**
+ * Class containing all fragments for Dagger.
+ */
+
 @Module
 public abstract class FragmentBuilderModule {
 

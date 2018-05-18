@@ -13,6 +13,10 @@ import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.base.BaseFlowableInteractor;
 import io.reactivex.Flowable;
 
+/**
+ * Class used to return vehicle information every 10 seconds.
+ */
+
 @PerScreen
 public class GetVehicleInteractor extends BaseFlowableInteractor<LiveVehicle> {
 

@@ -22,6 +22,10 @@ import cz.vutbr.fit.brnogo.tools.constant.DirectionType;
 import cz.vutbr.fit.brnogo.tools.constant.VehicleType;
 import io.reactivex.Single;
 
+/**
+ * Class used to return formatted direction information.
+ */
+
 @PerScreen
 public class GetDirectionsInteractor extends BaseSingleInteractor<List<RouteItem>> {
 
@@ -49,8 +53,7 @@ public class GetDirectionsInteractor extends BaseSingleInteractor<List<RouteItem
 		}
 
 		return directionStore.getDirections(Integer.valueOf(search.getStartStop().getId()), Integer.valueOf(search.getDestinationStop().getId()), search.getDateTime(), search.getTransferTime(), search.getTransfers())
-				.map(this::getDirections
-		);
+				.map(this::getDirections);
 	}
 
 	private List<RouteItem> getDirections(Route route) {
@@ -58,7 +61,7 @@ public class GetDirectionsInteractor extends BaseSingleInteractor<List<RouteItem
 
 		directions.add(route);
 
-		for (Vehicle vehicle: route.getVehicles()) {
+		for (Vehicle vehicle : route.getVehicles()) {
 			directions.add(new Direction(context.getString(R.string.direction_walk, vehicle.getPath().get(0).getStationName()), DirectionType.TYPE_WALK));
 
 			if (vehicle.getType() == VehicleType.TYPE_BUS) {

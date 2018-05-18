@@ -95,4 +95,5 @@
 	<string name="implicit_enter_title">Automatické nástupenie do vozidla</string>
 	<string name="implicit_enter_summary">Stlač pre zapnutie alebo vypnutie</string>
 	<string name="manual_enter">Potvrď nástupenie manuálne.</string>
+	<string name="delay">"Bez oneskorenia "</string>
 </resources>

@@ -9,6 +9,11 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * Interface with methods containing server endpoints.
+ *
+ */
+
 interface ApiService {
 	@GET("stations")
 	fun getStops(): Single<Response<List<Stop>>>
@@ -27,10 +32,10 @@ interface ApiService {
 
 	@GET("directions")
 	fun getDirections(@Query("sId") startStationId: Int,
-				  @Query("dId") destinationStationId: Int,
-				  @Query("dTime") dateTime: Long,
-				  @Query("mTime") minTimeToMove: Int,
-				  @Query("mTrans") maxTransfers: Int): Single<Response<Route>>
+					  @Query("dId") destinationStationId: Int,
+					  @Query("dTime") dateTime: Long,
+					  @Query("mTime") minTimeToMove: Int,
+					  @Query("mTrans") maxTransfers: Int): Single<Response<Route>>
 
 	@GET("vehicle")
 	fun getVehicle(@Query("lC") lineCode: Int,

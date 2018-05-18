@@ -10,6 +10,11 @@ import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Store Class containing methods for getting stops from database.
+ *
+ */
+
 @Singleton
 class StopStore @Inject constructor(
 		val apiManager: ApiManager,

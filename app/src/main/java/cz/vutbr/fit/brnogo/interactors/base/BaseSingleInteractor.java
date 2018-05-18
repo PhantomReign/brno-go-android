@@ -8,6 +8,10 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import timber.log.Timber;
 
+/**
+ * Base Abstract Class representing structure of Single Interactor.
+ */
+
 public abstract class BaseSingleInteractor<T> extends BaseInteractor {
 
 	protected abstract Single<T> buildSingle();
