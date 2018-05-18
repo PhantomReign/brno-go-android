@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="item"
+			type="cz.vutbr.fit.brnogo.data.model.response.DepartureVehicle"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/d0_5"
+			android:layout_marginTop="@dimen/d0_5"
+			>
+
+			<TextView
+				android:id="@+id/line_number"
+				style="@style/TextRegular.MediumRed.16"
+				android:layout_width="@dimen/d10"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/d0_5"
+				android:layout_marginStart="@dimen/d3"
+				android:layout_marginTop="@dimen/d0_5"
+				android:text="@{item.lineName}"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:text="N610"/>
+
+			<ImageView
+				android:id="@+id/barrier_less"
+				android:layout_width="@dimen/d4"
+				android:layout_height="@dimen/d4"
+				android:layout_marginStart="@dimen/d2"
+				android:tint="@color/blue"
+				android:visibility="@{item.barrierLessVisibility}"
+				app:layout_constraintBottom_toBottomOf="@+id/line_number"
+				app:layout_constraintStart_toEndOf="@+id/line_number"
+				app:layout_constraintTop_toTopOf="@+id/line_number"
+				app:srcCompat="@drawable/ic_accessible"/>
+
+			<TextView
+				android:id="@+id/final_station_name"
+				style="@style/TextRegular.Grey.16"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/d2"
+				android:layout_marginStart="@dimen/d2"
+				android:text="@{item.finalStationName}"
+				app:layout_constraintBottom_toBottomOf="@+id/barrier_less"
+				app:layout_constraintEnd_toStartOf="@+id/time"
+				app:layout_constraintStart_toEndOf="@+id/barrier_less"
+				app:layout_constraintTop_toTopOf="@+id/barrier_less"
+				tools:text="Skácelova"/>
+
+			<TextView
+				android:id="@+id/time"
+				style="@style/TextRegular.Grey.16"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/d3"
+				android:text="@{item.timeMark}"
+				app:layout_constraintBottom_toBottomOf="@+id/final_station_name"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/final_station_name"
+				tools:text="2 min"/>
+
+		</android.support.constraint.ConstraintLayout>
+
+	</LinearLayout>
+
+</layout>

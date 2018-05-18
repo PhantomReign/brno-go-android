@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 
 import cz.vutbr.fit.brnogo.BR;
 
+/**
+ * Base Class representing Injectable Fragment.
+ */
+
 public abstract class BaseInjectableFragment<T extends ViewModel, B extends ViewDataBinding> extends Fragment implements BaseView {
 
 	protected T viewModel;

@@ -12,19 +12,21 @@ import javax.inject.Inject;
 
 import cz.vutbr.fit.brnogo.R;
 import cz.vutbr.fit.brnogo.databinding.ActivityMainBinding;
+import cz.vutbr.fit.brnogo.tools.constant.StartScreenType;
 import cz.vutbr.fit.brnogo.ui.base.BaseActivity;
 import cz.vutbr.fit.brnogo.ui.base.BaseFragment;
-import cz.vutbr.fit.brnogo.ui.departures.DeparturesFragment;
-import cz.vutbr.fit.brnogo.ui.nearby.NearbyFragment;
-import cz.vutbr.fit.brnogo.ui.routes.RoutesFragment;
+import cz.vutbr.fit.brnogo.ui.main.departures.DeparturesFragment;
+import cz.vutbr.fit.brnogo.ui.main.directions.DirectionsFragment;
+import cz.vutbr.fit.brnogo.ui.main.routes.RoutesFragment;
+import cz.vutbr.fit.brnogo.ui.settings.SettingsActivity;
 
 public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBinding> implements MainView {
 
-	@Inject MainViewModelFactory mainViewModelFactory;
+	@Inject MainViewModelFactory viewModelFactory;
 
 	private RoutesFragment routesFragment = RoutesFragment.newInstance();
 	private DeparturesFragment departuresFragment = DeparturesFragment.newInstance();
-	private NearbyFragment nearbyFragment = NearbyFragment.newInstance();
+	private DirectionsFragment directionsFragment = DirectionsFragment.newInstance();
 
 	public static Intent getStartIntent(Context context) {
 		return new Intent(context, MainActivity.class);
@@ -32,7 +34,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 
 	@Override
 	protected MainViewModel createViewModel() {
-		return ViewModelProviders.of(this, mainViewModelFactory).get(MainViewModel.class);
+		return ViewModelProviders.of(this, viewModelFactory).get(MainViewModel.class);
 	}
 
 	@Override
@@ -40,6 +42,15 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 		return ActivityMainBinding.inflate(layoutInflater);
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				startActivity(SettingsActivity.getStartIntent(this));
+				return true;
+		}
+		return false;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +63,11 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 		}
 
 		if (savedInstanceState == null) {
-			setStartScreen();
+			viewModel.getStartScreenLiveData().observe(this, startScreen -> {
+				if (startScreen != null) {
+					setStartScreen(startScreen);
+				}
+			});
 		}
 	}
 
@@ -65,16 +80,28 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 			case R.id.menu_bottom_navigation_departures:
 				selectBottomNavigationItem(menuItem, departuresFragment);
 				return true;
-			case R.id.menu_bottom_navigation_nearby:
-				selectBottomNavigationItem(menuItem, nearbyFragment);
+			case R.id.menu_bottom_navigation_directions:
+				selectBottomNavigationItem(menuItem, directionsFragment);
 				return true;
 		}
 		return false;
 	}
 
-	private void setStartScreen() {
-		replaceFragment(routesFragment);
-		binding.mainBottomNavigationView.setSelectedItemId(R.id.menu_bottom_navigation_routes);
+	private void setStartScreen(String startScreen) {
+		switch (startScreen) {
+			case StartScreenType.TYPE_DIRECTIONS:
+				replaceFragment(directionsFragment);
+				binding.mainBottomNavigationView.setSelectedItemId(R.id.menu_bottom_navigation_directions);
+				break;
+			case StartScreenType.TYPE_DEPARTURES:
+				replaceFragment(departuresFragment);
+				binding.mainBottomNavigationView.setSelectedItemId(R.id.menu_bottom_navigation_departures);
+				break;
+			default:
+				replaceFragment(routesFragment);
+				binding.mainBottomNavigationView.setSelectedItemId(R.id.menu_bottom_navigation_routes);
+				break;
+		}
 	}
 
 	private void selectBottomNavigationItem(MenuItem menuItem, BaseFragment fragment) {
@@ -86,6 +113,7 @@ public class MainActivity extends BaseActivity<MainViewModel, ActivityMainBindin
 	private void replaceFragment(BaseFragment fragment) {
 		getSupportFragmentManager()
 				.beginTransaction()
+				.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
 				.replace(R.id.main_content, fragment)
 				.commit();
 	}

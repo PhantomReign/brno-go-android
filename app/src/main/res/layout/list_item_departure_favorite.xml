@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="favoriteClickListener"
+			type="cz.vutbr.fit.brnogo.ui.main.departures.DeparturesAdapter.FavoriteClickListener"/>
+
+		<variable
+			name="view"
+			type="cz.vutbr.fit.brnogo.ui.main.departures.DeparturesView"/>
+
+		<variable
+			name="item"
+			type="cz.vutbr.fit.brnogo.data.model.store.FavoriteStop"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?selectableItemBackground"
+			android:onClick="@{() -> view.onFavoriteItemClick(item)}">
+
+			<android.support.constraint.ConstraintLayout
+				android:id="@+id/layout"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:layout_marginEnd="@dimen/d2"
+				android:layout_marginStart="@dimen/d2"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toStartOf="@+id/favorite_departure"
+				app:layout_constraintStart_toStartOf="parent">
+
+				<ImageView
+					android:id="@+id/image_view_from"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="8dp"
+					android:layout_marginStart="@dimen/d2"
+					android:layout_marginTop="@dimen/d2"
+					android:tint="@color/colorPrimary"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:srcCompat="@drawable/ic_person_pin_circle"/>
+
+				<TextView
+					android:id="@+id/item_source_title"
+					style="@style/TextRegular.Grey.14"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/d2"
+					android:layout_marginStart="@dimen/d2"
+					android:text="@{item.name}"
+					app:layout_constraintBottom_toBottomOf="@+id/image_view_from"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toEndOf="@+id/image_view_from"
+					app:layout_constraintTop_toTopOf="@+id/image_view_from"
+					tools:text="Source"/>
+
+			</android.support.constraint.ConstraintLayout>
+
+			<ImageView
+				android:id="@+id/favorite_departure"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/d3"
+				android:layout_marginEnd="@dimen/d3"
+				android:layout_marginTop="@dimen/d3"
+				android:background="?selectableItemBackgroundBorderless"
+				android:onClick="@{() -> favoriteClickListener.onClick(item)}"
+				android:padding="@dimen/d1"
+				android:tint="@color/grey_400"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:srcCompat="@drawable/ic_favorite"/>
+
+		</android.support.constraint.ConstraintLayout>
+
+		<View
+			android:id="@+id/view_divider_favorite"
+			style="@style/DividerWithMargin"
+			/>
+
+	</LinearLayout>
+
+</layout>

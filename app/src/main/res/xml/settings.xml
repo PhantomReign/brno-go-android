@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:key="@string/settings_key_root">
+
+	<PreferenceCategory
+		android:title="@string/category_screen_title">
+
+		<ListPreference
+			android:defaultValue="0"
+			android:dialogTitle="@string/dialog_screen_title"
+			android:entries="@array/screens"
+			android:entryValues="@array/screens_values"
+			android:key="@string/settings_key_screen"
+			android:negativeButtonText="@string/cancel"
+			android:summary="%s"
+			android:title="@string/dialog_screen_title"/>
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:title="@string/category_limit_title">
+
+		<ListPreference
+			android:defaultValue="3"
+			android:dialogTitle="@string/dialog_limit_title"
+			android:entries="@array/routes_limit"
+			android:entryValues="@array/routes_limit_values"
+			android:key="@string/settings_key_limit"
+			android:negativeButtonText="@string/cancel"
+			android:summary="%s"
+			android:title="@string/dialog_limit_title"/>
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:title="@string/category_navigation">
+
+		<SwitchPreference
+			android:defaultValue="false"
+			android:dialogTitle="@string/dialog_limit_title"
+			android:key="@string/settings_key_implicit_enter"
+			android:summary="@string/implicit_enter_summary"
+			android:title="@string/implicit_enter_title"/>
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:title="@string/category_sync_title">
+
+		<Preference
+			android:key="@string/settings_key_sync"
+			android:summary="@string/sync_info"
+			android:title="@string/sync_header"/>
+
+	</PreferenceCategory>
+</PreferenceScreen>

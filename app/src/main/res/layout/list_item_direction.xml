@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="item"
+			type="cz.vutbr.fit.brnogo.data.model.recyclerview.Direction"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?selectableItemBackground">
+
+			<ImageView
+				android:id="@+id/item_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginBottom="@dimen/d2"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="@dimen/d2"
+				android:padding="@dimen/d1"
+				android:scaleType="center"
+				app:imageResource="@{item.getIcon()}"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:src="@drawable/ic_bus"/>
+
+			<TextView
+				android:id="@+id/item_msg"
+				style="@style/TextRegular.DarkGrey.16"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/d2_5"
+				android:layout_marginStart="@dimen/d2"
+				android:text="@{item.direction}"
+				app:layout_constraintBottom_toBottomOf="@+id/item_icon"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toEndOf="@+id/item_icon"
+				app:layout_constraintTop_toTopOf="@+id/item_icon"
+				tools:text="Message"/>
+
+		</android.support.constraint.ConstraintLayout>
+
+		<View
+			android:id="@+id/line"
+			style="@style/DividerDirections"
+			/>
+
+	</LinearLayout>
+
+</layout>

@@ -7,8 +7,12 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 
-import dagger.android.support.DaggerAppCompatActivity;
 import cz.vutbr.fit.brnogo.BR;
+import dagger.android.support.DaggerAppCompatActivity;
+
+/**
+ * Base Class representing Activity.
+ */
 
 public abstract class BaseActivity<T extends ViewModel, B extends ViewDataBinding> extends DaggerAppCompatActivity {
 

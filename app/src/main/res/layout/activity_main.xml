@@ -16,14 +16,19 @@
 			type="cz.vutbr.fit.brnogo.ui.main.MainViewModel"/>
 	</data>
 
-	<RelativeLayout
+	<android.support.constraint.ConstraintLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		android:background="@color/grey_200">
 
 		<android.support.design.widget.AppBarLayout
 			android:id="@+id/appbar_layout"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:elevation="@dimen/d0">
 
 			<android.support.v7.widget.Toolbar
 				android:id="@+id/toolbar"
@@ -35,10 +40,15 @@
 
 		<FrameLayout
 			android:id="@+id/main_content"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
 			android:layout_above="@+id/main_bottom_navigation_view"
-			android:layout_below="@id/appbar_layout"/>
+			android:layout_below="@id/appbar_layout"
+			android:visibility="visible"
+			app:layout_constraintBottom_toTopOf="@+id/main_bottom_navigation_view"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/appbar_layout"/>
 
 		<android.support.design.widget.BottomNavigationView
 			android:id="@id/main_bottom_navigation_view"
@@ -47,8 +57,11 @@
 			android:layout_alignParentBottom="true"
 			android:background="?android:attr/windowBackground"
 			app:itemTextAppearance="@style/TextRegular.Grey.14"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
 			app:menu="@menu/menu_bottom_navigation"
 			app:navigation_view_click="@{(menuItem) -> view.onBottomNavigationItemClick(menuItem)}"/>
 
-	</RelativeLayout>
+	</android.support.constraint.ConstraintLayout>
 </layout>

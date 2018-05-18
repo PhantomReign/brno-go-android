@@ -1,6 +1,5 @@
 package cz.vutbr.fit.brnogo.injection;
 
-
 import android.content.Context;
 
 import com.google.gson.Gson;
@@ -25,6 +24,11 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
+
+/**
+ * Class containing providing network objects for dagger.
+ *
+ */
 
 @Module
 public class NetModule {
@@ -54,8 +58,8 @@ public class NetModule {
 		return new OkHttpClient.Builder()
 				.cache(cache)
 				.addInterceptor(interceptor)
-				.readTimeout(30, TimeUnit.SECONDS)
-				.writeTimeout(30, TimeUnit.SECONDS)
+				.readTimeout(90, TimeUnit.SECONDS)
+				.writeTimeout(90, TimeUnit.SECONDS)
 				.build();
 	}
 

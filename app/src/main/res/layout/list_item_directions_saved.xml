@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="savedClickListener"
+			type="cz.vutbr.fit.brnogo.ui.main.directions.DirectionsAdapter.SavedClickListener"/>
+
+		<variable
+			name="view"
+			type="cz.vutbr.fit.brnogo.ui.main.directions.DirectionsView"/>
+
+		<variable
+			name="item"
+			type="cz.vutbr.fit.brnogo.data.model.response.Route"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?selectableItemBackground"
+			android:onClick="@{() -> view.onSavedItemClick(item)}">
+
+			<android.support.constraint.ConstraintLayout
+				android:id="@+id/layout"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/d2"
+				android:layout_marginStart="@dimen/d2"
+				android:layout_marginTop="@dimen/d1"
+				app:layout_constraintEnd_toStartOf="@+id/saved_route"
+				app:layout_constraintHorizontal_bias="1.0"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent">
+
+				<ImageView
+					android:id="@+id/image_view_from"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="@dimen/d2"
+					android:layout_marginTop="@dimen/d2"
+					android:tint="@color/colorPrimary"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:srcCompat="@drawable/ic_person_pin_circle"/>
+
+				<TextView
+					android:id="@+id/item_source_title"
+					style="@style/TextRegular.Grey.14"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/d2"
+					android:layout_marginStart="@dimen/d2"
+					android:text="@{item.startStationName}"
+					app:layout_constraintBottom_toBottomOf="@+id/image_view_from"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toEndOf="@+id/image_view_from"
+					app:layout_constraintTop_toTopOf="@+id/image_view_from"
+					tools:text="Source"/>
+
+				<ImageView
+					android:id="@+id/image_view_to"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="@dimen/d2"
+					android:layout_marginStart="@dimen/d2"
+					android:layout_marginTop="@dimen/d1"
+					android:tint="@color/green"
+					app:layout_constraintBottom_toBottomOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@+id/image_view_from"
+					app:srcCompat="@drawable/ic_place"/>
+
+				<TextView
+					android:id="@+id/item_destination_title"
+					style="@style/TextRegular.DarkGrey.16"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/d2"
+					android:layout_marginStart="@dimen/d2"
+					android:text="@{item.destinationStationName}"
+					app:layout_constraintBottom_toBottomOf="@+id/image_view_to"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintStart_toEndOf="@+id/image_view_to"
+					app:layout_constraintTop_toTopOf="@+id/image_view_to"
+					tools:text="Destination"/>
+
+			</android.support.constraint.ConstraintLayout>
+
+			<ImageView
+				android:id="@+id/saved_route"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/d3"
+				android:background="?selectableItemBackgroundBorderless"
+				android:onClick="@{() -> savedClickListener.onClick(item)}"
+				android:padding="@dimen/d1"
+				android:tint="@color/grey_400"
+				app:layout_constraintBottom_toBottomOf="@+id/layout"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/layout"
+				app:srcCompat="@drawable/ic_bookmark"/>
+
+			<TextView
+				android:id="@+id/item_time"
+				style="@style/TextRegular.Grey.12"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/d1"
+				android:layout_marginEnd="@dimen/d3"
+				android:layout_marginStart="@dimen/d4"
+				android:textAlignment="textEnd"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/layout"
+				tools:text="27.2.2018 - 21:00"/>
+
+		</android.support.constraint.ConstraintLayout>
+
+		<View
+			android:id="@+id/view_divider_directions_saved"
+			style="@style/DividerWithMargin"
+			/>
+
+	</LinearLayout>
+
+</layout>

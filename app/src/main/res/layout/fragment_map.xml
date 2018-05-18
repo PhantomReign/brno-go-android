@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="view"
+			type="cz.vutbr.fit.brnogo.ui.route.navigation.map.MapView"/>
+
+		<variable
+			name="viewModel"
+			type="cz.vutbr.fit.brnogo.ui.route.navigation.map.MapViewModel"/>
+
+	</data>
+
+	<android.support.constraint.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<android.support.v7.widget.CardView
+			android:id="@+id/faster_route_card"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:cardElevation="@dimen/d3"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="1.0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintVertical_bias="0.0">
+
+			<LinearLayout
+				android:id="@+id/faster_layout"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:animateLayoutChanges="true"
+				android:gravity="center"
+				android:orientation="vertical"
+				android:visibility="gone">
+
+				<TextView
+					android:id="@+id/faster_route_found_text"
+					style="@style/TextRegular.DarkGrey.16"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="@dimen/d2"
+					android:layout_marginStart="@dimen/d2"
+					android:layout_marginTop="@dimen/d2"
+					android:text="@string/faster_route_found"/>
+
+				<LinearLayout
+					android:id="@+id/faster_buttons_layout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					android:orientation="horizontal">
+
+					<Button
+						android:id="@+id/replace_button"
+						style="@style/ButtonWhiteBorderlessStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="@dimen/d2"
+						android:layout_marginEnd="@dimen/d5"
+						android:layout_marginStart="@dimen/d2"
+						android:layout_marginTop="@dimen/d2"
+						android:onClick="@{() -> view.onReplaceClick()}"
+						android:padding="@dimen/d2"
+						android:text="@string/replace"/>
+
+					<Button
+						android:id="@+id/keep_button"
+						style="@style/ButtonWhiteBorderlessStyle"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="@dimen/d2"
+						android:layout_marginEnd="@dimen/d2"
+						android:layout_marginStart="@dimen/d5"
+						android:layout_marginTop="@dimen/d2"
+						android:onClick="@{() -> view.onKeepClick()}"
+						android:padding="@dimen/d2"
+						android:text="@string/keep"/>
+
+				</LinearLayout>
+
+			</LinearLayout>
+		</android.support.v7.widget.CardView>
+
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/location_tracker"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/d3"
+			android:layout_marginEnd="@dimen/d3"
+			android:layout_marginStart="@dimen/d3"
+			android:layout_marginTop="@dimen/d3"
+			android:clickable="true"
+			android:focusable="true"
+			android:onClick="@{() -> view.onTrackClick()}"
+			android:src="@drawable/ic_my_location"
+			android:tint="@color/grey_600"
+			app:backgroundTint="@color/white"
+			app:elevation="@dimen/d0_5"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="1.0"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintVertical_bias="0.0"
+			app:rippleColor="@color/colorAccent"/>
+
+		<fragment
+			android:id="@+id/fragment_map"
+			class="com.google.android.gms.maps.SupportMapFragment"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			app:layout_constraintBottom_toTopOf="@+id/map_info_layout"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"/>
+
+		<LinearLayout
+			android:id="@+id/map_info_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:animateLayoutChanges="true"
+			android:orientation="vertical"
+			android:visibility="gone"
+			app:layout_constraintBottom_toTopOf="@+id/buttons_layout"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent">
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/d1"
+				android:background="@drawable/ic_shadow"/>
+
+			<android.support.v7.widget.CardView
+				android:id="@+id/nearest_stop_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:cardBackgroundColor="@color/grey_200"
+				app:cardCornerRadius="@dimen/d0">
+
+				<android.support.constraint.ConstraintLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<ImageView
+						android:id="@+id/moveToNext"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="@dimen/d2"
+						android:background="?selectableItemBackgroundBorderless"
+						android:onClick="@{() -> view.onMoveToNextClick()}"
+						android:padding="@dimen/d0_5"
+						android:tint="@color/grey_400"
+						android:visibility="gone"
+						app:layout_constraintBottom_toBottomOf="@+id/next_stop_layout"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintTop_toTopOf="@+id/next_stop_layout"
+						app:srcCompat="@drawable/ic_skip_next"/>
+
+					<LinearLayout
+						android:id="@+id/next_stop_layout"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="@dimen/d2"
+						android:layout_marginEnd="@dimen/d2"
+						android:layout_marginStart="@dimen/d11"
+						android:animateLayoutChanges="true"
+						android:background="@drawable/shape_rect_red_round"
+						android:orientation="vertical"
+						app:layout_constraintBottom_toTopOf="@+id/contentLayout"
+						app:layout_constraintEnd_toStartOf="@+id/moveToNext"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintTop_toTopOf="parent">
+
+						<TextView
+							android:id="@+id/next_far_stop"
+							style="@style/TextRegular.White70.16"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="@dimen/d7"
+							android:layout_marginStart="@dimen/d7"
+							android:layout_marginTop="@dimen/d1"
+							android:textAlignment="center"
+							android:visibility="gone"
+							tools:layout_editor_absoluteX="163dp"
+							tools:layout_editor_absoluteY="128dp"
+							tools:text="Česká"/>
+
+						<TextView
+							android:id="@+id/next_stop"
+							style="@style/TextRegular.White.16"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginBottom="@dimen/d2"
+							android:layout_marginEnd="@dimen/d7"
+							android:layout_marginStart="@dimen/d7"
+							android:layout_marginTop="@dimen/d1"
+							android:textAlignment="center"
+							android:visibility="gone"
+							tools:layout_editor_absoluteX="163dp"
+							tools:layout_editor_absoluteY="194dp"
+							tools:text="Dobrovského"/>
+					</LinearLayout>
+
+					<LinearLayout
+						android:id="@+id/contentLayout"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="@dimen/d2"
+						android:layout_marginEnd="@dimen/d7"
+						android:layout_marginStart="@dimen/d7"
+						android:animateLayoutChanges="true"
+						android:orientation="vertical"
+						android:padding="@dimen/d1"
+						app:layout_constraintBottom_toBottomOf="parent"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintStart_toStartOf="parent">
+
+						<TextView
+							android:id="@+id/current_action"
+							style="@style/TextBold.DarkGrey.AllCaps.12"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:textAlignment="center"
+							tools:text="Heading to"/>
+
+						<TextView
+							android:id="@+id/stop_name"
+							style="@style/TextBold.DarkGrey.AllCaps.16"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:textAlignment="center"
+							tools:text="Skácelova"/>
+
+						<TextView
+							android:id="@+id/distance_time"
+							style="@style/TextBold.MediumRed.16"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="@dimen/d2"
+							android:textAlignment="center"
+							tools:text="440 m"/>
+
+						<TextView
+							android:id="@+id/information"
+							style="@style/TextRegular.Grey.12"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="@dimen/d4"
+							android:layout_marginStart="@dimen/d4"
+							android:textAlignment="center"
+							tools:text="Continue to next stop by vehicle 12"/>
+
+						<TextView
+							android:id="@+id/manual_enter"
+							style="@style/TextRegular.MediumRed.12"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginEnd="@dimen/d4"
+							android:layout_marginStart="@dimen/d4"
+							android:layout_marginTop="@dimen/d2"
+							android:text="@string/manual_enter"
+							android:textAlignment="center"
+							android:visibility="gone"/>
+					</LinearLayout>
+				</android.support.constraint.ConstraintLayout>
+
+			</android.support.v7.widget.CardView>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/buttons_layout"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:animateLayoutChanges="true"
+			android:orientation="vertical"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent">
+
+			<Button
+				android:id="@+id/enter_button"
+				style="@style/ButtonRedBorderlessStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:onClick="@{() -> view.onEnterVehicleClick()}"
+				android:text="@string/enter_vehicle"
+				android:visibility="gone"/>
+
+			<Button
+				android:id="@+id/exit_button"
+				style="@style/ButtonRedBorderlessStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:onClick="@{() -> view.onExitVehicleClick()}"
+				android:text="@string/exit_vehicle"
+				android:visibility="gone"/>
+		</LinearLayout>
+
+	</android.support.constraint.ConstraintLayout>
+</layout>

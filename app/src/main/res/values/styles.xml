@@ -11,7 +11,7 @@
 		<item name="dialogTheme">@style/AppDialogStyle</item>
 		<item name="alertDialogTheme">@style/AppDialogStyle</item>
 		<item name="about_libraries_card">@color/white</item>
-		<item name="about_libraries_title_openSource">@color/blue_grey_800</item>
+		<item name="about_libraries_title_openSource">@color/grey_800</item>
 		<item name="about_libraries_dividerLight_openSource">@color/grey_200</item>
 		<item name="about_libraries_text_openSource">@color/grey_600</item>
 	</style>
@@ -44,7 +44,7 @@
 	<style name="TranslucentStatusBarActivityTheme" parent="AppTheme"/>
 
 	<style name="DialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
-		<item name="android:windowTitleStyle">@style/TextRegular.Grey.16</item>
+		<item name="android:windowTitleStyle">@style/TextBold.DarkGrey.AllCaps.16</item>
 		<item name="colorAccent">@color/colorAccent</item>
 	</style>
 
@@ -52,11 +52,24 @@
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">?actionBarSize</item>
 		<item name="titleTextAppearance">@style/TextRegular.White.20</item>
-		<item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+		<item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+	</style>
+
+	<style name="TransparentToolbarWithSubtitleStyle">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">?actionBarSize</item>
+		<item name="titleTextAppearance">@style/TextRegular.White70.16</item>
+		<item name="subtitleTextAppearance">@style/TextRegular.White.16</item>
+		<item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
 		<item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
 	</style>
 
 	<style name="ToolbarStyle" parent="TransparentToolbarStyle">
+		<item name="android:background">@color/colorPrimary</item>
+	</style>
+	
+	<style name="ToolbarWithSubtitleStyle" parent="TransparentToolbarWithSubtitleStyle">
 		<item name="android:background">@color/colorPrimary</item>
 	</style>
 
@@ -79,7 +92,7 @@
 	<style name="Divider">
 		<item name="android:layout_height">1dp</item>
 		<item name="android:layout_width">match_parent</item>
-		<item name="android:background">@color/grey_200</item>
+		<item name="android:background">@color/grey_300</item>
 	</style>
 
 	<style name="DividerWithMargin">
@@ -87,7 +100,23 @@
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_marginLeft">@dimen/d4</item>
 		<item name="android:layout_marginRight">@dimen/d4</item>
-		<item name="android:background">@color/grey_200</item>
+		<item name="android:background">@color/grey_300</item>
+	</style>
+
+	<style name="DividerDeparture">
+		<item name="android:layout_height">1dp</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_marginLeft">@dimen/d3</item>
+		<item name="android:layout_marginRight">@dimen/d3</item>
+		<item name="android:background">@color/grey_300</item>
+	</style>
+
+	<style name="DividerDirections">
+		<item name="android:layout_height">1dp</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_marginLeft">@dimen/d12</item>
+		<item name="android:layout_marginRight">@dimen/d3</item>
+		<item name="android:background">@color/grey_300</item>
 	</style>
 
 	<style name="IndeterminateProgressWheel">
@@ -118,11 +147,18 @@
 		<item name="android:background">?attr/selectableItemBackground</item>
 	</style>
 
+	<style name="ButtonNoCapsWhiteBorderlessStyle" parent="Widget.AppCompat.Button.Borderless">
+		<item name="android:textAppearance">@style/TextRegular.MediumRed.14</item>
+		<item name="android:background">?attr/selectableItemBackground</item>
+		<item name="android:padding">@dimen/d2</item>
+		<item name="android:drawablePadding">@dimen/d2</item>
+		<item name="android:textAlignment">viewStart</item>
+	</style>
+
 	<style name="ButtonRedBorderlessStyle" parent="Widget.AppCompat.Button.Borderless">
 		<item name="android:textAppearance">@style/TextBold.White.AllCaps.16</item>
 		<item name="android:background">@color/colorPrimary</item>
 		<item name="android:foreground">?attr/selectableItemBackground</item>
-
 	</style>
 
 	<!--Settings-->
@@ -131,7 +167,7 @@
 		<item name="preferenceFragmentListStyle">@style/AppPreferenceFragmentList</item>
 		<item name="android:textSize">16sp</item>
 		<item name="android:fontFamily">@font/roboto</item>
-		<item name="android:textColorPrimary">@color/blue_grey_800</item>
+		<item name="android:textColorPrimary">@color/grey_800</item>
 		<item name="android:textColorSecondary">@color/colorPrimary</item>
 		<item name="android:listSeparatorTextViewStyle">@style/AppPreference.Category</item>
 	</style>

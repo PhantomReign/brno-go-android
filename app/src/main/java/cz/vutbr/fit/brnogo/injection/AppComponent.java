@@ -9,7 +9,11 @@ import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
-import dagger.android.support.AndroidSupportInjectionModule;
+
+/**
+ * Component Class for Dagger creation.
+ *
+ */
 
 @Singleton
 @Component(modules = {AndroidInjectionModule.class, AppModule.class, UrlModule.class, NetModule.class, ActivityBuilderModule.class, FragmentBuilderModule.class})

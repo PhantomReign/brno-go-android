@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="settings_key_root" translatable="false">key_root</string>
+	<string name="settings_key_screen" translatable="false">key_screen</string>
+	<string name="settings_key_limit" translatable="false">key_limit</string>
+	<string name="settings_key_sync" translatable="false">key_sync</string>
+	<string name="settings_key_implicit_enter" translatable="false">key_implicit_enter</string>
+</resources>

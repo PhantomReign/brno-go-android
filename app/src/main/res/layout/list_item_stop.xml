@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="view"
+			type="cz.vutbr.fit.brnogo.ui.stop.StopSearchView"/>
+
+		<variable
+			name="item"
+			type="cz.vutbr.fit.brnogo.data.model.response.Stop"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:onClick="@{() -> view.onStopClick(item)}"
+		android:orientation="vertical">
+
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="?selectableItemBackground"
+			android:onClick="@{() -> view.onStopClick(item)}"
+			>
+
+			<ImageView
+				android:id="@+id/item_stop_icon"
+				android:layout_width="@dimen/d12"
+				android:layout_height="@dimen/d12"
+				android:layout_centerVertical="true"
+				android:layout_marginBottom="@dimen/d2"
+				android:layout_marginStart="@dimen/d4"
+				android:layout_marginTop="@dimen/d2"
+				android:scaleType="center"
+				android:tint="@color/white"
+				app:imageResource="@{item.getIcon().getFirst()}"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:background="@color/colorPrimary"/>
+
+			<TextView
+				android:id="@+id/item_stop_title"
+				style="@style/TextRegular.DarkGrey.16"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/d4"
+				android:layout_marginStart="@dimen/d2"
+				android:text="@{item.name}"
+				app:layout_constraintBottom_toTopOf="@+id/item_stop_subtitle"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.5"
+				app:layout_constraintStart_toEndOf="@+id/item_stop_icon"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintVertical_chainStyle="packed"
+				tools:text="Title"/>
+
+			<TextView
+				android:id="@+id/item_stop_subtitle"
+				style="@style/TextRegular.Grey.14"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="@dimen/d4"
+				android:layout_marginStart="@dimen/d2"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.5"
+				app:layout_constraintStart_toEndOf="@+id/item_stop_icon"
+				app:layout_constraintTop_toBottomOf="@+id/item_stop_title"
+				tools:text="Subtitle"/>
+
+		</android.support.constraint.ConstraintLayout>
+
+		<View
+			android:id="@+id/divider_stop"
+			style="@style/DividerWithMargin"
+			android:layout_width="match_parent"/>
+	</LinearLayout>
+
+</layout>

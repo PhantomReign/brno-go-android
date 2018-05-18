@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+	>
+
+	<data>
+
+		<variable
+			name="view"
+			type="cz.vutbr.fit.brnogo.ui.route.navigation.RouteNavigationView"/>
+
+		<variable
+			name="viewModel"
+			type="cz.vutbr.fit.brnogo.ui.route.navigation.RouteNavigationViewModel"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<android.support.design.widget.AppBarLayout
+			android:id="@+id/appbar_layout"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:elevation="@dimen/d0">
+
+			<android.support.v7.widget.Toolbar
+				android:id="@+id/toolbar"
+				style="@style/ToolbarWithSubtitleStyle"
+				app:navigationIcon="@drawable/ic_close"/>
+
+		</android.support.design.widget.AppBarLayout>
+
+		<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<FrameLayout
+				android:id="@+id/map_content"
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"/>
+
+		</android.support.constraint.ConstraintLayout>
+
+
+	</LinearLayout>
+
+</layout>
