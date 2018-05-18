@@ -6,6 +6,11 @@ import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Store Class containing method for getting vehicle from API ENDPOINT.
+ *
+ */
+
 @Singleton
 class VehicleStore @Inject constructor(
 		val apiManager: ApiManager) {

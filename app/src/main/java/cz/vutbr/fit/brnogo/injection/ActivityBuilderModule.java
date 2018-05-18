@@ -20,6 +20,10 @@ import cz.vutbr.fit.brnogo.ui.stop.StopSearchActivityModule;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
+/**
+ * Class containing all activities for Dagger.
+ */
+
 @Module
 public abstract class ActivityBuilderModule {
 

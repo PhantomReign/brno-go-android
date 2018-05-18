@@ -8,6 +8,10 @@ import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.base.BaseCompletableInteractor;
 import io.reactivex.Completable;
 
+/**
+ * Class used to set or unset favorite search.
+ */
+
 @PerScreen
 public class SetFavoriteRouteSearchInteractor extends BaseCompletableInteractor {
 

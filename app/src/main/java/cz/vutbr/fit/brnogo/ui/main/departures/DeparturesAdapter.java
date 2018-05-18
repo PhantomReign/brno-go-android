@@ -17,6 +17,10 @@ import cz.vutbr.fit.brnogo.databinding.ListItemDepartureFavoriteBinding;
 import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
 
+/**
+ * Adapter Class used to manage favorite departure stops in RecyclerView.
+ */
+
 public class DeparturesAdapter extends RecyclerView.Adapter<DeparturesAdapter.ViewHolder> {
 
 	private List<FavoriteStop> items = new ArrayList<>();

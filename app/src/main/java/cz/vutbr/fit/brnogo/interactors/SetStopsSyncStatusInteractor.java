@@ -7,6 +7,10 @@ import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.base.BaseCompletableInteractor;
 import io.reactivex.Completable;
 
+/**
+ * Class used to set stops sync status.
+ */
+
 @PerScreen
 public class SetStopsSyncStatusInteractor extends BaseCompletableInteractor {
 

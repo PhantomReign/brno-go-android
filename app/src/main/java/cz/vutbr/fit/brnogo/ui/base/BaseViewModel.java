@@ -42,11 +42,7 @@ public abstract class BaseViewModel extends ViewModel implements Observable {
 	}
 
 	/**
-	 * Notifies listeners that a specific property has changed. The getter for the property
-	 * that changes should be marked with {@link Bindable} to generate a field in
-	 * <code>BR</code> to be used as <code>fieldId</code>.
-	 *
-	 * @param fieldId The generated BR id for the Bindable field.
+	 * Notifies listeners that a specific property has changed.
 	 */
 	public void notifyPropertyChanged(int fieldId) {
 		synchronized (this) {

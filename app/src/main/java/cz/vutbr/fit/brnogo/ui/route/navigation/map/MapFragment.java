@@ -72,6 +72,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		return new MapFragment();
 	}
 
+	/**
+	 * Method used to get directions from Google Directions API.
+	 */
 	private DirectionsResult getDirectionsDetails(String origin, String destination, List<String> waypoints, TravelMode mode) {
 		DateTime now = new DateTime();
 		try {
@@ -260,7 +263,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 					LatLng convertedLocation = new LatLng(location.getLatitude(), location.getLongitude());
 					map.moveCamera(CameraUpdateFactory.newLatLngZoom(convertedLocation, Constant.Navigation.CAMERA_ZOOM));
 
-					setMap(map);
+					setMapExtensions(map);
 				})
 				.map(locationGoogleMapPair -> locationGoogleMapPair.second)
 				.flatMap(__ -> mapProvider.getCameraMoveStartedObservable())
@@ -270,12 +273,12 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 	private void initMapWithoutLocation() {
 		mapSubscription = mapProvider.getMapReadyObservable()
-				.doOnNext(this::setMap)
+				.doOnNext(this::setMapExtensions)
 				.subscribe();
 	}
 
 	@SuppressWarnings("MissingPermission")
-	private void setMap(GoogleMap map) {
+	private void setMapExtensions(GoogleMap map) {
 		map.getUiSettings().setRotateGesturesEnabled(false);
 		map.getUiSettings().setTiltGesturesEnabled(false);
 		map.getUiSettings().setZoomControlsEnabled(false);
@@ -287,6 +290,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 
 	}
 
+	/**
+	 * Method used to show path on Map.
+	 */
 	private void addPathDirectionsToMap(DirectionsResult results, LatLng endLocation) {
 		if (results != null) {
 			MapHelper.addPolylineToMap(results, map, binding.getRoot().getContext());
@@ -300,6 +306,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		super.onDestroyView();
 	}
 
+	/**
+	 * Main loop method.
+	 */
 	public void onLocationChanged(Location location) {
 		if (location != null && viewModel.navigationInfo.getCurrentNode() != null) {
 			viewModel.navigationInfo.setCurrentUserLocation(location);
@@ -357,6 +366,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		}
 	}
 
+	/**
+	 * Method used to get time or distance text.
+	 */
 	public String getQuantityText(Object value, int type) {
 		if (type == QuantityType.TYPE_DISTANCE) {
 			return getString(R.string.m, (int) value);
@@ -389,6 +401,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		}
 	}
 
+	/**
+	 * Method used to get current action text.
+	 */
 	private String getCurrentAction() {
 		switch (viewModel.navigationInfo.getCurrentUserState()) {
 			case UserActionType.TYPE_EXIT:
@@ -410,6 +425,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		}
 	}
 
+	/**
+	 * Method used to get detailed current action text.
+	 */
 	private String getInformationToCurrentAction(long currentDelay) {
 		switch (viewModel.navigationInfo.getCurrentUserState()) {
 			case UserActionType.TYPE_EXIT:
@@ -464,6 +482,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		}
 	}
 
+	/**
+	 * Method used to render path when in vehicle.
+	 */
 	private void renderInVehicle() {
 		isPathToDestinationSet = true;
 		String origin = String.valueOf(viewModel.navigationInfo.getCurrentUserLocation().getLatitude())
@@ -488,6 +509,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		addPathDirectionsToMap(results, new LatLng(endNode.getStopLatitude(), endNode.getStopLongitude()));
 	}
 
+	/**
+	 * Method used to render path when on foot.
+	 */
 	private void renderOnFoot() {
 		isPathToStopSet = true;
 		String origin = String.valueOf(viewModel.navigationInfo.getCurrentUserLocation().getLatitude())
@@ -499,12 +523,17 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		addPathDirectionsToMap(results, null);
 	}
 
+	/**
+	 * Method used to render route on map with circles.
+	 */
 	private void renderRouteOnMap(double distance) {
 		if (!viewModel.navigationInfo.isCurrentNodeReached()) {
 			if (!isPathToStopSet && !viewModel.navigationInfo.isInVehicle()) {
+				map.clear();
 				renderOnFoot();
 				MapHelper.addStopCircleAreasToMap(binding.getRoot().getContext(), map, viewModel.navigationInfo.getCurrentVehicle());
 			} else if (!isPathToDestinationSet && viewModel.navigationInfo.isInVehicle()) {
+				map.clear();
 				renderInVehicle();
 				MapHelper.addStopCircleAreasToMap(binding.getRoot().getContext(), map, viewModel.navigationInfo.getCurrentVehicle());
 			}
@@ -521,12 +550,21 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 			}
 		} else {
 			if (!isPathToDestinationSet && viewModel.navigationInfo.isInVehicle()) {
+				map.clear();
 				renderInVehicle();
+				MapHelper.addStopCircleAreasToMap(binding.getRoot().getContext(), map, viewModel.navigationInfo.getCurrentVehicle());
+			}
+
+			if (!isPathToStopSet && !isPathToDestinationSet) {
+				map.clear();
 				MapHelper.addStopCircleAreasToMap(binding.getRoot().getContext(), map, viewModel.navigationInfo.getCurrentVehicle());
 			}
 		}
 	}
 
+	/**
+	 * Method used to determine user status.
+	 */
 	private boolean updateUserStatus(double distance) {
 		boolean isTransfer = viewModel.navigationInfo.getCurrentNodeIndex() == (viewModel.navigationInfo.getCurrentVehicle().getPath().size() - 1);
 		long departureWithDelay;
@@ -641,6 +679,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		return true;
 	}
 
+	/**
+	 * Method used to change Station.
+	 */
 	private boolean moveToNextStation(boolean isTransfer) {
 		viewModel.navigationInfo.setCurrentNodeReached(false);
 		viewModel.isFindingFasterRouteEnabled = false;
@@ -672,6 +713,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		}
 	}
 
+	/**
+	 * Method used set visibility and text of next stops.
+	 */
 	public void setNextStationNames(List<Node> next) {
 		switch (next.size()) {
 			case 2:
@@ -697,6 +741,9 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		}
 	}
 
+	/**
+	 * Method used to get next nodes in path.
+	 */
 	private List<Node> getNextNodes(int currentNodeIndex) {
 		int maxVehicleIndex = viewModel.currentRoute.getVehicles().size() - 1;
 		if (viewModel.navigationInfo.getCurrentVehicleIndex() > maxVehicleIndex) {

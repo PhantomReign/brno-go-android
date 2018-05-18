@@ -14,6 +14,10 @@ import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import io.reactivex.Single;
 
+/**
+ * Class used to return saved route status.
+ */
+
 @PerScreen
 public class IsSavedRouteInteractor extends BaseSingleInteractor<Boolean> {
 

@@ -17,6 +17,10 @@ import cz.vutbr.fit.brnogo.databinding.ListItemSearchFavoriteBinding;
 import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
 
+/**
+ * Adapter Class used to manage favorite search stops in RecyclerView.
+ */
+
 public class RoutesAdapter extends RecyclerView.Adapter<RoutesAdapter.ViewHolder> {
 
 	private List<Search> items = new ArrayList<>();

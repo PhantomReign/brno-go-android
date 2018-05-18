@@ -6,6 +6,11 @@ import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Store Class containing method for getting directions from API ENDPOINT.
+ *
+ */
+
 @Singleton
 class DirectionStore @Inject constructor(
 		val apiManager: ApiManager) {

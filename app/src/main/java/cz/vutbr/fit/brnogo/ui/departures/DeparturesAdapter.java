@@ -19,6 +19,10 @@ import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
 
+/**
+ * Adapter Class used to manage departures data in RecyclerView.
+ */
+
 public class DeparturesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 	private List<DepartureItem> items = new ArrayList<>();

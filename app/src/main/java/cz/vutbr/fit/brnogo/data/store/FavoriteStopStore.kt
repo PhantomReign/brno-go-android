@@ -8,6 +8,11 @@ import io.reactivex.Flowable
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Store Class containing methods for getting favorite stops from database.
+ *
+ */
+
 @Singleton
 class FavoriteStopStore @Inject constructor(
 		val persistence: Persistence,

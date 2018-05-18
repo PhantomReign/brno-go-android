@@ -14,6 +14,10 @@ import cz.vutbr.fit.brnogo.injection.annotation.scope.PerScreen;
 import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import io.reactivex.Single;
 
+/**
+ * Class used to return new route.
+ */
+
 @PerScreen
 public class GetNewRouteInteractor extends BaseSingleInteractor<Route> {
 
@@ -31,7 +35,7 @@ public class GetNewRouteInteractor extends BaseSingleInteractor<Route> {
 	}
 
 	public GetNewRouteInteractor init(int startStationId, int destinationStationId,
-									long dateTime, int minTimeToMove, int maxTransfers) {
+									  long dateTime, int minTimeToMove, int maxTransfers) {
 		this.startStationId = startStationId;
 		this.destinationStationId = destinationStationId;
 		this.dateTime = dateTime;
@@ -51,7 +55,7 @@ public class GetNewRouteInteractor extends BaseSingleInteractor<Route> {
 					}
 
 					ArrayList<Vehicle> vehicles = new ArrayList<>();
-					return new Route("", -1 , -1, "", "", -1, -1, vehicles, false);
+					return new Route("", -1, -1, "", "", -1, -1, vehicles, false);
 				});
 	}
 }

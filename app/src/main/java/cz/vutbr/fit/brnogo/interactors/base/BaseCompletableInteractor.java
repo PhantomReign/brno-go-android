@@ -8,6 +8,10 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import timber.log.Timber;
 
+/**
+ * Base Abstract Class representing structure of Completable Interactor.
+ */
+
 public abstract class BaseCompletableInteractor extends BaseInteractor {
 
 	protected abstract Completable buildCompletable();
@@ -25,7 +29,7 @@ public abstract class BaseCompletableInteractor extends BaseInteractor {
 		});
 	}
 
-	protected CompletableTransformer  applySchedulers() {
+	protected CompletableTransformer applySchedulers() {
 		return upstream -> upstream.subscribeOn(getWorkScheduler()).observeOn(getResultScheduler());
 	}
 }

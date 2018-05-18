@@ -9,6 +9,11 @@ import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Manager Class with methods for getting information from server.
+ *
+ */
+
 @Singleton
 class ApiManager @Inject constructor(
 		val apiService: ApiService,
@@ -33,10 +38,10 @@ class ApiManager @Inject constructor(
 	}
 
 	fun getDirections(startStationId: Int,
-				  destinationStationId: Int,
-				  dateTime: Long,
-				  minTimeToMove: Int,
-				  maxTransfers: Int): Single<Route> {
+					  destinationStationId: Int,
+					  dateTime: Long,
+					  minTimeToMove: Int,
+					  maxTransfers: Int): Single<Route> {
 		return apiService.getDirections(startStationId, destinationStationId, dateTime, minTimeToMove, maxTransfers).compose(resultTransformer.transformData())
 	}
 

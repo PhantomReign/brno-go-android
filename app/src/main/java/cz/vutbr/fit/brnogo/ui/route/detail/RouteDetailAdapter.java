@@ -21,6 +21,10 @@ import cz.vutbr.fit.brnogo.tools.DiffUtilCallback;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewHolder;
 
+/**
+ * Adapter Class used to manage route about information in RecyclerView.
+ */
+
 public class RouteDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 	private List<RouteItem> items = new ArrayList<>();

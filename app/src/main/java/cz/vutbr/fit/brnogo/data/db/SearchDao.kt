@@ -4,6 +4,11 @@ import android.arch.persistence.room.*
 import cz.vutbr.fit.brnogo.data.model.store.Search
 import io.reactivex.Flowable
 
+/**
+ * Interface containing specific methods for database manipulation.
+ *
+ */
+
 @Dao
 interface SearchDao {
 

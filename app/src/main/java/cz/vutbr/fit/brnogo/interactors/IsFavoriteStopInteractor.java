@@ -14,6 +14,10 @@ import cz.vutbr.fit.brnogo.interactors.base.BaseSingleInteractor;
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 import io.reactivex.Single;
 
+/**
+ * Class used to return favorite stop status.
+ */
+
 @PerScreen
 public class IsFavoriteStopInteractor extends BaseSingleInteractor<Boolean> {
 

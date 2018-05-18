@@ -11,6 +11,11 @@ import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * Store Class containing method for getting location from location provider.
+ *
+ */
+
 @Singleton
 class LocationStore @Inject constructor(
 		@ApplicationContext val context: Context,

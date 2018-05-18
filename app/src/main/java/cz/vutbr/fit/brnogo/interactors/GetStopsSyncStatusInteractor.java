@@ -8,6 +8,10 @@ import cz.vutbr.fit.brnogo.interactors.base.BaseFlowableInteractor;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 
+/**
+ * Class used to return stop sync status.
+ */
+
 @PerScreen
 public class GetStopsSyncStatusInteractor extends BaseFlowableInteractor<Boolean> {
 

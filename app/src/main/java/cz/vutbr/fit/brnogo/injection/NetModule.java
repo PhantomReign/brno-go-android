@@ -25,6 +25,11 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
+/**
+ * Class containing providing network objects for dagger.
+ *
+ */
+
 @Module
 public class NetModule {
 

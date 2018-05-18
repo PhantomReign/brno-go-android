@@ -11,6 +11,10 @@ import java.util.StringTokenizer;
 
 import cz.vutbr.fit.brnogo.tools.constant.Constant;
 
+/**
+ * Class containing all methods used for converting date and time.
+ */
+
 public class DateTimeConverter {
 
 	private DateTimeConverter() {

@@ -14,6 +14,10 @@ import io.reactivex.Single;
 import io.reactivex.SingleTransformer;
 import retrofit2.Response;
 
+/**
+ * Result Transformer Class containing methods for transforming response.
+ */
+
 @Singleton
 public class ResultTransformer {
 

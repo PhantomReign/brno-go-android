@@ -16,6 +16,10 @@ import cz.vutbr.fit.brnogo.BR;
 import cz.vutbr.fit.brnogo.R;
 import dagger.android.support.AndroidSupportInjection;
 
+/**
+ * Base Class representing Dialog Fragment.
+ */
+
 public abstract class BaseDialogFragment<T extends BaseViewModel, B extends ViewDataBinding> extends DialogFragment {
 
 	protected T viewModel;
