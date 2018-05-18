@@ -7,7 +7,7 @@ It contains all necessary files.
 
 1. Run Android Studio (3.2 Canary 14) and open project.
 2. Choose build variant.
-3.
+3. Change server URL in UrlModule.
 4. Build and run the application.
 
 OR
@@ -15,6 +15,6 @@ OR
 1. Install apk from apk folder.
 2. Run the application.
 
-Note: You can change URL in UrlModule. The dev variant has as URL localhost of server.
+Note: The dev variant has as URL localhost of server.
 The prod variant has URL provided by *Localtunnel* using command
  `lt --port 8080 --subdomain brnogoserver`.
