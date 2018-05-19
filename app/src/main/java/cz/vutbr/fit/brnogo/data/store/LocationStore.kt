@@ -6,7 +6,8 @@ import android.location.Location
 import com.google.android.gms.location.LocationRequest
 import cz.vutbr.fit.brnogo.injection.annotation.qualifier.ApplicationContext
 import cz.vutbr.fit.brnogo.tools.PermissionChecker
-import io.reactivex.Maybe
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -22,13 +23,18 @@ class LocationStore @Inject constructor(
 		val reactiveLocationProvider: ReactiveLocationProvider,
 		val permissionChecker: PermissionChecker) {
 
-	var locationRequest = LocationRequest.create().setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY).setFastestInterval(1000).setInterval(1000)
+	var locationRequest = LocationRequest.create()
+			.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+			.setFastestInterval(1000)
+			.setInterval(1000)
 
 	@SuppressLint("MissingPermission")
-	fun getLocationObservable(): Maybe<Location> {
+	fun getLocationObservable(): Flowable<Location> {
 		return if (permissionChecker.hasLocation()) {
-			reactiveLocationProvider.getUpdatedLocation(locationRequest).firstElement()
-		} else Maybe.empty()
+			reactiveLocationProvider.getUpdatedLocation(locationRequest).toFlowable(BackpressureStrategy.LATEST)
+		} else {
+			Flowable.empty()
+		}
 	}
 }
 
