@@ -14,6 +14,7 @@ import cz.vutbr.fit.brnogo.interactors.GetFasterRouteInteractor;
 import cz.vutbr.fit.brnogo.interactors.GetLocationInformationInteractor;
 import cz.vutbr.fit.brnogo.interactors.GetNewRouteInteractor;
 import cz.vutbr.fit.brnogo.interactors.GetVehicleInteractor;
+import cz.vutbr.fit.brnogo.tools.PermissionChecker;
 import cz.vutbr.fit.brnogo.tools.datetime.DateTimeConverter;
 import cz.vutbr.fit.brnogo.tools.livedata.SingleEventLiveData;
 import cz.vutbr.fit.brnogo.ui.base.BaseViewModel;
@@ -84,7 +85,9 @@ public class MapViewModel extends BaseViewModel {
 
 	public void getLocation() {
 		getLocationInformationInteractor.execute(location -> {
-			locationData.setValue(location);
+			if (location != null) {
+				locationData.setValue(location);
+			}
 		});
 	}
 

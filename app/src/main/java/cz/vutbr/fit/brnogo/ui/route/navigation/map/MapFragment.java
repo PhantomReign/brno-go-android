@@ -125,7 +125,6 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		isImplicitEnabled = viewModel.getPersistence().get(getString(R.string.settings_key_implicit_enter), false);
 
 		viewModel.initNavigationData();
-		viewModel.getLocation();
 
 		viewModel.getLocationData().observe(this, location -> {
 			if (binding.mapInfoLayout.getVisibility() != View.VISIBLE) {
@@ -162,6 +161,7 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 	@NeedsPermission(Manifest.permission.ACCESS_FINE_LOCATION)
 	public void afterLocationGranted() {
 		if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getContext()) == ConnectionResult.SUCCESS) {
+			viewModel.getLocation();
 			initMap();
 		}
 	}
@@ -182,7 +182,6 @@ public class MapFragment extends BaseFragment<MapViewModel, FragmentMapBinding> 
 		map.clear();
 		viewModel.navigationInfo.setInVehicle(false);
 		binding.exitButton.setVisibility(View.GONE);
-
 	}
 
 	@Override
