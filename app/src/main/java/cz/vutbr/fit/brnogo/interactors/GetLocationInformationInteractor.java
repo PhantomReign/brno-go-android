@@ -30,8 +30,8 @@ public class GetLocationInformationInteractor extends BaseFlowableInteractor<Loc
 	@Override
 	protected Flowable<Location> buildFlowable() {
 
-		return Flowable.interval(1, TimeUnit.SECONDS).startWith((long) 0)
-				.flatMap(__ -> locationStore.getLocationObservable().toFlowable().onBackpressureLatest())
+		return Flowable.interval(1, TimeUnit.SECONDS).startWith(0L)
+				.withLatestFrom(locationStore.getLocationObservable(), (time, location) -> location)
 				.onBackpressureLatest();
 	}
 }
