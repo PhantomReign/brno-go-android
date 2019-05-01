@@ -3,6 +3,7 @@
 > **Not maintained, for study purposes only.**
 
 Implementation of client application for Brno Go server application. It contains all necessary files.
+Created as a part of [Master's Thesis](https://www.vutbr.cz/www_base/zav_prace_soubor_verejne.php?file_id=181410) at FIT BUT - understanding of Slovak language is required.
 
 ## Setup
 1. Run Android Studio (3.2 Canary 14) and open project.
